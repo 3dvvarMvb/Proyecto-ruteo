@@ -1,0 +1,19 @@
+# Extractos OSM crudos/intermedios (pesados, regenerables con codigo/*.py)
+codigo/data/*.pbf
+codigo/data/*.osm.xml
+
+# Capas geoespaciales muy pesadas (regenerables, no hacen falta en el repo)
+codigo/evidencia/regiones_chile.geojson
+codigo/evidencia/aristas_valparaiso.gpkg
+codigo/evidencia/nodos_valparaiso.gpkg
+codigo/evidencia/conaf_probabilidad_ignicion.geojson
+
+# Python
+__pycache__/
+*.pyc
+
+# Cache interna de osmnx (respuestas HTTP, no es contenido del proyecto)
+codigo/cache/
+
+# Config local de la herramienta (no es del proyecto)
+.claude/

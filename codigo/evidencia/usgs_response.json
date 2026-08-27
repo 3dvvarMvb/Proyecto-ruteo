@@ -1,0 +1,4221 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": 1787776846000,
+    "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minlatitude=-33.5&maxlatitude=-32.7&minlongitude=-72.0&maxlongitude=-71.2&minmagnitude=2&starttime=2015-01-01",
+    "title": "USGS Earthquakes",
+    "status": 200,
+    "api": "2.7.0",
+    "count": 105
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "9 km N of Quilpué, Chile",
+        "time": 1785172776712,
+        "updated": 1786286018302,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tg56",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000tg56&format=geojson",
+        "felt": 4,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "6000tg56",
+        "ids": ",us6000tg56,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 31,
+        "dmin": 0.193,
+        "rms": 0.47,
+        "gap": 78,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 9 km N of Quilpué, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4287,
+          -32.9625,
+          53.862
+        ]
+      },
+      "id": "us6000tg56"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "34 km NNW of Valparaíso, Chile",
+        "time": 1781477646081,
+        "updated": 1782078372796,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ssy4",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000ssy4&format=geojson",
+        "felt": 2,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "7000ssy4",
+        "ids": ",us7000ssy4,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 32,
+        "dmin": 0.724,
+        "rms": 0.47,
+        "gap": 139,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.1 - 34 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7345,
+          -32.7349,
+          33.17
+        ]
+      },
+      "id": "us7000ssy4"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "36 km NW of Valparaíso, Chile",
+        "time": 1781039170033,
+        "updated": 1786814829040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000srwj",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000srwj&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 271,
+        "net": "us",
+        "code": "7000srwj",
+        "ids": ",us7000srwj,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 22,
+        "dmin": 0.789,
+        "rms": 0.86,
+        "gap": 163,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 36 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9088,
+          -32.808,
+          35.194
+        ]
+      },
+      "id": "us7000srwj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "35 km NNW of Valparaíso, Chile",
+        "time": 1780265398129,
+        "updated": 1786455243040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000spql",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000spql&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 284,
+        "net": "us",
+        "code": "7000spql",
+        "ids": ",us7000spql,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 35,
+        "dmin": 0.752,
+        "rms": 0.49,
+        "gap": 146,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 35 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7918,
+          -32.7445,
+          10
+        ]
+      },
+      "id": "us7000spql"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.8,
+        "place": "32 km NNW of Valparaíso, Chile",
+        "time": 1780264331176,
+        "updated": 1786455243040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000spqh",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000spqh&format=geojson",
+        "felt": 8,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 358,
+        "net": "us",
+        "code": "7000spqh",
+        "ids": ",us7000spqh,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 81,
+        "dmin": 0.735,
+        "rms": 0.68,
+        "gap": 139,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.8 - 32 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8157,
+          -32.7929,
+          23.714
+        ]
+      },
+      "id": "us7000spqh"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 6,
+        "place": "33 km NW of Valparaíso, Chile",
+        "time": 1780263257953,
+        "updated": 1786455243040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000spqc",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000spqc&format=geojson",
+        "felt": 155,
+        "cdi": 5.9,
+        "mmi": 5.189,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 645,
+        "net": "us",
+        "code": "7000spqc",
+        "ids": ",us7000spqc,usauto7000spqc,",
+        "sources": ",us,usauto,",
+        "types": ",dyfi,ground-failure,internal-moment-tensor,losspager,moment-tensor,origin,phase-data,shakemap,",
+        "nst": 128,
+        "dmin": 0.763,
+        "rms": 0.79,
+        "gap": 64,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 6.0 - 33 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8897,
+          -32.8292,
+          25
+        ]
+      },
+      "id": "us7000spqc"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "33 km WNW of Cartagena, Chile",
+        "time": 1757932483789,
+        "updated": 1764734317040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000qwa0",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000qwa0&format=geojson",
+        "felt": 2,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 298,
+        "net": "us",
+        "code": "7000qwa0",
+        "ids": ",us7000qwa0,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 45,
+        "dmin": 0.35,
+        "rms": 0.47,
+        "gap": 146,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 33 km WNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9363,
+          -33.4325,
+          31.625
+        ]
+      },
+      "id": "us7000qwa0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "41 km NW of Valparaíso, Chile",
+        "time": 1753620671252,
+        "updated": 1760216242040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000qvhp",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000qvhp&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 234,
+        "net": "us",
+        "code": "6000qvhp",
+        "ids": ",us6000qvhp,",
+        "sources": ",us,",
+        "types": ",moment-tensor,origin,phase-data,",
+        "nst": 43,
+        "dmin": 0.357,
+        "rms": 1.34,
+        "gap": 138,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.9 - 41 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9664,
+          -32.7859,
+          15.58
+        ]
+      },
+      "id": "us6000qvhp"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "20 km SSE of Villa Alemana, Chile",
+        "time": 1740820935960,
+        "updated": 1746732283040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000pw96",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000pw96&format=geojson",
+        "felt": 1,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 272,
+        "net": "us",
+        "code": "6000pw96",
+        "ids": ",us6000pw96,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 30,
+        "dmin": 0.123,
+        "rms": 0.44,
+        "gap": 115,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 20 km SSE of Villa Alemana, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2698,
+          -33.2049,
+          61.251
+        ]
+      },
+      "id": "us6000pw96"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "23 km WNW of Valparaíso, Chile",
+        "time": 1735168472889,
+        "updated": 1741473550040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000pfm9",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000pfm9&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 246,
+        "net": "us",
+        "code": "6000pfm9",
+        "ids": ",us6000pfm9,",
+        "sources": ",us,",
+        "types": ",moment-tensor,origin,phase-data,",
+        "nst": 34,
+        "dmin": 0.197,
+        "rms": 0.75,
+        "gap": 146,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.0 - 23 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8777,
+          -32.986,
+          24.285
+        ]
+      },
+      "id": "us6000pfm9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "31 km NW of Cartagena, Chile",
+        "time": 1721511212642,
+        "updated": 1727563366040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000n0ja",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000n0ja&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "7000n0ja",
+        "ids": ",us7000n0ja,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": 0.35,
+        "rms": 0.97,
+        "gap": 178,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 31 km NW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8904,
+          -33.3927,
+          30.17
+        ]
+      },
+      "id": "us7000n0ja"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "26 km NNW of Cartagena, Chile",
+        "time": 1720326567231,
+        "updated": 1726177950040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000mxjb",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000mxjb&format=geojson",
+        "felt": 7,
+        "cdi": 3.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 300,
+        "net": "us",
+        "code": "7000mxjb",
+        "ids": ",us7000mxjb,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 61,
+        "dmin": 0.324,
+        "rms": 0.84,
+        "gap": 81,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 26 km NNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7327,
+          -33.3394,
+          32.102
+        ]
+      },
+      "id": "us7000mxjb"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "24 km NNW of Cartagena, Chile",
+        "time": 1720326378501,
+        "updated": 1726177950040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000mxja",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000mxja&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 271,
+        "net": "us",
+        "code": "7000mxja",
+        "ids": ",us7000mxja,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 37,
+        "dmin": 0.313,
+        "rms": 0.74,
+        "gap": 103,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 24 km NNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7322,
+          -33.3594,
+          32.387
+        ]
+      },
+      "id": "us7000mxja"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "5 km N of Viña del Mar, Chile",
+        "time": 1706250136085,
+        "updated": 1741191408660,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ltwn",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000ltwn&format=geojson",
+        "felt": 87,
+        "cdi": 5.6,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 374,
+        "net": "us",
+        "code": "7000ltwn",
+        "ids": ",us7000ltwn,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 145,
+        "dmin": 0.094,
+        "rms": 0.59,
+        "gap": 83,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.6 - 5 km N of Viña del Mar, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5506,
+          -32.9763,
+          50.351
+        ]
+      },
+      "id": "us7000ltwn"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "30 km W of Valparaíso, Chile",
+        "time": 1699278670755,
+        "updated": 1705187413040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000l951",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000l951&format=geojson",
+        "felt": 61,
+        "cdi": 6.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 439,
+        "net": "us",
+        "code": "7000l951",
+        "ids": ",us7000l951,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 150,
+        "dmin": 0.648,
+        "rms": 0.68,
+        "gap": 53,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.1 - 30 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9579,
+          -33.0743,
+          30.868
+        ]
+      },
+      "id": "us7000l951"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "36 km NNW of Valparaíso, Chile",
+        "time": 1693386436320,
+        "updated": 1699133750040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ks19",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000ks19&format=geojson",
+        "felt": 3,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "7000ks19",
+        "ids": ",us7000ks19,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 39,
+        "dmin": 0.311,
+        "rms": 0.63,
+        "gap": 133,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 36 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8257,
+          -32.7497,
+          46.77
+        ]
+      },
+      "id": "us7000ks19"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "24 km S of Quilpué, Chile",
+        "time": 1691555971965,
+        "updated": 1697580088040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000kysv",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000kysv&format=geojson",
+        "felt": 2,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "6000kysv",
+        "ids": ",us6000kysv,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 28,
+        "dmin": 0.224,
+        "rms": 0.31,
+        "gap": 159,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 24 km S of Quilpué, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4044,
+          -33.2681,
+          52.722
+        ]
+      },
+      "id": "us6000kysv"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.5,
+        "place": "41 km NW of Valparaíso, Chile",
+        "time": 1688721443131,
+        "updated": 1694296495040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000kqp1",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000kqp1&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 312,
+        "net": "us",
+        "code": "6000kqp1",
+        "ids": ",us6000kqp1,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 42,
+        "dmin": 0.352,
+        "rms": 0.84,
+        "gap": 147,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.5 - 41 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9403,
+          -32.7708,
+          24.153
+        ]
+      },
+      "id": "us6000kqp1"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "Near the coast of Valparaiso, Chile",
+        "time": 1675580926577,
+        "updated": 1681594772040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jliv",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000jliv&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 246,
+        "net": "us",
+        "code": "6000jliv",
+        "ids": ",us6000jliv,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 35,
+        "dmin": 0.304,
+        "rms": 0.52,
+        "gap": 134,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.0 - Near the coast of Valparaiso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7525,
+          -32.7313,
+          31.125
+        ]
+      },
+      "id": "us6000jliv"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "3 km NNE of Villa Alemana, Chile",
+        "time": 1673206126788,
+        "updated": 1679292181040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000j30u",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000j30u&format=geojson",
+        "felt": 5,
+        "cdi": 3.8,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 286,
+        "net": "us",
+        "code": "7000j30u",
+        "ids": ",us7000j30u,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 38,
+        "dmin": 0.245,
+        "rms": 0.35,
+        "gap": 69,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 3 km NNE of Villa Alemana, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3559,
+          -33.0128,
+          54.46
+        ]
+      },
+      "id": "us7000j30u"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "10 km NNW of Hacienda La Calera, Chile",
+        "time": 1672945698930,
+        "updated": 1678575101040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000j2dx",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000j2dx&format=geojson",
+        "felt": 9,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 275,
+        "net": "us",
+        "code": "7000j2dx",
+        "ids": ",us7000j2dx,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 41,
+        "dmin": 0.449,
+        "rms": 0.41,
+        "gap": 99,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.2 - 10 km NNW of Hacienda La Calera, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2694,
+          -32.7048,
+          57.962
+        ]
+      },
+      "id": "us7000j2dx"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "Near the coast of Valparaiso, Chile",
+        "time": 1670063946891,
+        "updated": 1676156583040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000j6mi",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000j6mi&format=geojson",
+        "felt": 4,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 299,
+        "net": "us",
+        "code": "6000j6mi",
+        "ids": ",us6000j6mi,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 31,
+        "dmin": 0.209,
+        "rms": 0.59,
+        "gap": 134,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - Near the coast of Valparaiso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7717,
+          -32.8415,
+          26.686
+        ]
+      },
+      "id": "us6000j6mi"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "40 km WSW of Valparaiso, Chile",
+        "time": 1668480203224,
+        "updated": 1674935895040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ipry",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000ipry&format=geojson",
+        "felt": 11,
+        "cdi": 4.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 289,
+        "net": "us",
+        "code": "7000ipry",
+        "ids": ",us7000ipry,",
+        "sources": ",us,",
+        "types": ",dyfi,earthquake-name,moment-tensor,origin,phase-data,",
+        "nst": 57,
+        "dmin": 0.343,
+        "rms": 0.54,
+        "gap": 61,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 40 km WSW of Valparaiso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9884,
+          -33.2126,
+          27.112
+        ]
+      },
+      "id": "us7000ipry"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "13 km NW of Hacienda La Calera, Chile",
+        "time": 1665844865793,
+        "updated": 1672527810040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ity7",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000ity7&format=geojson",
+        "felt": 9,
+        "cdi": 3.6,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 301,
+        "net": "us",
+        "code": "6000ity7",
+        "ids": ",us6000ity7,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 43,
+        "dmin": 0.423,
+        "rms": 0.79,
+        "gap": 104,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 13 km NW of Hacienda La Calera, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3196,
+          -32.7012,
+          57.896
+        ]
+      },
+      "id": "us6000ity7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "near the coast of central Chile",
+        "time": 1663631720485,
+        "updated": 1669496263040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000i9ef",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000i9ef&format=geojson",
+        "felt": 4,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 247,
+        "net": "us",
+        "code": "7000i9ef",
+        "ids": ",us7000i9ef,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 31,
+        "dmin": 0.306,
+        "rms": 0.6,
+        "gap": 148,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.0 - near the coast of central Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7168,
+          -33.3629,
+          35
+        ]
+      },
+      "id": "us7000i9ef"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "25 km WNW of Valparaíso, Chile",
+        "time": 1656900224198,
+        "updated": 1663050104040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000hzmw",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000hzmw&format=geojson",
+        "felt": 19,
+        "cdi": 5.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 308,
+        "net": "us",
+        "code": "6000hzmw",
+        "ids": ",us6000hzmw,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": 67,
+        "dmin": 0.214,
+        "rms": 0.6,
+        "gap": 63,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 25 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8875,
+          -32.9521,
+          31.598
+        ]
+      },
+      "id": "us6000hzmw"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "36 km NNW of Valparaíso, Chile",
+        "time": 1643737257490,
+        "updated": 1650045431040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000gh0u",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000gh0u&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 271,
+        "net": "us",
+        "code": "7000gh0u",
+        "ids": ",us7000gh0u,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.309,
+        "rms": 0.91,
+        "gap": 147,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 36 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7757,
+          -32.7316,
+          26.66
+        ]
+      },
+      "id": "us7000gh0u"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "5 km NNW of Quillota, Chile",
+        "time": 1636527106962,
+        "updated": 1642279904040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000fswl",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000fswl&format=geojson",
+        "felt": 25,
+        "cdi": 5,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 297,
+        "net": "us",
+        "code": "7000fswl",
+        "ids": ",us7000fswl,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.36,
+        "rms": 0.85,
+        "gap": 60,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 5 km NNW of Quillota, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2764,
+          -32.8423,
+          61.36
+        ]
+      },
+      "id": "us7000fswl"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "29 km SSW of Valparaíso, Chile",
+        "time": 1634955236609,
+        "updated": 1641663722040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000fwww",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000fwww&format=geojson",
+        "felt": 60,
+        "cdi": 7.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 368,
+        "net": "us",
+        "code": "6000fwww",
+        "ids": ",us6000fwww,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.273,
+        "rms": 0.66,
+        "gap": 58,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.6 - 29 km SSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7855,
+          -33.2708,
+          35.26
+        ]
+      },
+      "id": "us6000fwww"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "3 km S of Quillota, Chile",
+        "time": 1628465075075,
+        "updated": 1635003954040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000f3gi",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000f3gi&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "6000f3gi",
+        "ids": ",us6000f3gi,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.349,
+        "rms": 0.3,
+        "gap": 100,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 3 km S of Quillota, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2526,
+          -32.9119,
+          53.48
+        ]
+      },
+      "id": "us6000f3gi"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "28 km NW of Cartagena, Chile",
+        "time": 1627333085614,
+        "updated": 1660025710535,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ezay",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000ezay&format=geojson",
+        "felt": 44,
+        "cdi": 5.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 351,
+        "net": "us",
+        "code": "6000ezay",
+        "ids": ",us6000ezay,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.328,
+        "rms": 0.55,
+        "gap": 148,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.6 - 28 km NW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8547,
+          -33.3964,
+          34.4
+        ]
+      },
+      "id": "us6000ezay"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "24 km NNW of Cartagena, Chile",
+        "time": 1623874406728,
+        "updated": 1660023362091,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000edmg",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000edmg&format=geojson",
+        "felt": 39,
+        "cdi": 7.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 312,
+        "net": "us",
+        "code": "7000edmg",
+        "ids": ",us7000edmg,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.321,
+        "rms": 0.61,
+        "gap": 66,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 24 km NNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6982,
+          -33.343,
+          28.84
+        ]
+      },
+      "id": "us7000edmg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "26 km S of Quilpué, Chile",
+        "time": 1621807139396,
+        "updated": 1641519513643,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000e5lp",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000e5lp&format=geojson",
+        "felt": 12,
+        "cdi": 4.8,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 331,
+        "net": "us",
+        "code": "7000e5lp",
+        "ids": ",us7000e5lp,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.212,
+        "rms": 0.36,
+        "gap": 58,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.6 - 26 km S of Quilpué, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3906,
+          -33.279,
+          52.77
+        ]
+      },
+      "id": "us7000e5lp"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "31 km SW of Valparaíso, Chile",
+        "time": 1615564826317,
+        "updated": 1660018548000,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000divm",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000divm&format=geojson",
+        "felt": 11,
+        "cdi": 4.9,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 264,
+        "net": "us",
+        "code": "7000divm",
+        "ids": ",us7000divm,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.284,
+        "rms": 0.7,
+        "gap": 149,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.1 - 31 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8907,
+          -33.2128,
+          24.21
+        ]
+      },
+      "id": "us7000divm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "1 km S of Limache, Chile",
+        "time": 1608280864518,
+        "updated": 1614468340040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000cs2h",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000cs2h&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 234,
+        "net": "us",
+        "code": "7000cs2h",
+        "ids": ",us7000cs2h,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.248,
+        "rms": 0.49,
+        "gap": 80,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.9 - 1 km S of Limache, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2631,
+          -33.0337,
+          57.91
+        ]
+      },
+      "id": "us7000cs2h"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "36 km NNW of Viña del Mar, Chile",
+        "time": 1602131335482,
+        "updated": 1660006065821,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000c6m9",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000c6m9&format=geojson",
+        "felt": 15,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 304,
+        "net": "us",
+        "code": "6000c6m9",
+        "ids": ",us6000c6m9,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.315,
+        "rms": 0.72,
+        "gap": 133,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 36 km NNW of Viña del Mar, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6383,
+          -32.7067,
+          33.82
+        ]
+      },
+      "id": "us6000c6m9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "33 km NE of Cartagena, Chile",
+        "time": 1599225801628,
+        "updated": 1605642274040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000bhtg",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us7000bhtg&format=geojson",
+        "felt": 1,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 234,
+        "net": "us",
+        "code": "7000bhtg",
+        "ids": ",us7000bhtg,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.188,
+        "rms": 0.39,
+        "gap": 141,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.9 - 33 km NE of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3222,
+          -33.3681,
+          46.69
+        ]
+      },
+      "id": "us7000bhtg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "22 km WNW of Cartagena, Chile",
+        "time": 1597050914835,
+        "updated": 1603317843040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000bbrx",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000bbrx&format=geojson",
+        "felt": 9,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 288,
+        "net": "us",
+        "code": "6000bbrx",
+        "ids": ",us6000bbrx,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.265,
+        "rms": 0.93,
+        "gap": 68,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 22 km WNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8124,
+          -33.4493,
+          26.45
+        ]
+      },
+      "id": "us6000bbrx"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "28 km WNW of Valparaíso, Chile",
+        "time": 1596996520231,
+        "updated": 1603317841040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000bbji",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000bbji&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 271,
+        "net": "us",
+        "code": "6000bbji",
+        "ids": ",us6000bbji,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.726,
+        "rms": 0.75,
+        "gap": 166,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.2 - 28 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9013,
+          -32.9157,
+          10
+        ]
+      },
+      "id": "us6000bbji"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "31 km NE of Cartagena, Chile",
+        "time": 1584579597054,
+        "updated": 1591476831040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70008bxw",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us70008bxw&format=geojson",
+        "felt": 11,
+        "cdi": 3.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 238,
+        "net": "us",
+        "code": "70008bxw",
+        "ids": ",us70008bxw,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.206,
+        "rms": 0.29,
+        "gap": 121,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 3.9 - 31 km NE of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3341,
+          -33.3848,
+          49.69
+        ]
+      },
+      "id": "us70008bxw"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.4,
+        "place": "19 km SSW of Valparaíso, Chile",
+        "time": 1581738097921,
+        "updated": 1659983105958,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70007qtj",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us70007qtj&format=geojson",
+        "felt": 3,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 179,
+        "net": "us",
+        "code": "70007qtj",
+        "ids": ",us70007qtj,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.182,
+        "rms": 0.64,
+        "gap": 176,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.4 - 19 km SSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7149,
+          -33.1941,
+          28.78
+        ]
+      },
+      "id": "us70007qtj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "36 km NNW of Valparaíso, Chile",
+        "time": 1575099051666,
+        "updated": 1659978885461,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70006eqd",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us70006eqd&format=geojson",
+        "felt": 72,
+        "cdi": 5.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 337,
+        "net": "us",
+        "code": "70006eqd",
+        "ids": ",us70006eqd,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.315,
+        "rms": 0.68,
+        "gap": 99,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 36 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8162,
+          -32.7444,
+          23.32
+        ]
+      },
+      "id": "us70006eqd"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "35 km NNW of Valparaíso, Chile",
+        "time": 1575061628688,
+        "updated": 1659979080125,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70006elp",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us70006elp&format=geojson",
+        "felt": 16,
+        "cdi": 2.9,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 302,
+        "net": "us",
+        "code": "70006elp",
+        "ids": ",us70006elp,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.307,
+        "rms": 0.96,
+        "gap": 122,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 35 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7857,
+          -32.741,
+          21.41
+        ]
+      },
+      "id": "us70006elp"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.7,
+        "place": "19 km WNW of Hacienda La Calera, Chile",
+        "time": 1559535745657,
+        "updated": 1566681472040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70003ul8",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us70003ul8&format=geojson",
+        "felt": 139,
+        "cdi": 4.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 398,
+        "net": "us",
+        "code": "70003ul8",
+        "ids": ",us70003ul8,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.168,
+        "rms": 0.8,
+        "gap": 65,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.7 - 19 km WNW of Hacienda La Calera, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.402,
+          -32.7054,
+          55.45
+        ]
+      },
+      "id": "us70003ul8"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "27 km NNW of Melipilla, Chile",
+        "time": 1551673094800,
+        "updated": 1557858982040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000jasc",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000jasc&format=geojson",
+        "felt": 3,
+        "cdi": 5.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 248,
+        "net": "us",
+        "code": "1000jasc",
+        "ids": ",us1000jasc,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.218,
+        "rms": 0.44,
+        "gap": 91,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 4.0 - 27 km NNW of Melipilla, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2751,
+          -33.4451,
+          62.42
+        ]
+      },
+      "id": "us1000jasc"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "17 km SW of Valparaíso, Chile",
+        "time": 1551491730428,
+        "updated": 1557858976040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000j9qn",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000j9qn&format=geojson",
+        "felt": 1,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "1000j9qn",
+        "ids": ",us1000j9qn,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.161,
+        "rms": 0.38,
+        "gap": 165,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 17 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.771,
+          -33.1392,
+          35
+        ]
+      },
+      "id": "us1000j9qn"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.1,
+        "place": "22 km NW of Valparaíso, Chile",
+        "time": 1534301637080,
+        "updated": 1540657323040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000g9ft",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000g9ft&format=geojson",
+        "felt": 3,
+        "cdi": 3.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 149,
+        "net": "us",
+        "code": "1000g9ft",
+        "ids": ",us1000g9ft,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.191,
+        "rms": 0.71,
+        "gap": 180,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.1 - 22 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7699,
+          -32.8674,
+          28.17
+        ]
+      },
+      "id": "us1000g9ft"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.7,
+        "place": "40 km NW of Valparaíso, Chile",
+        "time": 1526081354010,
+        "updated": 1533741734040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000e6kv",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000e6kv&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 211,
+        "net": "us",
+        "code": "1000e6kv",
+        "ids": ",us1000e6kv,",
+        "sources": ",us,",
+        "types": ",moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.35,
+        "rms": 0.72,
+        "gap": 185,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.7 - 40 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9045,
+          -32.7527,
+          23.48
+        ]
+      },
+      "id": "us1000e6kv"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.5,
+        "place": "43 km NW of Valparaíso, Chile",
+        "time": 1526075860860,
+        "updated": 1533741656040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000e3a7",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000e3a7&format=geojson",
+        "felt": 77,
+        "cdi": 5.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 352,
+        "net": "us",
+        "code": "1000e3a7",
+        "ids": ",us1000e3a7,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.378,
+        "rms": 0.62,
+        "gap": 77,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.5 - 43 km NW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9572,
+          -32.7567,
+          19.06
+        ]
+      },
+      "id": "us1000e3a7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "10 km WNW of Hacienda La Calera, Chile",
+        "time": 1521626186790,
+        "updated": 1529372146040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000d70s",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000d70s&format=geojson",
+        "felt": 32,
+        "cdi": 4.9,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 287,
+        "net": "us",
+        "code": "1000d70s",
+        "ids": ",us1000d70s,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.187,
+        "rms": 0.41,
+        "gap": 129,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 10 km WNW of Hacienda La Calera, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3218,
+          -32.7484,
+          45.27
+        ]
+      },
+      "id": "us1000d70s"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.7,
+        "place": "10 km SSW of Valparaíso, Chile",
+        "time": 1507790966100,
+        "updated": 1515464096040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us1000aqlx",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000aqlx&format=geojson",
+        "felt": 42,
+        "cdi": 5.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 233,
+        "net": "us",
+        "code": "1000aqlx",
+        "ids": ",us1000aqlx,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.106,
+        "rms": 0.85,
+        "gap": 175,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 3.7 - 10 km SSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6767,
+          -33.1244,
+          29.66
+        ]
+      },
+      "id": "us1000aqlx"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "30 km W of Valparaíso, Chile",
+        "time": 1500709465380,
+        "updated": 1659875609408,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20009zn9",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20009zn9&format=geojson",
+        "felt": 32,
+        "cdi": 4.9,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 300,
+        "net": "us",
+        "code": "20009zn9",
+        "ids": ",us20009zn9,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.266,
+        "rms": 0.79,
+        "gap": 151,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 30 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9531,
+          -33.0524,
+          22.95
+        ]
+      },
+      "id": "us20009zn9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "43 km NNW of Valparaíso, Chile",
+        "time": 1499674960700,
+        "updated": 1507334172040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us100098i6",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us100098i6&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "100098i6",
+        "ids": ",us100098i6,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.777,
+        "rms": 1.11,
+        "gap": 152,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 43 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8851,
+          -32.7116,
+          18.14
+        ]
+      },
+      "id": "us100098i6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "21 km W of Valparaíso, Chile",
+        "time": 1497266825120,
+        "updated": 1503098004040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20009lxk",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20009lxk&format=geojson",
+        "felt": 15,
+        "cdi": 5.5,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 293,
+        "net": "us",
+        "code": "20009lxk",
+        "ids": ",us20009lxk,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.194,
+        "rms": 0.86,
+        "gap": 71,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 21 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8612,
+          -33.0714,
+          26.26
+        ]
+      },
+      "id": "us20009lxk"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "11 km S of Valparaíso, Chile",
+        "time": 1494761575940,
+        "updated": 1501903926040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008sc5",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008sc5&format=geojson",
+        "felt": 2,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "10008sc5",
+        "ids": ",us10008sc5,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.116,
+        "rms": 0.8,
+        "gap": 170,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 11 km S of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6411,
+          -33.1399,
+          30.53
+        ]
+      },
+      "id": "us10008sc5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.8,
+        "place": "17 km SW of Valparaíso, Chile",
+        "time": 1493433383390,
+        "updated": 1500604331040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lxe",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lxe&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 222,
+        "net": "us",
+        "code": "10008lxe",
+        "ids": ",us10008lxe,",
+        "sources": ",us,",
+        "types": ",moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.158,
+        "rms": 0.96,
+        "gap": 163,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.8 - 17 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7797,
+          -33.1266,
+          21.5
+        ]
+      },
+      "id": "us10008lxe"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "36 km WSW of Valparaíso, Chile",
+        "time": 1493430362230,
+        "updated": 1651602318121,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lwz",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lwz&format=geojson",
+        "felt": 25,
+        "cdi": 5.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 413,
+        "net": "us",
+        "code": "10008lwz",
+        "ids": ",us10008lwz,iscgem610588558,",
+        "sources": ",us,iscgem,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.333,
+        "rms": 0.74,
+        "gap": 61,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.1 - 36 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9616,
+          -33.2157,
+          18.79
+        ]
+      },
+      "id": "us10008lwz"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "39 km WNW of Cartagena, Chile",
+        "time": 1493428114830,
+        "updated": 1500604331040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lwq",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lwq&format=geojson",
+        "felt": 1,
+        "cdi": 2.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 298,
+        "net": "us",
+        "code": "10008lwq",
+        "ids": ",us10008lwq,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.41,
+        "rms": 0.82,
+        "gap": 69,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 39 km WNW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9773,
+          -33.38,
+          20.04
+        ]
+      },
+      "id": "us10008lwq"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "38 km WSW of Valparaíso, Chile",
+        "time": 1493413281960,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lsn",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lsn&format=geojson",
+        "felt": 1,
+        "cdi": 3.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008lsn",
+        "ids": ",us10008lsn,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.348,
+        "rms": 0.8,
+        "gap": 163,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 38 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9745,
+          -33.2277,
+          22.32
+        ]
+      },
+      "id": "us10008lsn"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "39 km SW of Valparaíso, Chile",
+        "time": 1493404103190,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lq0",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lq0&format=geojson",
+        "felt": 2,
+        "cdi": 4.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 272,
+        "net": "us",
+        "code": "10008lq0",
+        "ids": ",us10008lq0,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.358,
+        "rms": 0.88,
+        "gap": 94,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.2 - 39 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9407,
+          -33.2766,
+          25.51
+        ]
+      },
+      "id": "us10008lq0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.3,
+        "place": "40 km SW of Valparaíso, Chile",
+        "time": 1493401309010,
+        "updated": 1651602601952,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lnm",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lnm&format=geojson",
+        "felt": 10,
+        "cdi": 6.6,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 439,
+        "net": "us",
+        "code": "10008lnm",
+        "ids": ",us10008lnm,iscgem610650242,",
+        "sources": ",us,iscgem,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.371,
+        "rms": 0.68,
+        "gap": 61,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.3 - 40 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9578,
+          -33.2794,
+          17.98
+        ]
+      },
+      "id": "us10008lnm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "39 km NW of Cartagena, Chile",
+        "time": 1493396846920,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lme",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lme&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 326,
+        "net": "us",
+        "code": "10008lme",
+        "ids": ",us10008lme,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.389,
+        "rms": 0.85,
+        "gap": 101,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.6 - 39 km NW of Cartagena, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9356,
+          -33.3216,
+          24.03
+        ]
+      },
+      "id": "us10008lme"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.6,
+        "place": "39 km WSW of Valparaíso, Chile",
+        "time": 1493396488400,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lma",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lma&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 199,
+        "net": "us",
+        "code": "10008lma",
+        "ids": ",us10008lma,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.36,
+        "rms": 0.63,
+        "gap": 189,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.6 - 39 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9995,
+          -33.2169,
+          22.51
+        ]
+      },
+      "id": "us10008lma"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.8,
+        "place": "18 km WSW of Valparaíso, Chile",
+        "time": 1493395557030,
+        "updated": 1651602579309,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lm3",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lm3&format=geojson",
+        "felt": 52,
+        "cdi": 7.9,
+        "mmi": 5.965,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 559,
+        "net": "us",
+        "code": "10008lm3",
+        "ids": ",us10008lm3,iscgem610639145,",
+        "sources": ",us,iscgem,",
+        "types": ",dyfi,losspager,moment-tensor,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 0.173,
+        "rms": 1.03,
+        "gap": 59,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.8 - 18 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7998,
+          -33.1297,
+          27
+        ]
+      },
+      "id": "us10008lm3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "38 km SW of Valparaíso, Chile",
+        "time": 1493394203020,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lll",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lll&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 284,
+        "net": "us",
+        "code": "10008lll",
+        "ids": ",us10008lll,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.348,
+        "rms": 0.84,
+        "gap": 184,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 38 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.943,
+          -33.2599,
+          22.66
+        ]
+      },
+      "id": "us10008lll"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.6,
+        "place": "36 km SW of Valparaíso, Chile",
+        "time": 1493394024020,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008lli",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008lli&format=geojson",
+        "felt": 1,
+        "cdi": 5,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 326,
+        "net": "us",
+        "code": "10008lli",
+        "ids": ",us10008lli,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.333,
+        "rms": 0.82,
+        "gap": 129,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.6 - 36 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9301,
+          -33.2495,
+          22.43
+        ]
+      },
+      "id": "us10008lli"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.7,
+        "place": "40 km SW of Valparaíso, Chile",
+        "time": 1493393609930,
+        "updated": 1500604330040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008llm",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008llm&format=geojson",
+        "felt": 1,
+        "cdi": 6.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 340,
+        "net": "us",
+        "code": "10008llm",
+        "ids": ",us10008llm,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.371,
+        "rms": 0.88,
+        "gap": 151,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.7 - 40 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9383,
+          -33.2958,
+          24.28
+        ]
+      },
+      "id": "us10008llm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.9,
+        "place": "37 km WSW of Valparaíso, Chile",
+        "time": 1493393406310,
+        "updated": 1651604320015,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008llg",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008llg&format=geojson",
+        "felt": 325,
+        "cdi": 6.8,
+        "mmi": 4.835,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 757,
+        "net": "us",
+        "code": "10008llg",
+        "ids": ",us10008llg,iscgem611833671,",
+        "sources": ",us,iscgem,",
+        "types": ",dyfi,losspager,moment-tensor,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 0.34,
+        "rms": 1.2,
+        "gap": 67,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.9 - 37 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9694,
+          -33.219,
+          22
+        ]
+      },
+      "id": "us10008llg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "35 km WSW of Valparaíso, Chile",
+        "time": 1493282796540,
+        "updated": 1500604328040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008ntq",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008ntq&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 284,
+        "net": "us",
+        "code": "10008ntq",
+        "ids": ",us10008ntq,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.324,
+        "rms": 1.16,
+        "gap": 163,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 35 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9581,
+          -33.2047,
+          28.61
+        ]
+      },
+      "id": "us10008ntq"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.7,
+        "place": "38 km SW of Valparaíso, Chile",
+        "time": 1493281480130,
+        "updated": 1500604328040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l8p",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l8p&format=geojson",
+        "felt": 11,
+        "cdi": 4.6,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 345,
+        "net": "us",
+        "code": "10008l8p",
+        "ids": ",us10008l8p,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.347,
+        "rms": 0.58,
+        "gap": 68,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.7 - 38 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9516,
+          -33.25,
+          20.35
+        ]
+      },
+      "id": "us10008l8p"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "42 km SW of Valparaíso, Chile",
+        "time": 1493276145600,
+        "updated": 1500604328040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l8d",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l8d&format=geojson",
+        "felt": 1,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008l8d",
+        "ids": ",us10008l8d,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.384,
+        "rms": 0.56,
+        "gap": 171,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.1 - 42 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.973,
+          -33.2855,
+          24.21
+        ]
+      },
+      "id": "us10008l8d"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "39 km SW of Valparaíso, Chile",
+        "time": 1493269762920,
+        "updated": 1651603155651,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l82",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l82&format=geojson",
+        "felt": 57,
+        "cdi": 6.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 436,
+        "net": "us",
+        "code": "10008l82",
+        "ids": ",us10008l82,iscgem611149701,",
+        "sources": ",us,iscgem,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.36,
+        "rms": 0.65,
+        "gap": 68,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.1 - 39 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9563,
+          -33.2652,
+          22.51
+        ]
+      },
+      "id": "us10008l82"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "15 km SW of Valparaíso, Chile",
+        "time": 1493258105880,
+        "updated": 1500604328040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l75",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l75&format=geojson",
+        "felt": 3,
+        "cdi": 2.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 235,
+        "net": "us",
+        "code": "10008l75",
+        "ids": ",us10008l75,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.141,
+        "rms": 0.67,
+        "gap": 165,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.9 - 15 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7636,
+          -33.1172,
+          29.43
+        ]
+      },
+      "id": "us10008l75"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "37 km SW of Valparaíso, Chile",
+        "time": 1493219641960,
+        "updated": 1500604327040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l1w",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l1w&format=geojson",
+        "felt": 2,
+        "cdi": 2.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "10008l1w",
+        "ids": ",us10008l1w,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.339,
+        "rms": 0.71,
+        "gap": 68,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 37 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9033,
+          -33.2797,
+          27.02
+        ]
+      },
+      "id": "us10008l1w"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "40 km SW of Valparaíso, Chile",
+        "time": 1493217953890,
+        "updated": 1500604327040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008l15",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008l15&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "10008l15",
+        "ids": ",us10008l15,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.367,
+        "rms": 0.72,
+        "gap": 69,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.3 - 40 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9584,
+          -33.2736,
+          19.38
+        ]
+      },
+      "id": "us10008l15"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.7,
+        "place": "34 km WNW of Valparaíso, Chile",
+        "time": 1493167380200,
+        "updated": 1500604326040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kw7",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kw7&format=geojson",
+        "felt": 1,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 211,
+        "net": "us",
+        "code": "10008kw7",
+        "ids": ",us10008kw7,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.304,
+        "rms": 1,
+        "gap": 173,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.7 - 34 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9918,
+          -32.9573,
+          22.09
+        ]
+      },
+      "id": "us10008kw7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "31 km WNW of Valparaíso, Chile",
+        "time": 1493164691260,
+        "updated": 1500604326040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kvy",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kvy&format=geojson",
+        "felt": 3,
+        "cdi": 4.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 247,
+        "net": "us",
+        "code": "10008kvy",
+        "ids": ",us10008kvy,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.273,
+        "rms": 0.62,
+        "gap": 153,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.0 - 31 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9536,
+          -32.9563,
+          23.04
+        ]
+      },
+      "id": "us10008kvy"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.8,
+        "place": "27 km W of Valparaíso, Chile",
+        "time": 1493087585520,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008khf",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008khf&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 222,
+        "net": "us",
+        "code": "10008khf",
+        "ids": ",us10008khf,",
+        "sources": ",us,",
+        "types": ",moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.235,
+        "rms": 0.7,
+        "gap": 186,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.8 - 27 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.916,
+          -33.0023,
+          23.3
+        ]
+      },
+      "id": "us10008khf"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.2,
+        "place": "15 km WSW of Valparaíso, Chile",
+        "time": 1493078968920,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008n9s",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008n9s&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 271,
+        "net": "us",
+        "code": "10008n9s",
+        "ids": ",us10008n9s,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.133,
+        "rms": 0.88,
+        "gap": 201,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.2 - 15 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7822,
+          -33.0789,
+          25.85
+        ]
+      },
+      "id": "us10008n9s"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "40 km SW of Valparaíso, Chile",
+        "time": 1493078280400,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kfk",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kfk&format=geojson",
+        "felt": 2,
+        "cdi": 4.8,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 299,
+        "net": "us",
+        "code": "10008kfk",
+        "ids": ",us10008kfk,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.367,
+        "rms": 0.63,
+        "gap": 59,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 40 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.944,
+          -33.2863,
+          24.57
+        ]
+      },
+      "id": "us10008kfk"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.7,
+        "place": "43 km SW of Valparaíso, Chile",
+        "time": 1493078084230,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kfg",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kfg&format=geojson",
+        "felt": 9,
+        "cdi": 5.5,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 345,
+        "net": "us",
+        "code": "10008kfg",
+        "ids": ",us10008kfg,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.393,
+        "rms": 1.06,
+        "gap": 69,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.7 - 43 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9967,
+          -33.2762,
+          19.64
+        ]
+      },
+      "id": "us10008kfg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "27 km W of Valparaíso, Chile",
+        "time": 1493077162530,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008n9p",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008n9p&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008n9p",
+        "ids": ",us10008n9p,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.243,
+        "rms": 0.66,
+        "gap": 186,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 27 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9276,
+          -33.0152,
+          23.52
+        ]
+      },
+      "id": "us10008n9p"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "26 km SW of Valparaíso, Chile",
+        "time": 1493076533630,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kf0",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kf0&format=geojson",
+        "felt": 2,
+        "cdi": 4.8,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "10008kf0",
+        "ids": ",us10008kf0,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.24,
+        "rms": 1.14,
+        "gap": 161,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 26 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8593,
+          -33.1759,
+          26.19
+        ]
+      },
+      "id": "us10008kf0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "32 km W of Valparaíso, Chile",
+        "time": 1493075043160,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008keu",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008keu&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008keu",
+        "ids": ",us10008keu,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.281,
+        "rms": 0.56,
+        "gap": 200,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 32 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9721,
+          -33.0243,
+          19.78
+        ]
+      },
+      "id": "us10008keu"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.5,
+        "place": "25 km WSW of Valparaíso, Chile",
+        "time": 1493073835660,
+        "updated": 1500604325040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008ke3",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008ke3&format=geojson",
+        "felt": 1,
+        "cdi": 4.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 312,
+        "net": "us",
+        "code": "10008ke3",
+        "ids": ",us10008ke3,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.229,
+        "rms": 0.77,
+        "gap": 68,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.5 - 25 km WSW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8895,
+          -33.1125,
+          23.58
+        ]
+      },
+      "id": "us10008ke3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.9,
+        "place": "18 km W of Valparaíso, Chile",
+        "time": 1493071423690,
+        "updated": 1500604324040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kcv",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kcv&format=geojson",
+        "felt": 1,
+        "cdi": 5.8,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 370,
+        "net": "us",
+        "code": "10008kcv",
+        "ids": ",us10008kcv,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.167,
+        "rms": 0.63,
+        "gap": 134,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.9 - 18 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8303,
+          -33.0634,
+          27.92
+        ]
+      },
+      "id": "us10008kcv"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "30 km WNW of Valparaíso, Chile",
+        "time": 1493070713770,
+        "updated": 1500604324040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kcw",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kcw&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 234,
+        "net": "us",
+        "code": "10008kcw",
+        "ids": ",us10008kcw,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.265,
+        "rms": 0.93,
+        "gap": 172,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.9 - 30 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.944,
+          -32.9604,
+          27.61
+        ]
+      },
+      "id": "us10008kcw"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.4,
+        "place": "35 km WNW of Valparaíso, Chile",
+        "time": 1493070384100,
+        "updated": 1500604324040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008kcr",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008kcr&format=geojson",
+        "felt": 8,
+        "cdi": 7.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 454,
+        "net": "us",
+        "code": "10008kcr",
+        "ids": ",us10008kcr,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.305,
+        "rms": 0.71,
+        "gap": 81,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 5.4 - 35 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9844,
+          -32.9309,
+          13.21
+        ]
+      },
+      "id": "us10008kcr"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "34 km WNW of Valparaíso, Chile",
+        "time": 1492963973460,
+        "updated": 1500604322040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008k1k",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008k1k&format=geojson",
+        "felt": 2,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008k1k",
+        "ids": ",us10008k1k,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.299,
+        "rms": 0.84,
+        "gap": 69,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.1 - 34 km WNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9865,
+          -32.9634,
+          21.27
+        ]
+      },
+      "id": "us10008k1k"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.1,
+        "place": "30 km W of Valparaíso, Chile",
+        "time": 1492917003970,
+        "updated": 1500604321040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008jwi",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008jwi&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 259,
+        "net": "us",
+        "code": "10008jwi",
+        "ids": ",us10008jwi,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": 0.27,
+        "rms": 0.53,
+        "gap": 172,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.1 - 30 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9574,
+          -32.9935,
+          19.96
+        ]
+      },
+      "id": "us10008jwi"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.8,
+        "place": "30 km W of Valparaíso, Chile",
+        "time": 1492915398710,
+        "updated": 1500604321040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10008jw7",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10008jw7&format=geojson",
+        "felt": 2,
+        "cdi": 6,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 356,
+        "net": "us",
+        "code": "10008jw7",
+        "ids": ",us10008jw7,",
+        "sources": ",us,",
+        "types": ",dyfi,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.264,
+        "rms": 0.67,
+        "gap": 122,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.8 - 30 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.9518,
+          -33.0181,
+          21
+        ]
+      },
+      "id": "us10008jw7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "30 km NNW of Valparaíso, Chile",
+        "time": 1472326568080,
+        "updated": 1480382922040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20006uma",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20006uma&format=geojson",
+        "felt": 2,
+        "cdi": 5,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 299,
+        "net": "us",
+        "code": "20006uma",
+        "ids": ",us20006uma,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.259,
+        "rms": 0.88,
+        "gap": 71,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 30 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7105,
+          -32.7701,
+          27.82
+        ]
+      },
+      "id": "us20006uma"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "25 km W of Hacienda La Calera, Chile",
+        "time": 1462703592250,
+        "updated": 1469038248040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10005fum",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10005fum&format=geojson",
+        "felt": 8,
+        "cdi": 4.3,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 301,
+        "net": "us",
+        "code": "10005fum",
+        "ids": ",us10005fum,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.292,
+        "rms": 0.73,
+        "gap": 116,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 25 km W of Hacienda La Calera, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4873,
+          -32.7579,
+          32.7
+        ]
+      },
+      "id": "us10005fum"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "23 km SW of Valparaíso, Chile",
+        "time": 1458413428640,
+        "updated": 1659452276331,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20005b20",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20005b20&format=geojson",
+        "felt": 1,
+        "cdi": 2.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "20005b20",
+        "ids": ",us20005b20,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.219,
+        "rms": 1.34,
+        "gap": 133,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 23 km SW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.811,
+          -33.1874,
+          24.98
+        ]
+      },
+      "id": "us20005b20"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "17 km SSE of Quilpué, Chile",
+        "time": 1456223355560,
+        "updated": 1659440614378,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10004rzg",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10004rzg&format=geojson",
+        "felt": 1,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 298,
+        "net": "us",
+        "code": "10004rzg",
+        "ids": ",us10004rzg,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.222,
+        "rms": 0.34,
+        "gap": 108,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 17 km SSE of Quilpué, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3932,
+          -33.1977,
+          47.97
+        ]
+      },
+      "id": "us10004rzg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "38 km NNW of Valparaíso, Chile",
+        "time": 1450834804700,
+        "updated": 1659400616375,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us100048yl",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us100048yl&format=geojson",
+        "felt": 1,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "100048yl",
+        "ids": ",us100048yl,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.333,
+        "rms": 0.91,
+        "gap": 147,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 38 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7522,
+          -32.7027,
+          23.36
+        ]
+      },
+      "id": "us100048yl"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "29 km N of Valparaíso, Chile",
+        "time": 1445970750270,
+        "updated": 1453506080040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20003zyf",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20003zyf&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 298,
+        "net": "us",
+        "code": "20003zyf",
+        "ids": ",us20003zyf,",
+        "sources": ",us,",
+        "types": ",cap,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.25,
+        "rms": 1.03,
+        "gap": 139,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.4 - 29 km N of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6589,
+          -32.7727,
+          26.58
+        ]
+      },
+      "id": "us20003zyf"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.3,
+        "place": "26 km SSE of Villa Alemana, Chile",
+        "time": 1442929232680,
+        "updated": 1659338050100,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20003mvw",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20003mvw&format=geojson",
+        "felt": 2,
+        "cdi": 2.7,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 285,
+        "net": "us",
+        "code": "20003mvw",
+        "ids": ",us20003mvw,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.374,
+        "rms": 0.85,
+        "gap": 98,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.3 - 26 km SSE of Villa Alemana, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3036,
+          -33.2726,
+          49.06
+        ]
+      },
+      "id": "us20003mvw"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.9,
+        "place": "13 km NNW of Viña del Mar, Chile",
+        "time": 1442492074910,
+        "updated": 1659333352862,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20003kkw",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20003kkw&format=geojson",
+        "felt": 1,
+        "cdi": 4.2,
+        "mmi": 6.5,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 536,
+        "net": "us",
+        "code": "20003kkw",
+        "ids": ",us20003kkw,gcmt20150917121434,gcmt20150917121435,iscgem608098265,atlas20150917121434,",
+        "sources": ",us,gcmt,gcmt,iscgem,atlas,",
+        "types": ",cap,dyfi,impact-text,losspager,moment-tensor,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 0.11,
+        "rms": 1.17,
+        "gap": 54,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.9 - 13 km NNW of Viña del Mar, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6064,
+          -32.9149,
+          10
+        ]
+      },
+      "id": "us20003kkw"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.9,
+        "place": "37 km NNW of Valparaíso, Chile",
+        "time": 1435149323000,
+        "updated": 1441068836040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us10002lcj",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10002lcj&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 234,
+        "net": "us",
+        "code": "10002lcj",
+        "ids": ",us10002lcj,",
+        "sources": ",us,",
+        "types": ",impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.79,
+        "gap": null,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 3.9 - 37 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.783,
+          -32.723,
+          25.9
+        ]
+      },
+      "id": "us10002lcj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.7,
+        "place": "13 km N of Villa Alemana, Chile",
+        "time": 1434246120000,
+        "updated": 1659274109158,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us20002q4g",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20002q4g&format=geojson",
+        "felt": 2,
+        "cdi": 3.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 211,
+        "net": "us",
+        "code": "20002q4g",
+        "ids": ",us20002q4g,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.6,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 3.7 - 13 km N of Villa Alemana, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.38,
+          -32.925,
+          46.7
+        ]
+      },
+      "id": "us20002q4g"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.4,
+        "place": "28 km W of Valparaíso, Chile",
+        "time": 1431766314000,
+        "updated": 1659251702977,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us100029qx",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us100029qx&format=geojson",
+        "felt": 7,
+        "cdi": 4.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 301,
+        "net": "us",
+        "code": "100029qx",
+        "ids": ",us100029qx,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 1.11,
+        "gap": null,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.4 - 28 km W of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.933,
+          -33.08,
+          33.3
+        ]
+      },
+      "id": "us100029qx"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.8,
+        "place": "37 km NNW of Valparaíso, Chile",
+        "time": 1429033122000,
+        "updated": 1435015141040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us200026h6",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us200026h6&format=geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 222,
+        "net": "us",
+        "code": "200026h6",
+        "ids": ",us200026h6,",
+        "sources": ",us,",
+        "types": ",cap,impact-text,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 1.83,
+        "gap": null,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 3.8 - 37 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.723,
+          -32.706,
+          26.3
+        ]
+      },
+      "id": "us200026h6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.8,
+        "place": "37 km N of Valparaíso, Chile",
+        "time": 1421553599000,
+        "updated": 1659857315318,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/usc000tgw0",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=usc000tgw0&format=geojson",
+        "felt": 18,
+        "cdi": 5.4,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 364,
+        "net": "us",
+        "code": "c000tgw0",
+        "ids": ",usc000tgw0,iscgem606586145,",
+        "sources": ",us,iscgem,",
+        "types": ",cap,dyfi,impact-text,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.91,
+        "gap": null,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.8 - 37 km N of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.703,
+          -32.703,
+          25.8
+        ]
+      },
+      "id": "usc000tgw0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4,
+        "place": "31 km NNW of Valparaíso, Chile",
+        "time": 1420637700490,
+        "updated": 1658927143495,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/usc000tcd4",
+        "detail": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=usc000tcd4&format=geojson",
+        "felt": 1,
+        "cdi": 3.1,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 246,
+        "net": "us",
+        "code": "c000tcd4",
+        "ids": ",usc000tcd4,",
+        "sources": ",us,",
+        "types": ",cap,dyfi,impact-text,moment-tensor,origin,phase-data,",
+        "nst": null,
+        "dmin": 0.664,
+        "rms": 0.99,
+        "gap": 147,
+        "magType": "mwr",
+        "type": "earthquake",
+        "title": "M 4.0 - 31 km NNW of Valparaíso, Chile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7697,
+          -32.7784,
+          27.67
+        ]
+      },
+      "id": "usc000tcd4"
+    }
+  ],
+  "bbox": [
+    -71.9995,
+    -33.4493,
+    10,
+    -71.2526,
+    -32.7012,
+    62.42
+  ]
+}
