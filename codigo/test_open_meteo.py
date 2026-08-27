@@ -20,6 +20,6 @@ print(json.dumps({k: data[k] for k in ("latitude", "longitude", "hourly_units")}
 print("Primeras 3 horas de viento (m/s):", data["hourly"]["wind_speed_10m"][:3])
 print("Primeras 3 horas de rachas (m/s):", data["hourly"]["wind_gusts_10m"][:3])
 
-with open("evidencia/open_meteo_response.json", "w", encoding="utf-8") as f:
+with open("evidencia/datos/open_meteo_response.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
-print("Guardado en evidencia/open_meteo_response.json")
+print("Guardado en evidencia/datos/open_meteo_response.json")

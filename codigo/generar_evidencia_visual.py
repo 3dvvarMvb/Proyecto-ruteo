@@ -6,7 +6,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-EVID = "evidencia"
+EVID = "evidencia/datos"
+EVID_IMG = "evidencia/imagenes"
 
 # Fondo geografico comun (tierra/mar + comunas) para dar contexto real a los
 # mapas de poligonos; sin esto, los poligonos aislados "flotan" sin
@@ -61,7 +62,7 @@ ax.set_aspect("equal", adjustable="box")
 ax.set_title("CONAF - Probabilidad de ignición (PI) a 5 días — 2026-08-30\n(Región de Valparaíso, índice 0-100 por decil, dato real vía ArcGIS REST)")
 ax.set_xlabel("Longitud"); ax.set_ylabel("Latitud")
 fig.tight_layout()
-fig.savefig(f"{EVID}/mapa_conaf_probabilidad_ignicion.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/mapa_conaf_probabilidad_ignicion.png", dpi=150)
 print("OK mapa_conaf_probabilidad_ignicion.png")
 
 # ------------------------------------------------------------------
@@ -76,7 +77,7 @@ ax.set_aspect("equal", adjustable="box")
 ax.set_title(f"CONAF - Áreas Silvestres Protegidas en Valparaíso\n({len(gdf_asp)} polígonos reales vía ArcGIS REST)")
 ax.set_xlabel("Longitud"); ax.set_ylabel("Latitud")
 fig.tight_layout()
-fig.savefig(f"{EVID}/mapa_conaf_areas_protegidas.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/mapa_conaf_areas_protegidas.png", dpi=150)
 print("OK mapa_conaf_areas_protegidas.png")
 
 # ------------------------------------------------------------------
@@ -94,7 +95,7 @@ ax.axhline(40, color="red", linestyle="--", linewidth=1, label="Ej. límite oper
 ax.set_title(f"Open-Meteo - Pronóstico de viento, Valparaíso\n(lat={om['latitude']}, lon={om['longitude']}, primeras 48 h)")
 ax.set_xlabel("Hora (índice)"); ax.set_ylabel("km/h"); ax.legend()
 fig.tight_layout()
-fig.savefig(f"{EVID}/grafico_open_meteo_viento.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/grafico_open_meteo_viento.png", dpi=150)
 print("OK grafico_open_meteo_viento.png")
 
 # ------------------------------------------------------------------
@@ -117,7 +118,7 @@ tbl = ax.table(cellText=rows, colLabels=["way id", "building:levels", "height", 
 tbl.auto_set_font_size(False); tbl.set_fontsize(9); tbl.scale(1, 1.5)
 ax.set_title(f"Overpass API - edificación en Valparaíso ({len(rows)} elementos reales)")
 fig.tight_layout()
-fig.savefig(f"{EVID}/tabla_overpass_edificacion.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/tabla_overpass_edificacion.png", dpi=150)
 print("OK tabla_overpass_edificacion.png")
 
 print("\nListo. Todas las imagenes quedaron en", EVID)

@@ -24,9 +24,9 @@ if "Invalid" in resp.text or resp.status_code != 200:
     print("\n[NOTA] MAP_KEY inválida o no configurada. Esto es esperado sin registro.")
     print("El endpoint SÍ responde (no está caído): confirma la accesibilidad del servicio.")
 else:
-    with open("evidencia/firms_response.csv", "w", encoding="utf-8") as f:
+    with open("evidencia/datos/firms_response.csv", "w", encoding="utf-8") as f:
         f.write(resp.text)
-    print("Guardado en evidencia/firms_response.csv")
+    print("Guardado en evidencia/datos/firms_response.csv")
 
 # Endpoint de estado de transacciones de la key (también requiere key, pero confirma el dominio)
 status_url = f"https://firms.modaps.eosdis.nasa.gov/mapserver/mapkey_status/?MAP_KEY={MAP_KEY}"

@@ -3,10 +3,10 @@ codigo/data/*.pbf
 codigo/data/*.osm.xml
 
 # Capas geoespaciales muy pesadas (regenerables, no hacen falta en el repo)
-codigo/evidencia/regiones_chile.geojson
-codigo/evidencia/aristas_valparaiso.gpkg
-codigo/evidencia/nodos_valparaiso.gpkg
-codigo/evidencia/conaf_probabilidad_ignicion.geojson
+codigo/evidencia/datos/regiones_chile.geojson
+codigo/evidencia/datos/aristas_valparaiso.gpkg
+codigo/evidencia/datos/nodos_valparaiso.gpkg
+codigo/evidencia/datos/conaf_probabilidad_ignicion.geojson
 
 # Python
 __pycache__/

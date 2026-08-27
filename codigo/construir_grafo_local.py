@@ -14,9 +14,9 @@ print(f"Tiempo de construccion del grafo: {t1 - t0:.1f} s")
 print(f"Nodos: {len(nodos)} | Aristas: {len(aristas)}")
 print(f"CRS: {nodos.crs}")
 
-nodos.to_file("evidencia/nodos_valparaiso.gpkg", driver="GPKG")
-aristas.to_file("evidencia/aristas_valparaiso.gpkg", driver="GPKG")
-print("Guardado en evidencia/nodos_valparaiso.gpkg y aristas_valparaiso.gpkg")
+nodos.to_file("evidencia/datos/nodos_valparaiso.gpkg", driver="GPKG")
+aristas.to_file("evidencia/datos/aristas_valparaiso.gpkg", driver="GPKG")
+print("Guardado en evidencia/datos/nodos_valparaiso.gpkg y aristas_valparaiso.gpkg")
 
 fig, ax = ox.plot_graph(
     G, show=False, close=False,
@@ -25,5 +25,5 @@ fig, ax = ox.plot_graph(
     bgcolor="#cfe3f5",
 )
 ax.set_title(f"Grafo vial real - Gran Valparaíso (OSM vía Geofabrik)\n{len(nodos):,} nodos, {len(aristas):,} aristas", fontsize=11, color="black")
-fig.savefig("evidencia/mapa_grafo_valparaiso.png", dpi=150)
-print("Mapa guardado en evidencia/mapa_grafo_valparaiso.png")
+fig.savefig("evidencia/imagenes/mapa_grafo_valparaiso.png", dpi=150)
+print("Mapa guardado en evidencia/imagenes/mapa_grafo_valparaiso.png")

@@ -6,7 +6,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-EVID = "evidencia"
+EVID = "evidencia/datos"
+EVID_IMG = "evidencia/imagenes"
 
 with open(f"{EVID}/overpass_local_edificacion.json", encoding="utf-8") as f:
     data = json.load(f)
@@ -30,7 +31,7 @@ ax.set_title(
 ax.set_xlabel("building:levels (pisos)")
 ax.set_ylabel("Cantidad de edificios")
 fig.tight_layout()
-fig.savefig(f"{EVID}/grafico_edificacion_valparaiso.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/grafico_edificacion_valparaiso.png", dpi=150)
 print("OK evidencia/grafico_edificacion_valparaiso.png")
 print(f"Mediana de pisos: {sorted(niveles)[len(niveles)//2]}")
 print(f"Máximo: {max(niveles)}")

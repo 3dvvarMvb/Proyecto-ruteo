@@ -17,11 +17,11 @@ print(f"Nodos: {len(nodos)} | Aristas: {len(aristas)}")
 print(f"CRS: {nodos.crs}")
 print(f"Bounding box: {nodos.total_bounds}")
 
-nodos.to_file("evidencia/nodos_valparaiso.gpkg", driver="GPKG")
-aristas.to_file("evidencia/aristas_valparaiso.gpkg", driver="GPKG")
-print("Guardado en evidencia/nodos_valparaiso.gpkg y aristas_valparaiso.gpkg")
+nodos.to_file("evidencia/datos/nodos_valparaiso.gpkg", driver="GPKG")
+aristas.to_file("evidencia/datos/aristas_valparaiso.gpkg", driver="GPKG")
+print("Guardado en evidencia/datos/nodos_valparaiso.gpkg y aristas_valparaiso.gpkg")
 
 # Mapa estático como evidencia visual
 fig, ax = ox.plot_graph(G, show=False, close=False, node_size=2, edge_linewidth=0.5)
-fig.savefig("evidencia/mapa_valparaiso.png", dpi=150)
-print("Mapa guardado en evidencia/mapa_valparaiso.png")
+fig.savefig("evidencia/imagenes/mapa_valparaiso.png", dpi=150)
+print("Mapa guardado en evidencia/imagenes/mapa_valparaiso.png")

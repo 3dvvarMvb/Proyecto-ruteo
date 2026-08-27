@@ -38,9 +38,9 @@ def query_layer(nombre, url, where="1=1", out_fields="*"):
     print("HTTP", resp.status_code, "| features:", len(feats))
     for f in feats[:5]:
         print(" ", f["properties"])
-    with open(f"evidencia/conaf_{nombre}.geojson", "w", encoding="utf-8") as fh:
+    with open(f"evidencia/datos/conaf_{nombre}.geojson", "w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=False)
-    print(f"Guardado en evidencia/conaf_{nombre}.geojson")
+    print(f"Guardado en evidencia/datos/conaf_{nombre}.geojson")
     return data
 
 

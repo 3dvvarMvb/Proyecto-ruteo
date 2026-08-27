@@ -25,6 +25,6 @@ for feat in data["features"][:5]:
     lon, lat, depth = feat["geometry"]["coordinates"]
     print(f"  mag={p['mag']} lugar={p['place']} lat={lat:.3f} lon={lon:.3f} prof={depth}km")
 
-with open("evidencia/usgs_response.json", "w", encoding="utf-8") as f:
+with open("evidencia/datos/usgs_response.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
-print("Guardado en evidencia/usgs_response.json")
+print("Guardado en evidencia/datos/usgs_response.json")

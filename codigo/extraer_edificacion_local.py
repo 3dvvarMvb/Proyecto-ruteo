@@ -7,7 +7,7 @@ import json
 import csv
 
 XML_PATH = "data/valparaiso_buildings.osm.xml"
-EVID = "evidencia"
+EVID = "evidencia/datos"
 
 tree = ET.parse(XML_PATH)
 root = tree.getroot()

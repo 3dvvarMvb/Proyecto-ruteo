@@ -8,7 +8,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import requests
 
-EVID = "evidencia"
+EVID = "evidencia/datos"
+EVID_IMG = "evidencia/imagenes"
 COMUNAS = ["Valparaíso", "Viña del Mar", "Quilpué", "Villa Alemana", "Concón"]
 
 # --- Contorno real de comunas (contexto geografico) ---
@@ -57,5 +58,5 @@ ax.set_aspect("equal", adjustable="box")
 ax.set_title(f"USGS - Sismicidad Región de Valparaíso (2015-2026)\n{len(mags)} eventos M≥2 reales · comunas del Gran Valparaíso como referencia", fontsize=11)
 ax.set_xlabel("Longitud"); ax.set_ylabel("Latitud")
 fig.subplots_adjust(left=0.09, right=0.93, top=0.90, bottom=0.08)
-fig.savefig(f"{EVID}/mapa_usgs_sismicidad.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/mapa_usgs_sismicidad.png", dpi=150)
 print("OK mapa_usgs_sismicidad.png (con contexto geografico)")

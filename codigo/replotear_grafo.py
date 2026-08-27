@@ -5,10 +5,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-nodos = gpd.read_file("evidencia/nodos_valparaiso.gpkg")
-aristas = gpd.read_file("evidencia/aristas_valparaiso.gpkg")
-region = gpd.read_file("evidencia/region_valparaiso.geojson")
-comunas = gpd.read_file("evidencia/comunas_gran_valparaiso.geojson")
+nodos = gpd.read_file("evidencia/datos/nodos_valparaiso.gpkg")
+aristas = gpd.read_file("evidencia/datos/aristas_valparaiso.gpkg")
+region = gpd.read_file("evidencia/datos/region_valparaiso.geojson")
+comunas = gpd.read_file("evidencia/datos/comunas_gran_valparaiso.geojson")
 
 fig, ax = plt.subplots(figsize=(9, 11))
 ax.set_facecolor("#cfe3f5")
@@ -24,5 +24,5 @@ ax.set_aspect("equal", adjustable="box")
 ax.set_title(f"Grafo vial real - Gran Valparaíso (OSM vía Geofabrik, sin Overpass)\n{len(nodos):,} nodos, {len(aristas):,} aristas", fontsize=12)
 ax.set_xlabel("Longitud"); ax.set_ylabel("Latitud")
 fig.tight_layout()
-fig.savefig("evidencia/mapa_grafo_valparaiso.png", dpi=150)
-print("OK evidencia/mapa_grafo_valparaiso.png")
+fig.savefig("evidencia/imagenes/mapa_grafo_valparaiso.png", dpi=150)
+print("OK evidencia/imagenes/mapa_grafo_valparaiso.png")

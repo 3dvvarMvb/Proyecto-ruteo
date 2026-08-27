@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 from shapely.geometry import box
 
-EVID = "evidencia"
+EVID = "evidencia/datos"
+EVID_IMG = "evidencia/imagenes"
 
 region = gpd.read_file(f"{EVID}/region_valparaiso.geojson")
 comunas = gpd.read_file(f"{EVID}/comunas_gran_valparaiso.geojson")
@@ -79,5 +80,5 @@ ax2.set_xlabel("Longitud"); ax2.set_ylabel("Latitud")
 
 fig.suptitle("NASA FIRMS - Amenaza 1: focos de incendio activo (dato real, API con MAP_KEY)", fontsize=13, y=0.99)
 fig.tight_layout(rect=[0, 0, 1, 0.96])
-fig.savefig(f"{EVID}/mapa_firms_focos_incendio.png", dpi=150)
+fig.savefig(f"{EVID_IMG}/mapa_firms_focos_incendio.png", dpi=150)
 print("OK evidencia/mapa_firms_focos_incendio.png")

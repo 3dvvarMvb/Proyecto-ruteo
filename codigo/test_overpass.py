@@ -27,6 +27,6 @@ for el in data.get("elements", [])[:5]:
     tags = el.get("tags", {})
     print(f"  way {el['id']}: building:levels={tags.get('building:levels')}, height={tags.get('height')}")
 
-with open("evidencia/overpass_response.json", "w", encoding="utf-8") as f:
+with open("evidencia/datos/overpass_response.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
-print("Guardado en evidencia/overpass_response.json")
+print("Guardado en evidencia/datos/overpass_response.json")
