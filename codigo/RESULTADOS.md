@@ -35,6 +35,12 @@ En el mapa `mapa_ine_poblacion_manzanas.png`, la comuna de Quilpué se ve casi v
 
 De paso se detectó y descartó una falsa alarma propia: al calcular el área de los polígonos comunales reproyectando a Web Mercator (EPSG:3857) da un valor ~43% más alto que el real (a esta latitud, `1/cos²(33°) ≈ 1,42`, que es justo el factor de más que aparecía). El campo `area` nativo del Feature Service de CONAF (en hectáreas) sí coincide con las superficies oficiales (ej. Quilpué: 534,8 km² del servicio vs. 536,9 km² oficial). Para cualquier cálculo de área en la Tarea 2 hay que reproyectar a un CRS proyectado adecuado para Chile (ej. UTM 19S / EPSG:32719), nunca usar Web Mercator para mediciones.
 
+## Corrección de escala de color en el mapa de población por manzana
+
+La primera versión del mapa usaba una escala de color lineal de 0 hasta el máximo real (2.754 hab./manzana), lo que hacía ver casi todo el mapa del mismo color oscuro. La distribución real es muy sesgada: mediana de **58 habitantes por manzana**, y el **95% de las 10.750 manzanas tiene 302 habitantes o menos** (solo 31 manzanas, 0,3%, superan 1.000). Al estirar la escala hasta el máximo, esas pocas manzanas densas (edificios altos) comprimían al resto en la parte inferior de la paleta, ocultando la variación real entre baja y media densidad.
+
+Se corrigió recortando la escala de color en 300 (percentil 95), con una flecha en la barra de color indicando "300 o más" para las manzanas por encima de ese umbral (`vmin=0, vmax=300, extend="max"` en `generar_mapa_poblacion.py`). Con esto el mapa distingue correctamente los núcleos de alta densidad (costa de Viña del Mar, Villa Alemana) de las zonas de baja densidad.
+
 ## Hallazgos a incorporar al informe
 
 1. **Reemplazar SENAPRED por CONAF como Amenaza 2**: CONAF expone, sin darse cuenta explícitamente en su sitio de contenido, un dashboard ArcGIS Online **público** con dos Feature Services REST:
