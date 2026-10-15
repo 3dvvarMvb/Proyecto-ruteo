@@ -4,12 +4,11 @@
   1. Levanta la base de datos (Docker: PostGIS + pgRouting) y el sitio web.
   2. Corre cada extractor de infraestructura/metadata/amenazas -> *.json.
   3. Carga cada *.json a su tabla correspondiente en la BD.
-  4. Calcula la ruta de ejemplo con pgr_dijkstra y exporta las capas para
-     el sitio web (Leaflet).
+  4. Calcula la ruta con pgr_dijkstra y la ruta resiliente con pgr_KSP, y
+     exporta las capas para el sitio web (Leaflet).
 
 Uso:  python3 main.py            (requiere Docker y docker compose)
-      python3 main.py --sin-docker   (asume que ya tenes Postgres accesible
-                                       por las variables de entorno DB_*)
+      python3 main.py --sin-docker   (ejecución directa dentro del contenedor o con BD accesible)
 """
 import os
 import subprocess
@@ -18,8 +17,6 @@ import time
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 
-# (script, directorio) - orden importa: infraestructura y carabineros antes
-# que la ruta de ejemplo; cada extractor antes de su loader.
 PASOS_EXTRACCION = [
     ("infraestructura/extraer_infraestructura.py", "infraestructura"),
     ("infraestructura/extraer_carabineros.py", "infraestructura"),
@@ -45,6 +42,7 @@ PASOS_CARGA = [
 ]
 
 PASOS_SITIO = [
+    ("sitio_web/generar_rutas_comparativas.py", "sitio_web"),
     ("sitio_web/generar_ruta_ejemplo.py", "sitio_web"),
     ("sitio_web/exportar_capas_web.py", "sitio_web"),
 ]
@@ -70,8 +68,8 @@ def main():
     sin_docker = "--sin-docker" in sys.argv
 
     if not sin_docker:
-        print("1. Levantando Docker (BD + sitio web)...")
-        subprocess.run(["docker", "compose", "up", "-d", "--build"], cwd=RAIZ, check=True)
+        print("1. Levantando Docker (BD PostgreSQL/PostGIS/pgRouting + Nginx)...")
+        subprocess.run(["docker", "compose", "up", "-d", "--build", "db", "sitio_web"], cwd=RAIZ, check=True)
         print("   Esperando que la BD esté healthy...")
         for _ in range(30):
             chequeo = subprocess.run(
@@ -84,26 +82,32 @@ def main():
         else:
             raise SystemExit("La BD no quedó healthy a tiempo.")
 
+        print("\n2. Ejecutando ETL y cálculo de rutas dentro del contenedor Docker (ruteo_etl)...")
+        subprocess.run(["docker", "compose", "run", "--rm", "etl", "python3", "main.py", "--sin-docker"], cwd=RAIZ, check=True)
+        print("\n=== Proceso completado con éxito ===")
+        print("Sitio disponible en: http://localhost:8080")
+        return
+
+    # Si estamos en modo --sin-docker (ej. dentro del contenedor etl):
     env = os.environ.copy()
-    env.setdefault("DB_HOST", "localhost")
+    env.setdefault("DB_HOST", "db" if os.path.exists("/.dockerenv") else "localhost")
     env.setdefault("DB_PORT", "5432")
     env.setdefault("DB_NAME", "ruteo_drones")
     env.setdefault("DB_USER", "ruteo")
     env.setdefault("DB_PASSWORD", "ruteo")
+    env.setdefault("FIRMS_MAP_KEY", "d3739dfce8747115849167ec3fdc5e23")
 
-    print("\n2. Extracción (API -> JSON)...")
+    print("\n[ETL - Paso 1/3] Extracción (API / Fuentes -> JSON)...")
     for script, carpeta in PASOS_EXTRACCION:
         correr(script, carpeta, env)
 
-    print("\n3. Carga (JSON -> BD)...")
+    print("\n[ETL - Paso 2/3] Carga (JSON -> PostGIS / pgRouting)...")
     for script, carpeta in PASOS_CARGA:
         correr(script, carpeta, env)
 
-    print("\n4. Ruta de ejemplo + capas del sitio web...")
+    print("\n[ETL - Paso 3/3] Cálculo de Rutas Resilientes + Generación Sitio Web...")
     for script, carpeta in PASOS_SITIO:
         correr(script, carpeta, env)
-
-    print("\nListo. Sitio disponible en http://localhost:8080")
 
 
 if __name__ == "__main__":

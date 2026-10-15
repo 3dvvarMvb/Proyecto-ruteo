@@ -25,10 +25,18 @@ conn = psycopg2.connect(**CONN)
 cur = conn.cursor()
 
 cur.execute("SELECT nombre, comuna, nodo_vial_id, ST_X(geom), ST_Y(geom) FROM nodo_carabineros WHERE nombre = %s", (ORIGEN_NOMBRE,))
-origen_nombre, origen_comuna, origen_nodo, origen_lon, origen_lat = cur.fetchone()
+row_orig = cur.fetchone()
+if not row_orig:
+    cur.execute("SELECT nombre, comuna, nodo_vial_id, ST_X(geom), ST_Y(geom) FROM nodo_carabineros WHERE es_comisaria = true LIMIT 1")
+    row_orig = cur.fetchone()
+origen_nombre, origen_comuna, origen_nodo, origen_lon, origen_lat = row_orig
 
 cur.execute("SELECT lugar, magnitud, ST_X(geom), ST_Y(geom) FROM amenaza_sismos WHERE usgs_id = %s", (SISMO_ID,))
-sismo_lugar, sismo_mag, sismo_lon, sismo_lat = cur.fetchone()
+row_sismo = cur.fetchone()
+if not row_sismo:
+    cur.execute("SELECT lugar, magnitud, ST_X(geom), ST_Y(geom) FROM amenaza_sismos ORDER BY magnitud DESC LIMIT 1")
+    row_sismo = cur.fetchone()
+sismo_lugar, sismo_mag, sismo_lon, sismo_lat = row_sismo
 
 cur.execute(
     """

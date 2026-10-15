@@ -4,16 +4,28 @@
 Fuente: extracto local de OpenStreetMap via Geofabrik (ver codigo/RESULTADOS.md
 de la Tarea 1 - Overpass en vivo se descarto por inestable). Este script NO
 vuelve a descargar el .pbf (pesado); parte de los .gpkg ya generados por
-codigo/construir_grafo_local.py en la Tarea 1. Si no existen, hay que correr
-ese script primero (requiere el extracto de Geofabrik).
+codigo/construir_grafo_local.py en la Tarea 1 o de los .json ya extraidos.
 """
 import json
 import os
-import geopandas as gpd
+import sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 TAREA1_DATOS = os.environ.get("TAREA1_DATOS", os.path.join(AQUI, "../../codigo/evidencia/datos"))
 SALIDA = AQUI
+
+# Si los JSON ya existen y tienen contenido, los reutiliza directamente
+nodos_path = os.path.join(SALIDA, "nodos.json")
+aristas_path = os.path.join(SALIDA, "aristas.json")
+
+if os.path.exists(nodos_path) and os.path.exists(aristas_path) and os.path.getsize(aristas_path) > 1000:
+    print(f"OK: {nodos_path} y {aristas_path} ya existen y están listos.")
+    sys.exit(0)
+
+try:
+    import geopandas as gpd
+except ImportError:
+    sys.exit("Error: geopandas es requerido si no existen nodos.json ni aristas.json.")
 
 print("Cargando grafo vial (Tarea 1)...")
 nodos = gpd.read_file(f"{TAREA1_DATOS}/nodos_valparaiso.gpkg")
@@ -31,9 +43,9 @@ for _, row in nodos.iterrows():
         "lat": round(row.geometry.y, 7),
     })
 
-with open(f"{SALIDA}/nodos.json", "w", encoding="utf-8") as f:
+with open(nodos_path, "w", encoding="utf-8") as f:
     json.dump(nodos_json, f, ensure_ascii=False)
-print(f"Guardado {SALIDA}/nodos.json ({len(nodos_json):,} nodos)")
+print(f"Guardado {nodos_path} ({len(nodos_json):,} nodos)")
 
 # --- aristas.json ---
 aristas_json = []
@@ -63,6 +75,6 @@ for _, row in aristas.iterrows():
     })
     next_id += 1
 
-with open(f"{SALIDA}/aristas.json", "w", encoding="utf-8") as f:
+with open(aristas_path, "w", encoding="utf-8") as f:
     json.dump(aristas_json, f, ensure_ascii=False)
-print(f"Guardado {SALIDA}/aristas.json ({len(aristas_json):,} aristas)")
+print(f"Guardado {aristas_path} ({len(aristas_json):,} aristas)")

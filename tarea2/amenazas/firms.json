@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-10-14",
+    "confianza": "n",
+    "frp": 3.43,
+    "dentro_chile": true,
+    "lon": -71.44853,
+    "lat": -33.29592
+  },
+  {
+    "id": 2,
+    "fecha": "2026-10-14",
+    "confianza": "n",
+    "frp": 3.73,
+    "dentro_chile": true,
+    "lon": -71.26463,
+    "lat": -32.93338
+  }
+]

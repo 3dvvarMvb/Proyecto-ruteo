@@ -1,0 +1,492 @@
+#!/usr/bin/env python3
+"""
+Servidor Web y API Dinámica de Ruteo Resiliente BVLOS
+Calcula rutas Dijkstra y Resilientes en tiempo real usando PostGIS y pgRouting
+para CUALQUIERA de los 106 sismos, focos de incendio o puntos personalizados.
+"""
+
+import os
+import sys
+import json
+import time
+import urllib.parse
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+import psycopg2
+from psycopg2 import pool
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+
+DB_HOST = os.getenv("DB_HOST", "db")
+DB_PORT = int(os.getenv("DB_PORT", 5432))
+DB_NAME = os.getenv("DB_NAME", "ruteo_drones")
+DB_USER = os.getenv("DB_USER", "ruteo")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "ruteo")
+PORT = int(os.getenv("PORT", 8080))
+
+# Pool de conexiones a PostgreSQL
+db_pool = None
+try:
+    db_pool = psycopg2.pool.ThreadedConnectionPool(
+        minconn=2,
+        maxconn=15,
+        host=DB_HOST,
+        port=DB_PORT,
+        dbname=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+    )
+    print(f"OK: Pool PostgreSQL conectado a {DB_HOST}:{DB_PORT}/{DB_NAME}")
+except Exception as e:
+    print(f"AVISO: No se pudo conectar inmediatamente al pool DB ({e}). Se reintentará al recibir peticiones.")
+
+# Caché en memoria para respuestas de rutas instantáneas (<5ms)
+CACHE_RUTAS = {}
+
+# Mapeo de alias a IDs de cuarteles
+ALIAS_CUARTEL = {
+    "8va_florida": 17,
+    "1ra_sur": 25,
+    "2da_central": 23,
+    "3ra_norte": 21,
+    "4ta_puerto": 20,
+    "1ra_vina": 24,
+    "5ta_vina": 19,
+    "subcom_concon": 15,
+    "2da_quilpue": 22,
+    "6ta_villa_alemana": 18,
+    "reten_placilla": 2,
+    "reten_laguna_verde": 28,
+}
+ID_A_ALIAS = {v: k for k, v in ALIAS_CUARTEL.items()}
+
+
+def get_db_connection():
+    global db_pool
+    if db_pool is None:
+        db_pool = psycopg2.pool.ThreadedConnectionPool(
+            minconn=2,
+            maxconn=15,
+            host=DB_HOST,
+            port=DB_PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD,
+        )
+    return db_pool.getconn()
+
+
+def release_db_connection(conn):
+    if db_pool and conn:
+        db_pool.putconn(conn)
+
+
+def obtener_todos_los_sismos():
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT s.id, s.usgs_id, s.magnitud, s.lugar, s.profundidad_km,
+                   ST_X(s.geom) AS lon, ST_Y(s.geom) AS lat,
+                   round(ST_Distance(s.geom::geography, n.geom::geography)::numeric, 1) AS dist_red_m,
+                   (ST_X(s.geom) >= -71.68) AS en_tierra
+            FROM amenaza_sismos s
+            CROSS JOIN LATERAL (
+                SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
+            ) n
+            ORDER BY s.magnitud DESC, dist_red_m ASC;
+        """)
+        filas = cur.fetchall()
+        sismos = []
+        for r in filas:
+            s_id, usgs_id, mag, lugar, prof, lon, lat, dist_red, en_tierra = r
+            sismos.append({
+                "key": f"sismo_{s_id}",
+                "id": s_id,
+                "usgs_id": usgs_id,
+                "magnitud": float(mag),
+                "lugar": lugar,
+                "profundidad_km": float(prof) if prof is not None else None,
+                "lon": round(float(lon), 5),
+                "lat": round(float(lat), 5),
+                "dist_red_m": float(dist_red) if dist_red is not None else 0.0,
+                "en_tierra": bool(en_tierra),
+                "descripcion": f"Sismo M{mag} ({lugar})",
+            })
+        return sismos
+    finally:
+        release_db_connection(conn)
+
+
+def obtener_origenes_cuarteles():
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, nombre, comuna, es_comisaria, ST_X(geom) lon, ST_Y(geom) lat, nodo_vial_id
+            FROM nodo_carabineros
+            WHERE es_comisaria OR nombre IN ('SUBCOM. CONCON', 'RETEN PLACILLA PENUELAS', 'RETEN LAGUNA VERDE')
+            ORDER BY comuna, nombre;
+        """)
+        filas = cur.fetchall()
+        origenes = []
+        for r in filas:
+            c_id, nom, com, es_com, lon, lat, nodo_vial = r
+            key = ID_A_ALIAS.get(c_id, f"cuartel_{c_id}")
+            origenes.append({
+                "key": key,
+                "id": c_id,
+                "nombre": nom,
+                "comuna": com,
+                "es_comisaria": bool(es_com),
+                "lon": round(float(lon), 5),
+                "lat": round(float(lat), 5),
+                "nodo_vial": nodo_vial,
+            })
+        return origenes
+    finally:
+        release_db_connection(conn)
+
+
+def resolver_origen_nodo(cur, origen_str):
+    c_id = None
+    if str(origen_str).isdigit():
+        c_id = int(origen_str)
+    elif origen_str in ALIAS_CUARTEL:
+        c_id = ALIAS_CUARTEL[origen_str]
+    elif origen_str.startswith("cuartel_"):
+        c_id = int(origen_str.replace("cuartel_", ""))
+
+    if c_id:
+        cur.execute("SELECT id, nombre, comuna, es_comisaria, ST_X(geom), ST_Y(geom), nodo_vial_id FROM nodo_carabineros WHERE id = %s", (c_id,))
+    else:
+        cur.execute("SELECT id, nombre, comuna, es_comisaria, ST_X(geom), ST_Y(geom), nodo_vial_id FROM nodo_carabineros WHERE id = 17")
+
+    row = cur.fetchone()
+    if not row:
+        return None
+    key = ID_A_ALIAS.get(row[0], f"cuartel_{row[0]}")
+    return {
+        "key": key,
+        "id": row[0],
+        "nombre": row[1],
+        "comuna": row[2],
+        "es_comisaria": bool(row[3]),
+        "lon": round(float(row[4]), 5),
+        "lat": round(float(row[5]), 5),
+        "nodo_vial": row[6],
+    }
+
+
+def resolver_destino_nodo(cur, destino_str, lat_param=None, lon_param=None):
+    if destino_str.startswith("sismo_") or destino_str.isdigit():
+        s_id = int(destino_str.replace("sismo_", ""))
+        cur.execute("SELECT id, usgs_id, magnitud, lugar, ST_X(geom), ST_Y(geom) FROM amenaza_sismos WHERE id = %s", (s_id,))
+        row = cur.fetchone()
+        if row:
+            s_id, usgs, mag, lug, s_lon, s_lat = row
+            cur.execute("""
+                SELECT id, ST_X(geom), ST_Y(geom),
+                       ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(%s, %s), 4326)::geography)
+                FROM infraestructura_nodos
+                ORDER BY geom <-> ST_SetSRID(ST_MakePoint(%s, %s), 4326)
+                LIMIT 1;
+            """, (s_lon, s_lat, s_lon, s_lat))
+            d_nodo, dn_lon, dn_lat, dist_aerea = cur.fetchone()
+            return {
+                "key": f"sismo_{s_id}",
+                "id": s_id,
+                "tipo": "sismo",
+                "descripcion": f"Sismo M{mag} ({lug})",
+                "magnitud": float(mag),
+                "lugar": lug,
+                "lon": round(float(s_lon), 5),
+                "lat": round(float(s_lat), 5),
+                "nodo_vial": d_nodo,
+                "nodo_lon": float(dn_lon),
+                "nodo_lat": float(dn_lat),
+                "dist_aerea_m": float(dist_aerea),
+            }
+
+    if destino_str.startswith("firms_"):
+        f_id = int(destino_str.replace("firms_", ""))
+        cur.execute("SELECT id, fecha, confianza, ST_X(geom), ST_Y(geom) FROM amenaza_firms WHERE id = %s", (f_id,))
+        row = cur.fetchone()
+        if row:
+            f_id, fec, conf, f_lon, f_lat = row
+            cur.execute("""
+                SELECT id, ST_X(geom), ST_Y(geom),
+                       ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(%s, %s), 4326)::geography)
+                FROM infraestructura_nodos
+                ORDER BY geom <-> ST_SetSRID(ST_MakePoint(%s, %s), 4326)
+                LIMIT 1;
+            """, (f_lon, f_lat, f_lon, f_lat))
+            d_nodo, dn_lon, dn_lat, dist_aerea = cur.fetchone()
+            sec_str = "Valparaíso Cerros / Placilla" if f_id == 1 else "Sector Forestal Norte"
+            return {
+                "key": f"firms_{f_id}",
+                "id": f_id,
+                "tipo": "incendio",
+                "descripcion": f"Foco Incendio Activo FIRMS #{f_id} ({sec_str})",
+                "lon": round(float(f_lon), 5),
+                "lat": round(float(f_lat), 5),
+                "nodo_vial": d_nodo,
+                "nodo_lon": float(dn_lon),
+                "nodo_lat": float(dn_lat),
+                "dist_aerea_m": float(dist_aerea),
+            }
+
+    # Destino por coordenadas personalizadas (clic en cualquier parte del mapa)
+    if lat_param is not None and lon_param is not None:
+        c_lat, c_lon = float(lat_param), float(lon_param)
+        cur.execute("""
+            SELECT id, ST_X(geom), ST_Y(geom),
+                   ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(%s, %s), 4326)::geography)
+            FROM infraestructura_nodos
+            ORDER BY geom <-> ST_SetSRID(ST_MakePoint(%s, %s), 4326)
+            LIMIT 1;
+        """, (c_lon, c_lat, c_lon, c_lat))
+        d_nodo, dn_lon, dn_lat, dist_aerea = cur.fetchone()
+        return {
+            "key": f"coord_{round(c_lat,4)}_{round(c_lon,4)}",
+            "tipo": "coordenada",
+            "descripcion": f"Punto personalizado ({round(c_lat,4)}, {round(c_lon,4)})",
+            "lon": round(c_lon, 5),
+            "lat": round(c_lat, 5),
+            "nodo_vial": d_nodo,
+            "nodo_lon": float(dn_lon),
+            "nodo_lat": float(dn_lat),
+            "dist_aerea_m": float(dist_aerea),
+        }
+
+    # Fallback default: Sismo 15 (M4.6 Viña del Mar Norte)
+    return resolver_destino_nodo(cur, "sismo_15")
+
+
+def calcular_metricas(cur, edges1, edges2, dist1, dist2):
+    s1, s2 = set(edges1), set(edges2)
+    inter = len(s1.intersection(s2))
+    union = len(s1.union(s2)) if len(s1.union(s2)) > 0 else 1
+    disyuncion = 1.0 - (inter / union)
+    solapamiento_pct = (inter / union) * 100.0
+
+    if len(s1.union(s2)) > 0:
+        cur.execute(
+            "SELECT count(*) FROM infraestructura_aristas WHERE id = ANY(%s) AND cost_resiliente > length_m",
+            (list(s1.union(s2)),),
+        )
+        aristas_con_riesgo = cur.fetchone()[0]
+    else:
+        aristas_con_riesgo = 0
+
+    factor_seguridad = max(0.2, 1.0 - (aristas_con_riesgo / max(len(s1.union(s2)), 1)))
+    resiliencia_score = round(disyuncion * factor_seguridad * 100.0, 1)
+
+    return {
+        "disyuncion_pct": round(disyuncion * 100.0, 1),
+        "solapamiento_pct": round(solapamiento_pct, 1),
+        "factor_seguridad": round(factor_seguridad, 2),
+        "aristas_con_riesgo": aristas_con_riesgo,
+        "resiliencia_score": resiliencia_score,
+        "distancia_promedio_km": round((dist1 + dist2) / 2000.0, 2),
+    }
+
+
+def extraer_geometria_y_distancia(cur, edge_ids, dest_info=None):
+    if not edge_ids:
+        return None, 0.0
+
+    cur.execute(
+        "SELECT ST_AsGeoJSON(ST_LineMerge(ST_Collect(geom)))::json, coalesce(sum(length_m), 0) FROM infraestructura_aristas WHERE id = ANY(%s)",
+        (edge_ids,),
+    )
+    geom_json, dist_m = cur.fetchone()
+    dist_total = float(dist_m or 0.0)
+
+    # Si el objetivo se encuentra fuera de la red vial (por ejemplo en el mar o cerro a > 40 metros),
+    # conectamos el corredor aéreo directo desde el último nodo vial hasta el epicentro exacto.
+    if dest_info and dest_info.get("dist_aerea_m", 0) > 40.0:
+        dist_total += dest_info["dist_aerea_m"]
+        tramo_aereo = [[dest_info["nodo_lon"], dest_info["nodo_lat"]], [dest_info["lon"], dest_info["lat"]]]
+        if geom_json:
+            gtype = geom_json.get("type")
+            if gtype == "LineString":
+                coords = geom_json["coordinates"]
+                coords.append([dest_info["lon"], dest_info["lat"]])
+                geom_json["coordinates"] = coords
+            elif gtype == "MultiLineString":
+                coords = geom_json["coordinates"]
+                coords.append(tramo_aereo)
+                geom_json["coordinates"] = coords
+
+    return geom_json, dist_total
+
+
+def calcular_rutas_par(origen_key, destino_key, lat=None, lon=None):
+    cache_key = f"{origen_key}_{destino_key}_{lat}_{lon}"
+    if cache_key in CACHE_RUTAS:
+        return CACHE_RUTAS[cache_key]
+
+    conn = get_db_connection()
+    try:
+        cur = conn.cursor()
+        orig = resolver_origen_nodo(cur, origen_key)
+        dest = resolver_destino_nodo(cur, destino_key, lat, lon)
+
+        if not orig or not dest:
+            return {"error": "Origen o destino no encontrado"}
+
+        o_nodo = orig["nodo_vial"]
+        d_nodo = dest["nodo_vial"]
+
+        # 1. Dijkstra 1 (Distancia Pura)
+        cur.execute(
+            "SELECT edge FROM pgr_dijkstra('SELECT id, source, target, length_m AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
+            (o_nodo, d_nodo),
+        )
+        e_d1 = [r[0] for r in cur.fetchall()]
+
+        # 2. Dijkstra 2 (Bypass con penalización)
+        cur.execute(
+            """
+            SELECT edge FROM pgr_dijkstra(
+                'SELECT id, source, target,
+                        CASE WHEN id = ANY(%s) THEN length_m * 1000.0 ELSE length_m END AS cost
+                 FROM infraestructura_aristas',
+                %s, %s
+            ) WHERE edge != -1
+            """,
+            (e_d1, o_nodo, d_nodo),
+        )
+        e_d2 = [r[0] for r in cur.fetchall()]
+
+        # 3. Resiliente 1 (Ponderación multi-amenaza y seguridad)
+        cur.execute(
+            "SELECT edge FROM pgr_dijkstra('SELECT id, source, target, cost_resiliente AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
+            (o_nodo, d_nodo),
+        )
+        e_r1 = [r[0] for r in cur.fetchall()]
+
+        # 4. Resiliente 2 (Bypass resiliente disjunto)
+        cur.execute(
+            """
+            SELECT edge FROM pgr_dijkstra(
+                'SELECT id, source, target,
+                        CASE WHEN id = ANY(%s) THEN cost_resiliente * 1000.0 ELSE cost_resiliente END AS cost
+                 FROM infraestructura_aristas',
+                %s, %s
+            ) WHERE edge != -1
+            """,
+            (e_r1, o_nodo, d_nodo),
+        )
+        e_r2 = [r[0] for r in cur.fetchall()]
+
+        geom_d1, dist_d1 = extraer_geometria_y_distancia(cur, e_d1, dest)
+        geom_d2, dist_d2 = extraer_geometria_y_distancia(cur, e_d2 if e_d2 else e_d1, dest)
+        geom_r1, dist_r1 = extraer_geometria_y_distancia(cur, e_r1, dest)
+        geom_r2, dist_r2 = extraer_geometria_y_distancia(cur, e_r2 if e_r2 else e_r1, dest)
+
+        m_dijkstra = calcular_metricas(cur, e_d1, e_d2 if e_d2 else e_d1, dist_d1, dist_d2)
+        m_resiliente = calcular_metricas(cur, e_r1, e_r2 if e_r2 else e_r1, dist_r1, dist_r2)
+        diff_resil = round(m_resiliente["resiliencia_score"] - m_dijkstra["resiliencia_score"], 1)
+
+        resultado = {
+            "origen": orig,
+            "destino": dest,
+            "dijkstra_1": {"distancia_m": round(dist_d1, 1), "tramos": len(e_d1), "geom": geom_d1},
+            "dijkstra_2": {"distancia_m": round(dist_d2, 1), "tramos": len(e_d2), "geom": geom_d2},
+            "resiliente_1": {"distancia_m": round(dist_r1, 1), "tramos": len(e_r1), "geom": geom_r1},
+            "resiliente_2": {"distancia_m": round(dist_r2, 1), "tramos": len(e_r2), "geom": geom_r2},
+            "metricas": {
+                "dijkstra": m_dijkstra,
+                "resiliente": m_resiliente,
+                "diferencial_resiliencia": diff_resil,
+            },
+        }
+
+        # Guardar en caché
+        CACHE_RUTAS[cache_key] = resultado
+        return resultado
+    finally:
+        release_db_connection(conn)
+
+
+class RuteoRequestHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=AQUI, **kwargs)
+
+    def do_GET(self):
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path
+        query = urllib.parse.parse_qs(parsed.query)
+
+        # 1. API: Listado de todos los sismos (106)
+        if path == "/api/sismos":
+            try:
+                sismos = obtener_todos_los_sismos()
+                self._send_json(sismos)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 2. API: Listado de orígenes (cuarteles)
+        if path == "/api/origenes":
+            try:
+                origenes = obtener_origenes_cuarteles()
+                self._send_json(origenes)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 3. API: Cálculo Dinámico de Ruta en tiempo real
+        if path == "/api/calcular_ruta":
+            try:
+                orig = query.get("origen", ["8va_florida"])[0]
+                dest = query.get("destino", ["sismo_15"])[0]
+                lat = query.get("lat", [None])[0]
+                lon = query.get("lon", [None])[0]
+
+                t0 = time.time()
+                ruta_data = calcular_rutas_par(orig, dest, lat, lon)
+                t_ms = round((time.time() - t0) * 1000, 1)
+
+                if "error" in ruta_data:
+                    self._send_json(ruta_data, 400)
+                    return
+
+                # Empaquetar como respuesta enriquecida
+                ruta_data["tiempo_calculo_ms"] = t_ms
+                self._send_json(ruta_data)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 4. Servir archivos estáticos normales (index.html, app.js, data/*.geojson)
+        super().do_GET()
+
+    def _send_json(self, data, status=200):
+        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, format, *args):
+        # Log conciso para peticiones API
+        sys.stderr.write(f"[{time.strftime('%H:%M:%S')}] {args[0]} - {args[1]}\n")
+
+
+def run():
+    print(f"Iniciando Servidor Web Ruteo BVLOS en puerto {PORT}...")
+    server = ThreadingHTTPServer(("0.0.0.0", PORT), RuteoRequestHandler)
+    print(f"Servidor listo en http://localhost:{PORT}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("Cerrando servidor...")
+        server.server_close()
+
+
+if __name__ == "__main__":
+    run()

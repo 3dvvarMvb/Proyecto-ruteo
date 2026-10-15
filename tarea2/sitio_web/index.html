@@ -2,41 +2,184 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Ruteo resiliente de drones BVLOS — Gran Valparaíso</title>
+<title>Ruteo Resiliente de Drones BVLOS — Gran Valparaíso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-  html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
-  #map { height: 100%; }
+  html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  #map { height: 100%; width: 100%; }
+  
   .panel {
-    position: absolute; top: 10px; right: 10px; z-index: 1000;
-    background: white; padding: 12px 16px; border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3); max-width: 280px; font-size: 13px;
+    position: absolute; top: 12px; right: 12px; z-index: 1000;
+    background: rgba(255, 255, 255, 0.97); padding: 14px 18px; border-radius: 10px;
+    box-shadow: 0 4px 22px rgba(0,0,0,0.25); width: 360px; max-height: 94vh;
+    overflow-y: auto; font-size: 13px; line-height: 1.4; color: #2c3e50;
   }
-  .panel h3 { margin: 0 0 8px; font-size: 15px; }
-  .panel label { display: block; margin: 6px 0 2px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; margin: 3px 0; }
-  .swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
-  .line-swatch { width: 20px; height: 3px; display: inline-block; }
+  .panel h2 { margin: 0 0 4px; font-size: 15px; color: #1a365d; display: flex; align-items: center; justify-content: space-between; }
+  .panel p.sub { margin: 0 0 10px; font-size: 11px; color: #718096; }
+  
+  .section-title {
+    font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px;
+    margin: 12px 0 6px; color: #4a5568; border-bottom: 1px solid #e2e8f0; padding-bottom: 3px;
+  }
+  
+  .form-group { margin-bottom: 8px; }
+  .form-group label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 3px; color: #4a5568; }
+  .form-control {
+    width: 100%; box-sizing: border-box; padding: 6px 8px; font-size: 12px;
+    border: 1px solid #cbd5e0; border-radius: 6px; background: #fff; color: #2d3748;
+    transition: border-color 0.2s;
+  }
+  .form-control:focus { outline: none; border-color: #3182ce; box-shadow: 0 0 0 2px rgba(66,153,225,0.2); }
+  
+  .info-trayecto {
+    margin-top: 6px; font-size: 11.5px; color: #1a365d; background: #ebf8ff;
+    border: 1px solid #bee3f8; padding: 6px 10px; border-radius: 6px; line-height: 1.35;
+  }
+  
+  .tip-box {
+    margin-top: 4px; font-size: 10.5px; color: #718096; font-style: italic;
+  }
+  
+  .layer-item { display: flex; align-items: center; justify-content: space-between; margin: 4px 0; font-size: 12px; }
+  .swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+  .line-swatch { width: 18px; height: 4px; display: inline-block; margin-right: 6px; vertical-align: middle; border-radius: 2px; }
+  
+  .table-metric { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 11.5px; }
+  .table-metric th, .table-metric td { padding: 5px 6px; text-align: left; border-bottom: 1px solid #edf2f7; }
+  .table-metric th { background: #f7fafc; color: #4a5568; font-weight: 600; }
+  .table-metric td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  
+  .badge-diff {
+    background: #ebfbee; color: #2b8a3e; border: 1px solid #b2f2bb;
+    padding: 7px 10px; border-radius: 6px; font-weight: 700; font-size: 12.5px;
+    text-align: center; margin-top: 8px; display: block; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  
+  .btn-popup {
+    display: inline-block; margin-top: 6px; padding: 4px 8px; font-size: 11px;
+    font-weight: 600; color: #fff; border: none; border-radius: 4px; cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-origen { background: #2980b9; }
+  .btn-origen:hover { background: #1c5980; }
+  .btn-destino { background: #d35400; }
+  .btn-destino:hover { background: #a04000; }
 </style>
 </head>
 <body>
 <div id="map"></div>
+
 <div class="panel">
-  <h3>Ruteo resiliente BVLOS — Gran Valparaíso</h3>
-  <label><input type="checkbox" id="chk-ruta" checked> Ruta de ejemplo (pgr_dijkstra)</label>
-  <label><input type="checkbox" id="chk-carabineros" checked> Cuarteles Carabineros</label>
-  <label><input type="checkbox" id="chk-sismos" checked> Sismos (amenaza)</label>
-  <!-- Resto de metadata/amenazas (viento, tendido eléctrico, relieve,
-       población, FIRMS, CONAF) se agregan a medida que se completen sus
-       scripts de extracción/carga -->
-  <hr>
-  <div class="legend-item"><span class="line-swatch" style="background:#2980b9"></span> Ruta de ejemplo</div>
-  <div class="legend-item"><span class="swatch" style="background:#c0392b"></span> Comisaría</div>
-  <div class="legend-item"><span class="swatch" style="background:#7f8c8d"></span> Otro cuartel</div>
-  <div class="legend-item"><span class="swatch" style="background:#e67e22"></span> Sismo</div>
-  <div id="info" style="margin-top:8px; font-size:12px; color:#555;"></div>
+  <h2>
+    <span>Ruteo Resiliente BVLOS</span>
+    <span style="font-size:10px; font-weight:normal; background:#2980b9; color:#fff; padding:2px 6px; border-radius:4px;">Gran Valparaíso</span>
+  </h2>
+  <p class="sub">Plataforma de Evaluación de Daños tras Desastres — Drones Autónomos</p>
+
+  <div class="section-title">1. Dupla Origen / Destino Dinámica (Punto 11.1)</div>
+  <div class="form-group">
+    <label>Inicio (Cuartel Carabineros / Base de Carga):</label>
+    <select id="sel-origen" class="form-control">
+      <option value="">Cargando cuarteles...</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Objetivo (Emergencia a Evaluar):</label>
+    <select id="sel-destino" class="form-control">
+      <option value="">Cargando emergencias...</option>
+    </select>
+  </div>
+  
+  <div class="info-trayecto" id="info-seleccion">
+    <b>Ruta Activa:</b> Cargando trayectoria...
+  </div>
+  <div class="tip-box">
+    💡 <i>Tip: También puedes hacer clic en cualquier Cuartel o Sismo en el mapa para fijarlo como Origen o Destino.</i>
+  </div>
+
+  <div class="section-title">2. Preferencias / Restricciones (Punto 6)</div>
+  <div class="form-group">
+    <label>Viento máx permitido: <span id="lbl-viento">40 km/h (operacional)</span></label>
+    <input type="range" id="rng-viento" min="20" max="60" value="40" class="form-control" style="padding:0;">
+  </div>
+  <div style="display:flex; gap:12px; font-size:11.5px; margin-bottom:4px;">
+    <label><input type="checkbox" id="chk-opt-tendido" checked disabled> Evitar tendido eléctrico</label>
+    <label><input type="checkbox" id="chk-opt-conaf" checked disabled> Evitar áreas SNASPE</label>
+  </div>
+
+  <div class="section-title">3. Comparación de Rutas (Puntos 8, 9, 10, 11)</div>
+  <table class="table-metric">
+    <thead>
+      <tr>
+        <th>Métrica Evaluada</th>
+        <th style="color:#e67e22;">Dijkstra</th>
+        <th style="color:#2980b9;">Resiliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Distancia prom. (km)</td>
+        <td class="num" id="m-dist-dijkstra">—</td>
+        <td class="num" id="m-dist-resil">—</td>
+      </tr>
+      <tr>
+        <td>Disyunción de caminos</td>
+        <td class="num" id="m-disy-dijkstra">—</td>
+        <td class="num" id="m-disy-resil">—</td>
+      </tr>
+      <tr>
+        <td>Aristas en riesgo</td>
+        <td class="num" id="m-riesgo-dijkstra" style="color:#c0392b; font-weight:600;">—</td>
+        <td class="num" id="m-riesgo-resil" style="color:#27ae60; font-weight:600;">—</td>
+      </tr>
+      <tr style="font-weight:700; background:#f8fafc;">
+        <td>Resiliencia Global (R)</td>
+        <td class="num" id="m-resil-dijkstra" style="color:#e67e22;">—</td>
+        <td class="num" id="m-resil-resil" style="color:#2980b9;">—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="badge-diff" id="badge-diferencial">
+    Calculando Diferencial de Resiliencia...
+  </div>
+
+  <div class="section-title">4. Capas en el Mapa (Punto 7)</div>
+  <div class="layer-item">
+    <span><span class="line-swatch" style="background:#2980b9;"></span> Rutas Resilientes (k=2: azul + verde)</span>
+    <input type="checkbox" id="chk-capa-resil" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="line-swatch" style="background:#e74c3c;"></span> Rutas Dijkstra (k=2: rojo + naranja)</span>
+    <input type="checkbox" id="chk-capa-dijkstra" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="swatch" style="background:#c0392b;"></span> Cuarteles Carabineros (29 bases)</span>
+    <input type="checkbox" id="chk-capa-carabineros" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="swatch" style="background:#e67e22;"></span> Sismos USGS (106 epicentros)</span>
+    <input type="checkbox" id="chk-capa-sismos" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="line-swatch" style="background:#8e44ad;"></span> Tendido Eléctrico (100 líneas)</span>
+    <input type="checkbox" id="chk-capa-tendido" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="swatch" style="background:#27ae60;"></span> Áreas Protegidas CONAF (26 zonas)</span>
+    <input type="checkbox" id="chk-capa-conaf" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="swatch" style="background:#d35400;"></span> Focos Activos NASA FIRMS</span>
+    <input type="checkbox" id="chk-capa-firms" checked>
+  </div>
+  <div class="layer-item">
+    <span><span class="swatch" style="background:#3498db;"></span> Estaciones Viento Open-Meteo</span>
+    <input type="checkbox" id="chk-capa-viento" checked>
+  </div>
 </div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="app.js"></script>
 </body>

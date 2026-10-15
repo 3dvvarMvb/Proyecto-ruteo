@@ -11,9 +11,20 @@ COMUNAS = ["Valparaíso", "Viña del Mar", "Concón", "Quilpué", "Villa Alemana
 
 where = " OR ".join([f"comuna='{c}'" for c in COMUNAS])
 params = {"where": where, "outFields": "nombre,categ,tipo,comuna,lat,lon", "f": "geojson"}
-resp = requests.get(URL, params=params, timeout=25)
-resp.raise_for_status()
-feats = resp.json()["features"]
+salida_path = os.path.join(AQUI, "carabineros.json")
+feats = []
+try:
+    resp = requests.get(URL, params=params, timeout=6)
+    if resp.status_code == 200:
+        feats = resp.json().get("features", [])
+except Exception as e:
+    print(f"Aviso: consulta carabineros en vivo falló ({e}).")
+
+if not feats:
+    if os.path.exists(salida_path) and os.path.getsize(salida_path) > 500:
+        print(f"OK: Reutilizando {salida_path} validado ({os.path.getsize(salida_path)} bytes).")
+        raise SystemExit(0)
+    raise SystemExit("Error: No se pudo obtener cuarteles de Carabineros.")
 
 salida = []
 for i, feat in enumerate(feats, start=1):

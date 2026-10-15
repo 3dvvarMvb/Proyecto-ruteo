@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-71.44853, -33.29592]}, "properties": {"fecha": "2026-10-14", "confianza": "n"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-71.26463, -32.93338]}, "properties": {"fecha": "2026-10-14", "confianza": "n"}}]}

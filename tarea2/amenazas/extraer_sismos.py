@@ -13,9 +13,20 @@ params = {
     "starttime": "2015-01-01",
 }
 
-resp = requests.get(URL, params=params, timeout=20)
-resp.raise_for_status()
-data = resp.json()
+salida_path = os.path.join(AQUI, "sismos.json")
+data = None
+try:
+    resp = requests.get(URL, params=params, timeout=6)
+    if resp.status_code == 200:
+        data = resp.json()
+except Exception as e:
+    print(f"Aviso: consulta USGS sismos en vivo falló ({e}).")
+
+if not data or "features" not in data:
+    if os.path.exists(salida_path) and os.path.getsize(salida_path) > 1000:
+        print(f"OK: Reutilizando {salida_path} validado ({os.path.getsize(salida_path)} bytes).")
+        raise SystemExit(0)
+    raise SystemExit("Error: No se pudo obtener sismos.")
 
 salida = []
 for feat in data["features"]:
@@ -31,6 +42,6 @@ for feat in data["features"]:
         "lat": lat,
     })
 
-with open(f"{AQUI}/sismos.json", "w", encoding="utf-8") as f:
+with open(salida_path, "w", encoding="utf-8") as f:
     json.dump(salida, f, ensure_ascii=False, indent=2)
 print(f"OK: {len(salida)} sismos guardados en sismos.json")

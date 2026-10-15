@@ -31,18 +31,30 @@ services:
       DB_NAME: ruteo_drones
       DB_USER: ruteo
       DB_PASSWORD: ruteo
+      FIRMS_MAP_KEY: d3739dfce8747115849167ec3fdc5e23
     volumes:
       - ./:/app
 
   sitio_web:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: etl.Dockerfile
     container_name: ruteo_sitio
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ruteo_drones
+      DB_USER: ruteo
+      DB_PASSWORD: ruteo
+      PORT: 8080
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
-      - ./sitio_web:/usr/share/nginx/html:ro
+      - ./:/app
+    command: ["python3", "sitio_web/servidor.py"]
 
 volumes:
   db_data:
