@@ -1,0 +1,556 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5640209997337,
+          -33.0211649998503
+        ]
+      },
+      "properties": {
+        "nombre": "RETEN PALACIO PRESIDENCIAL",
+        "categ": "Base",
+        "tipo": "RETEN",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.021164999850335,
+        "lon": -71.56402099973374
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5766299996234,
+          -33.1147100004233
+        ]
+      },
+      "properties": {
+        "nombre": "RETEN PLACILLA PENUELAS",
+        "categ": "Base",
+        "tipo": "RETEN",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.114710000423344,
+        "lon": -71.57662999962345
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5602889998992,
+          -33.1467459999291
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA CARRETERA VALPARAISO",
+        "categ": "Base",
+        "tipo": "TENENCIA CARRETERAS",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.14674599992908,
+        "lon": -71.56028899989924
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6013159995255,
+          -33.0432400001902
+        ]
+      },
+      "properties": {
+        "nombre": "SUBCOM. I.A.T. VALPARAÍSO",
+        "categ": "Base",
+        "tipo": "SUBCOMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.043240000190195,
+        "lon": -71.60131599952548
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6380210002626,
+          -33.0433439999068
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA CORDILLERA VALPO.",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.04334399990676,
+        "lon": -71.63802100026263
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5189149996477,
+          -32.9994180003109
+        ]
+      },
+      "properties": {
+        "nombre": "SUBCOM. GOMEZ CARRENO",
+        "categ": "Base",
+        "tipo": "SUBCOMISARIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -32.99941800031087,
+        "lon": -71.5189149996477
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4048209998399,
+          -33.0462019997974
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA EL BELLOTO",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Quilpué",
+        "region": "Valparaíso",
+        "lat": -33.04620199979744,
+        "lon": -71.40482099983993
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5439239998139,
+          -33.0295099999532
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA FORESTAL",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.029509999953184,
+        "lon": -71.54392399981386
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5648149997648,
+          -33.0474110001678
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA NUEVA AURORA",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.04741100016779,
+        "lon": -71.56481499976482
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5866330002861,
+          -33.0614469999147
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA OHIGGINS",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.061446999914665,
+        "lon": -71.58663300028607
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5790019997082,
+          -33.0308780002778
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA RECREO",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.030878000277795,
+        "lon": -71.57900199970818
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5424979997198,
+          -32.9696290000562
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA REÑACA",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -32.96962900005614,
+        "lon": -71.54249799971976
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5768169998697,
+          -33.0576799997495
+        ]
+      },
+      "properties": {
+        "nombre": "TENENCIA RODELILLO",
+        "categ": "Base",
+        "tipo": "TENENCIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.05767999974953,
+        "lon": -71.57681699986975
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6187329998048,
+          -33.0488189998844
+        ]
+      },
+      "properties": {
+        "nombre": "ZONA DE CARABS. VALPARAISO",
+        "categ": "Base",
+        "tipo": "ZONA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.04881899988444,
+        "lon": -71.61873299980483
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5129388582353,
+          -32.9223914568835
+        ]
+      },
+      "properties": {
+        "nombre": "SUBCOM. CONCON",
+        "categ": "Base",
+        "tipo": "SUBCOMISARIA",
+        "comuna": "Concón",
+        "region": "Valparaíso",
+        "lat": -32.92239145688349,
+        "lon": -71.51293885823532
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6187500000675,
+          -33.048840000061
+        ]
+      },
+      "properties": {
+        "nombre": "PREFECTURA DE CARABS. VALPARAISO",
+        "categ": "Base",
+        "tipo": "PREFECTURA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.04884000006104,
+        "lon": -71.61875000006751
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6218170002046,
+          -33.0531370004142
+        ]
+      },
+      "properties": {
+        "nombre": "8VA. COM. FLORIDA VALPO.",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.05313700041416,
+        "lon": -71.62181700020462
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3709799995214,
+          -33.0433300001926
+        ]
+      },
+      "properties": {
+        "nombre": "6TA. COM. VILLA ALEMANA",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Villa Alemana",
+        "region": "Valparaíso",
+        "lat": -33.04333000019255,
+        "lon": -71.37097999952138
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5173930005046,
+          -33.0233959996476
+        ]
+      },
+      "properties": {
+        "nombre": "5TA. COM. VINA DEL MAR",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.02339599964761,
+        "lon": -71.51739300050457
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6182149995057,
+          -33.0480429998281
+        ]
+      },
+      "properties": {
+        "nombre": "4TA. COM. R.P.Y TTO.VALPARAISO",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.04804299982816,
+        "lon": -71.61821499950571
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6012899997744,
+          -33.0432500000961
+        ]
+      },
+      "properties": {
+        "nombre": "3RA. COM. NORTE VALPO.",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.04325000009612,
+        "lon": -71.60128999977438
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4388180003054,
+          -33.0553280003118
+        ]
+      },
+      "properties": {
+        "nombre": "2DA. COM. QUILPUE",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Quilpué",
+        "region": "Valparaíso",
+        "lat": -33.0553280003118,
+        "lon": -71.43881800030542
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6186300000859,
+          -33.0483089995545
+        ]
+      },
+      "properties": {
+        "nombre": "2DA. COM. CENTRAL VALPO.",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.048308999554465,
+        "lon": -71.61863000008586
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5557520001161,
+          -33.0191320001412
+        ]
+      },
+      "properties": {
+        "nombre": "1RA. COM. VINA DEL MAR",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.0191320001412,
+        "lon": -71.5557520001161
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.637684999758,
+          -33.0294230001989
+        ]
+      },
+      "properties": {
+        "nombre": "1RA. COM. SUR VALPARAISO",
+        "categ": "Base",
+        "tipo": "COMISARIA",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.029423000198854,
+        "lon": -71.63768499975795
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5557889998111,
+          -33.0192080000537
+        ]
+      },
+      "properties": {
+        "nombre": "PREFECTURA DE CARABS. VINA DEL MAR",
+        "categ": "Base",
+        "tipo": "PREFECTURA",
+        "comuna": "Viña del Mar",
+        "region": "Valparaíso",
+        "lat": -33.01920800005369,
+        "lon": -71.55578899981111
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5596260003205,
+          -33.0565469999072
+        ]
+      },
+      "properties": {
+        "nombre": "RETEN CABO 1º JUAN CARLOS SILVA TORO",
+        "categ": "Base",
+        "tipo": "RETEN",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.056546999907226,
+        "lon": -71.55962600032052
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6678960605165,
+          -33.1046247258506
+        ]
+      },
+      "properties": {
+        "nombre": "RETEN LAGUNA VERDE",
+        "categ": "Base",
+        "tipo": "RETEN",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.10462472585057,
+        "lon": -71.66789606051645
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6071210002408,
+          -33.0591439997216
+        ]
+      },
+      "properties": {
+        "nombre": "RETEN LAS CANAS",
+        "categ": "Base",
+        "tipo": "RETEN",
+        "comuna": "Valparaíso",
+        "region": "Valparaíso",
+        "lat": -33.059143999721584,
+        "lon": -71.6071210002408
+      }
+    }
+  ]
+}

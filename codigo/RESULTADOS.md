@@ -97,6 +97,67 @@ Al diseñar el uso de cada amenaza en el grafo, se detectó una inconsistencia c
 
 Implicancia para el diseño del algoritmo de la Tarea 2: el peso/penalización de una arista no puede depender solo de "¿hay una amenaza cerca?", sino de si esa amenaza es del tipo "evitar" (incendio) o del tipo "priorizar con precaución puntual" (sismo). Conviene modelarlo como dos mecanismos separados en la función de costo del grafo, en vez de una única función de penalización genérica por cercanía a cualquier amenaza.
 
+## Corrección: Metadata #1 (viento) ahora se mide en 6 puntos, con dirección
+
+La primera versión de `test_open_meteo.py` consultaba un único par de coordenadas (lat=-33.0472, lon=-71.6127) para representar el viento de **todo** el Gran Valparaíso, lo cual no era representativo: el viento varía bastante entre la costa y el interior.
+
+**Se decidió medir en varios puntos** en vez de sacar la metadata. Se probó primero con 7 puntos (2 por Valparaíso y Viña del Mar, para separar plan/costa de cerros/interior, más 1 cada uno para Concón, Quilpué y Villa Alemana), pero se detectó que **Open-Meteo "engancha" cada coordenada consultada a la celda más cercana de la grilla de su modelo de pronóstico, que tiene una resolución real de ~11 km** (se verifica comparando la lat/lon pedida contra la que devuelve la respuesta). Con eso, el punto de Viña del Mar (costa) cayó en la misma celda que Concón, y el de Viña del Mar (interior) en la misma celda que Quilpué, devolviendo valores idénticos — no aportaban información nueva.
+
+**Versión final: 6 puntos, todos en celdas de modelo distintas** — uno por comuna (Viña del Mar, Concón, Quilpué, Villa Alemana) más un punto extra en Valparaíso para distinguir plan/costa de cerros/interior alto (Placilla), donde la diferencia de altitud (15 m vs. 324 m) sí produce un cambio de viento real. Los puntos coinciden con cuarteles de Carabineros usados como nodo de origen/carga (ver sección siguiente). Además se agregó `wind_direction_10m` a la consulta (antes no se pedía).
+
+**Los 6 puntos exactos consultados** (coordenadas pedidas; Open-Meteo luego las engancha a la celda de grilla más cercana, ver tabla de celdas más abajo):
+
+| # | Punto | Lat | Lon | Referencia (cuartel de Carabineros) |
+|---|---|---|---|---|
+| 1 | Valparaíso (plan/costa) | -33.0488 | -71.6188 | Prefectura de Carabs. Valparaíso |
+| 2 | Valparaíso (cerros/Placilla, interior alto) | -33.1147 | -71.5766 | Retén Placilla Peñuelas |
+| 3 | Viña del Mar | -33.0192 | -71.5558 | Prefectura de Carabs. Viña del Mar |
+| 4 | Concón | -32.9224 | -71.5129 | Subcom. Concón |
+| 5 | Quilpué | -33.0553 | -71.4388 | 2da Com. Quilpué |
+| 6 | Villa Alemana | -33.0433 | -71.3710 | 6ta Com. Villa Alemana |
+
+Valparaíso aparece dos veces porque fue la única comuna donde se detectó una diferencia real de elevación que cae en celdas distintas del modelo; las demás quedaron con 1 punto cada una.
+
+**Resultado real**:
+
+| Punto | Elevación | Viento medio (km/h) | Racha media (km/h) | Racha máxima pronosticada (km/h) |
+|---|---|---|---|---|
+| Valparaíso (plan/costa) | 15 m | 12,3 | 31,0 | 52,2 |
+| Valparaíso (cerros/Placilla) | 324 m | 10,4 | 27,7 | **55,4** |
+| Viña del Mar | 9 m | 7,0 | 21,3 | 48,6 |
+| Concón | 38 m | 6,8 | 18,4 | 40,3 |
+| Quilpué | 131 m | 5,7 | 17,6 | 42,8 |
+| Villa Alemana | 142 m | 4,2 | 13,1 | **32,0** |
+
+Datos en `evidencia/datos/open_meteo_resumen_por_comuna.json` (incluye `direccion_10m` y la `celda_modelo` real devuelta por la API para cada punto), gráfico comparativo en `evidencia/imagenes/grafico_viento_por_comuna.png`.
+
+**Limitación a declarar explícitamente**: 6 es, en la práctica, el límite de puntos distinguibles para el área del Gran Valparaíso con el modelo gratuito de Open-Meteo (~11 km de grilla). Pedir más puntos sin verificar contra la celda devuelta genera una falsa sensación de precisión (valores duplicados disfrazados de datos nuevos).
+
+**El viento no solo debería penalizar por magnitud — también importa la dirección**: además de comparar la racha contra un umbral, el costo de una arista debería considerar el ángulo entre la dirección del viento (`direccion_10m`, en grados, de dónde sopla) y la orientación de esa calle. Viento de frente consume más batería y es más riesgoso que viento de cola o costado en el mismo tramo, lo que conecta directamente con la autonomía del dron y los puntos de carga en comisarías (sección siguiente): un tramo con viento en contra podría forzar una recarga antes de lo esperado.
+
+**Implicancia para el algoritmo de la Tarea 2**: (1) cada arista toma el viento/dirección del punto más cercano, no un valor global; (2) el costo de la arista debe ser función de la magnitud *y* del ángulo relativo viento-calle, no solo de la magnitud.
+
+## Nodo de origen y puntos de carga: Cuarteles de Carabineros
+
+Se definió que el dron parte desde una **comisaría de Carabineros** (ruta sigue siendo de punto A a punto B: origen en la comisaría → zona de daño a evaluar), y que además **las comisarías/cuarteles sirven como puntos de carga** a lo largo de la ruta — si la autonomía de batería no alcanza para ir y volver en un solo viaje, el algoritmo puede incluir una parada en un cuartel cercano al camino para recargar, en vez de forzar siempre el regreso al origen.
+
+**Fuente verificada**: dataset público de Carabineros de Chile (nivel nacional, 929 cuarteles), republicado como Feature Service ArcGIS, sin API key:
+`https://services6.arcgis.com/LCdFQd7nnAn5xeUA/arcgis/rest/services/Cuarteles_Carabineros/FeatureServer/0`
+
+**Resultado real para el Gran Valparaíso**: **29 cuarteles** con coordenadas (`test_carabineros.py`), de los cuales **9 son comisarías propiamente tales** (el resto son tenencias, subcomisarías y retenes):
+
+| Comuna | Comisarías | Otros cuarteles |
+|---|---|---|
+| Valparaíso | 5 | 11 |
+| Viña del Mar | 2 | 7 |
+| Quilpué | 1 | 1 |
+| Villa Alemana | 1 | 0 |
+| Concón | 0 | 1 (solo subcomisaría) |
+
+Datos en `evidencia/datos/carabineros_cuarteles_gran_valparaiso.geojson`, mapa en `evidencia/imagenes/mapa_carabineros_cuarteles.png` (`generar_mapa_carabineros.py`).
+
+**Implicancia para el algoritmo de la Tarea 2**: a cada nodo del grafo que coincida con un cuartel se le agrega el atributo `es_punto_carga = true`. El ruteo sigue siendo A→B normal; ese atributo solo se usa como restricción adicional (ej. "si la distancia acumulada supera el rango de batería del dron, forzar una parada en el nodo de carga más cercano disponible dentro de la ruta").
+
 ## Archivos de evidencia
 
 Ver `evidencia/` (o `codigo/evidencia/`): `open_meteo_response.json`, `overpass_response.json`, `usgs_response.json`, `conaf_probabilidad_ignicion.geojson`, `conaf_areas_protegidas.geojson`, `mapa_grafo_valparaiso.png`, `grafico_edificacion_valparaiso.png`, `overpass_local_edificacion.{json,csv}`, `google_open_buildings_gran_valparaiso.json`, `google_open_buildings_resumen.csv`, `grafico_google_open_buildings_alturas.png`, `comparativa_osm_vs_google_open_buildings.png`, `mapa_google_open_buildings_2_5d.png`.
