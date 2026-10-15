@@ -132,6 +132,21 @@ Al diseñar el uso de cada amenaza en el grafo, se detectó una inconsistencia c
 
 Implicancia para el diseño del algoritmo de la Tarea 2: el peso/penalización de una arista no puede depender solo de "¿hay una amenaza cerca?", sino de si esa amenaza es del tipo "evitar" (incendio) o del tipo "priorizar con precaución puntual" (sismo). Conviene modelarlo como dos mecanismos separados en la función de costo del grafo, en vez de una única función de penalización genérica por cercanía a cualquier amenaza.
 
+### Ampliación: antigüedad de la edificación como segundo factor de la prioridad sísmica
+
+Se evaluó si existe una API que indique qué edificios cumplen la norma antisísmica (para estimar probabilidad de colapso). **No existe tal fuente pública en Chile** — esa información depende de permisos municipales (DOM) no digitalizados/abiertos de forma centralizada, por razones legales y de responsabilidad civil.
+
+Se encontró en cambio un proxy real, parcial: **"Permisos de Edificación Georreferenciados en Chile 2010-2018"**, Feature Service público del Observatorio de Ciudades UC (mismo publicador que la Metadata #3), sin API key:
+`https://services9.arcgis.com/kKJR3Qt68ohAWuet/arcgis/rest/services/Permisos_edificacion_2010_2018/FeatureServer`
+
+**Resultado real**: de los 74.550 edificios del Gran Valparaíso (extracto OSM), solo **6.788 (9,1%)** tienen un permiso registrado en la ventana 2010-2018 (Valparaíso: 2.361, Viña del Mar: 1.193, Concón: 691, Quilpué: 1.397, Villa Alemana: 1.146). El 90,9% restante no tiene permiso en esa ventana — probablemente edificación más antigua, aunque el dato no distingue "antigua e incumple norma" de "con permiso anterior a 2010 o posterior a 2018"; **no se usa como probabilidad de colapso por edificio**, solo como indicador agregado de antigüedad relativa por zona.
+
+**Propuesta de integración con la Amenaza #3 (sismicidad), sin tratarlo como probabilidad de colapso**:
+1. **Prioridad de inspección post-sismo** = f(magnitud/recencia del sismo) × (1 + proporción de edificación sin permiso reciente en esa zona). A igual magnitud de sismo, una zona con más edificación antigua sube en la cola de prioridad de evaluación.
+2. **Costo de arista condicionado a sismo activo**: cuando hay un sismo reciente relevante, las aristas que pasan por zonas con alta proporción de edificación antigua reciben un **costo adicional leve y condicional** por riesgo de escombros/obstrucción física de la calle — distinto de "evitar" (incendio) y de "priorizar puro" (sismo sin este factor), es una ponderación adicional, no una exclusión.
+
+Esto queda como **propuesta de diseño para la Tarea 2**, no implementada aún — falta decidir el peso relativo (k) de este factor frente a magnitud/recencia del sismo.
+
 ## Corrección: Metadata #1 (viento) ahora se mide en 6 puntos, con dirección
 
 La primera versión de `test_open_meteo.py` consultaba un único par de coordenadas (lat=-33.0472, lon=-71.6127) para representar el viento de **todo** el Gran Valparaíso, lo cual no era representativo: el viento varía bastante entre la costa y el interior.

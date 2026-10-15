@@ -1,0 +1,16 @@
+{
+  "fuente": "Permisos de Edificación Georreferenciados en Chile 2010-2018 (Observatorio de Ciudades UC)",
+  "url": "https://services9.arcgis.com/kKJR3Qt68ohAWuet/arcgis/rest/services/Permisos_edificacion_2010_2018/FeatureServer/0",
+  "permisos_por_comuna": {
+    "Valparaíso": 2361,
+    "Viña del Mar": 1193,
+    "Concón": 691,
+    "Quilpué": 1397,
+    "Villa Alemana": 1146
+  },
+  "total_permisos_2010_2018": 6788,
+  "total_edificios_osm": 74550,
+  "pct_con_permiso_reciente": 9.1,
+  "pct_sin_permiso_reciente": 90.9,
+  "nota": "No es probabilidad de colapso por edificio; es un proxy agregado de antigüedad relativa por zona."
+}
