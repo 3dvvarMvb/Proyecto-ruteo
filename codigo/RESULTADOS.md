@@ -19,8 +19,11 @@ Fecha de ejecución: 2026-08-26. Todos los scripts están en este directorio y s
 | 5b | **CONAF — reemplazo de SENAPRED** | `test_conaf.py` | ✅ **OK, mejor de lo esperado** | La página de CONAF enlaza un **dashboard ArcGIS Online público** ("Pronóstico de Riesgo", `deigeprif`, `access: public`). Detrás hay **Feature Services REST reales, sin API key**: `PI/FeatureServer/4` (polígonos de probabilidad de ignición a 5 días, actualizados a diario) y `ASP/FeatureServer/0` (polígonos de Áreas Silvestres Protegidas). Se consultaron ambos con un bbox de la Región de Valparaíso y devolvieron geometrías de polígono reales |
 | 6 | PostGIS + pgRouting (pipeline completo) | `test_postgis_pgrouting.py` | ✅ OK | Se replicó exactamente el pipeline del informe con datos sintéticos: `ST_Intersects` corta aristas por polígono DGAC, `ST_DWithin` penaliza por cercanía a foco de incendio, `pgr_KSP` devuelve rutas alternativas (algoritmo de Yen) |
 | 7 | OSMnx (grafo vial real) | `construir_grafo_local.py` | ✅ **Resuelto con plan B** | Overpass quedó bloqueado tras uso pesado (verificado en servidor principal y espejo). Se ejecutó el plan de contingencia: `chile-latest.osm.pbf` de Geofabrik (346 MB) → `osmium extract` por bbox (21.8 MB) → `osmium tags-filter` a vías transitables (3.5 MB) → `ox.graph_from_xml()`. Resultado real: **52.856 nodos, 126.480 aristas** en <1 min de procesamiento. Mapa en `evidencia/mapa_grafo_valparaiso.png` |
-| 2b | Overpass (edificación) — reemplazo local | `extraer_edificacion_local.py` | ✅ **Reemplazado, mejor cobertura** | La consulta en vivo a Overpass solo devolvía 8 elementos (filtro muy restrictivo). Con el mismo extracto de Geofabrik (`osmium tags-filter w/building`) se obtuvieron **74.550 edificios totales, 17.961 con dato de altura (24,1% de cobertura)** — muestra estadísticamente representativa en vez de 8 casos sueltos. Histograma real en `evidencia/grafico_edificacion_valparaiso.png` |
-| 2c | **Google Open Buildings 2.5D Temporal (alturas continuas)** | `extraer_google_open_buildings.py` | ✅ **100% Cobertura Real** | Soluciona la limitación del 75,9% de edificios sin altura en OSM. Mediante el dataset global satelital de Google Research (resolución efectiva ~4m, CRS UTM 19S / EPSG:32719), se procesaron **85.268 estructuras urbanas con altura en metros** para las 5 comunas del Gran Valparaíso (mediana: 5,4 m, media: 7,7 m, P90: 12,9 m, P99: 47,1 m, máx: 91,6 m). Mapas y comparativas en `evidencia/imagenes/` |
+| 2b | ~~Overpass (edificación) — reemplazo local~~ | `extraer_edificacion_local.py` | 🗑️ **Descartada** | Ver sección "Metadata #2 descartada: altura de edificación" más abajo — se reemplazó por tendido eléctrico |
+| 2c | ~~Google Open Buildings 2.5D Temporal~~ | `extraer_google_open_buildings.py` | 🗑️ **Descartada** | Ver sección "Metadata #2 descartada: altura de edificación" más abajo — feedback del profesor, sin buena justificación para el ruteo del dron |
+| 2d | **Tendido eléctrico aéreo (nueva Metadata #2)** | `test_tendido_electrico.py` | ✅ **OK** | Ver sección "Metadata #2 (reemplazo): tendido eléctrico aéreo" más abajo |
+| 2e | **Pendiente del terreno / relieve (metadata adicional)** | `test_relieve.py` | ✅ **OK** | Ver sección "Metadata adicional: pendiente del terreno (relieve)" más abajo |
+| 2f | **Cuarteles de Carabineros (nodos de origen/carga)** | `test_carabineros.py` | ✅ **OK** | Ver sección "Nodo de origen y puntos de carga: Cuarteles de Carabineros" más abajo |
 | 3b | INE — población por manzana censal (Metadata #3) | `generar_mapa_poblacion.py` | ✅ **OK** | El portal genérico del INE no tiene un endpoint REST abierto usable; se encontró el mismo Censo 2017 reprocesado en un **Feature Service ArcGIS público, sin API key**, publicado por el **Observatorio de Ciudades UC** (`https://services9.arcgis.com/kKJR3Qt68ohAWuet/arcgis/rest/services/Manzanas_censo_2017/FeatureServer`). Con paginación (`resultOffset`, tope de 2000 registros/página) y el nombre de comuna con tilde correcto (`VALPARAÍSO`, no `VALPARAISO`) se obtuvieron **10.750 manzanas reales con geometría de polígono y 1.005.013 habitantes** en las 5 comunas del Gran Valparaíso. Mapa de densidad en `evidencia/imagenes/mapa_ine_poblacion_manzanas.png` |
 
 ## Aclaración sobre la capa de probabilidad de ignición
@@ -59,7 +62,39 @@ El conteo de "56 focos en Chile" reportado antes estaba mal. La consulta a FIRMS
 
 Esto es un hallazgo de diseño importante para la Tarea 2: **las consultas geoespaciales de amenazas deben filtrarse por el polígono real de la zona de interés (`ST_Intersects`/`ST_Within` con el polígono, no con su bounding box)**, o el modelo va a contaminarse con eventos de otro país. El mapa `mapa_firms_focos_incendio.png` ya quedó corregido mostrando ambos grupos (dentro/fuera de Chile) para dejar el filtro en evidencia.
 
-## Incorporación de Google Open Buildings 2.5D Temporal para Alturas de Edificación
+## Metadata #2 descartada: altura de edificación
+
+**Se descartó la altura de edificación como Metadata #2** (tanto la versión por OSM/Overpass como el reemplazo con Google Open Buildings 2.5D, documentada íntegra más abajo para que quede el registro del trabajo hecho). Motivo: feedback directo del profesor — no había una justificación sólida de **por qué la altura de un edificio debería penalizar el costo de una arista** para un dron que vuela siguiendo el trazado de las calles (a diferencia del tendido eléctrico o la pendiente, que sí tienen un mecanismo de riesgo directo y obvio).
+
+**Reemplazada por**: tendido eléctrico aéreo (penaliza aristas por riesgo de colisión) y pendiente del terreno (penaliza aristas por exigencia de vuelo/pérdida de línea de vista C2) — ver secciones más abajo. La sección de Google Open Buildings se deja documentada tal cual se dejó funcionando, por transparencia del trabajo, pero **no se usa en el informe final**.
+
+## Metadata #2 (reemplazo): tendido eléctrico aéreo
+
+**Justificación**: los cables de alta/media tensión son un riesgo de colisión físico y directo para un dron de bajo vuelo — es una de las causas más comunes de accidentes de drones urbanos, y en los cerros de Valparaíso el tendido sobre las calles es particularmente denso y bajo. A diferencia de la altura de edificación, acá el mecanismo de riesgo es directo y obvio.
+
+**Fuente**: Overpass API, tags `power=line` (alta/media tensión) y `power=minor_line` (distribución) de OpenStreetMap (`test_tendido_electrico.py`). Overpass volvió a mostrarse inestable (504 Gateway Timeout con `out geom` en los primeros intentos, igual que en pruebas anteriores de este grupo) — funcionó al reintentar con `[maxsize]` más alto; el script cachea el resultado para no depender de la red en corridas repetidas.
+
+**Bug encontrado y corregido (mismo patrón que el de FIRMS)**: Overpass devuelve la **geometría completa** de cada línea aunque solo un tramo cruce el área consultada — se encontró una sola línea de transmisión de **178,7 km** completa en la respuesta. Sin corregir esto, el largo total sumaba 1.052,8 km. Se corrigió recortando cada línea (`shapely.intersection`) al polígono real del área antes de medir, dando un largo real de **565,5 km** dentro del Gran Valparaíso.
+
+**Resultado real**: **100 tramos** de tendido eléctrico (71 de alta/media tensión, 29 de distribución menor), ~565 km dentro del área. Datos en `evidencia/datos/osm_tendido_electrico.json`, mapa en `evidencia/imagenes/mapa_tendido_electrico.png` (`generar_mapa_tendido_electrico.py`).
+
+**Implicancia para el algoritmo de la Tarea 2**: aristas que cruzan o corren paralelas a una línea eléctrica reciben un costo adicional (o se excluyen si el cruce es a baja altura).
+
+## Metadata adicional: pendiente del terreno (relieve)
+
+**Justificación**: Valparaíso es conocido por sus cerros empinados; una arista con pendiente fuerte es más exigente para el vuelo del dron (aerodinámica, estabilidad) y reduce la línea de vista para el enlace de comando y control (C2) con antenas en el corredor — conecta directo con el "Argumento 3" del informe.
+
+**Fuente**: se probó primero con **Open-Elevation** (`api.open-elevation.com`), pero su instancia pública devolvió `429 Too Many Requests` de forma persistente. Se cambió a **Open Topo Data** (`api.opentopodata.org`, dataset SRTM 90m), pública y sin API key (límite: ~1 request/seg, 100 puntos/request), que respondió bien. Los valores de elevación son consistentes entre las 3 fuentes probadas para los mismos puntos (Valparaíso plan ~15-18 m, Placilla ~324-330 m en Open-Meteo, Open-Elevation y Open Topo Data).
+
+**Prueba real**: sobre una muestra de 300 aristas reales del grafo vial local ya construido (52.856 nodos, 126.480 aristas), calculando el desnivel entre los nodos de cada arista (`test_relieve.py`):
+- Pendiente media: **4,2%**, mediana: 3,0%, P90: 10,4%, máxima: 23,9%
+- Aristas con pendiente > 15% (empinadas): 8 de 300 (2,7%)
+
+Histograma en `evidencia/imagenes/grafico_relieve_pendiente.png`, datos completos en `evidencia/datos/relieve_muestra_aristas.json`.
+
+**Implicancia para el algoritmo de la Tarea 2**: el costo de la arista debe incluir un término proporcional a la pendiente (desnivel/largo), no solo a la distancia plana.
+
+## (Documentación histórica, no usada en el informe final) Google Open Buildings 2.5D Temporal para Alturas de Edificación
 
 Para resolver la limitación de OpenStreetMap donde solo el **24,1% de los edificios (17.961 de 74.550)** cuenta con datos de altura (`building:levels` o `height`), se integró el **Google Open Buildings 2.5D Temporal Dataset (versión v1, 2023)** desarrollado por Google Research.
 

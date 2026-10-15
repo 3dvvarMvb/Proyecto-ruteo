@@ -13,20 +13,24 @@ volar en línea recta, lo que reduce el riesgo sobre zonas edificadas, permite
 un aterrizaje de emergencia seguro sobre la calzada y mantiene el enlace de
 comando y control.
 
-Sobre esa infraestructura vial se incorporan capas de metadata (viento, altura
-de edificación, población por manzana censal) y de amenazas geolocalizadas
-(focos de incendio activo, probabilidad de ignición, sismicidad) que permiten
-penalizar o eliminar dinámicamente aristas del grafo según el riesgo real del
-entorno, recalculando rutas alternativas (k-shortest-paths sobre
-PostGIS/pgRouting) hacia la zona afectada.
+Sobre esa infraestructura vial se incorporan capas de metadata (viento,
+tendido eléctrico aéreo, pendiente del terreno, población por manzana censal)
+y de amenazas geolocalizadas (focos de incendio activo, probabilidad de
+ignición, sismicidad) que permiten penalizar o eliminar dinámicamente aristas
+del grafo según el riesgo real del entorno, recalculando rutas alternativas
+(k-shortest-paths sobre PostGIS/pgRouting) hacia la zona afectada. Además,
+los cuarteles de Carabineros se usan como nodos especiales de origen y carga
+de batería del dron.
 
 ## Fuentes de datos verificadas
 
 | | Metadata #1 | Metadata #2 | Metadata #3 | Amenaza #1 | Amenaza #2 | Amenaza #3 |
 |---|---|---|---|---|---|---|
-| **Fuente** | Open-Meteo | Google Open Buildings 2.5D Temporal (Google Research) | INE Censo 2017 (vía Observatorio de Ciudades UC) | NASA FIRMS | CONAF | USGS / CSN |
-| **Qué mide** | Viento y rachas | Altura de edificación/estructuras | Población por manzana censal | Focos de incendio activo | Probabilidad de ignición (5 días) | Sismicidad |
-| **Resultado verificado** | Rachas hasta 45 km/h | 85.268 estructuras con altura real, 100% de cobertura (vs. 24,1% con OSM/Overpass) | 10.750 manzanas, 1.005.013 habitantes | 7 focos reales en Chile | Polígonos de riesgo + áreas protegidas | 105 sismos M≥2 desde 2015 |
+| **Fuente** | Open-Meteo | Tendido eléctrico aéreo (OSM/Overpass) | INE Censo 2017 (vía Observatorio de Ciudades UC) | NASA FIRMS | CONAF | USGS / CSN |
+| **Qué mide** | Viento, rachas y dirección | Líneas de alta/media tensión y distribución | Población por manzana censal | Focos de incendio activo | Probabilidad de ignición (5 días) | Sismicidad |
+| **Resultado verificado** | Racha máx. 55,4 km/h (6 puntos) | 100 tramos, ~565 km dentro del área | 10.750 manzanas, 1.005.013 habitantes | 7 focos reales en Chile | Polígonos de riesgo + áreas protegidas | 105 sismos M≥2 desde 2015 |
+
+Además: **pendiente del terreno** (metadata adicional, penaliza aristas empinadas) y **cuarteles de Carabineros** (nodos de origen/carga del dron, no penalizan aristas). La altura de edificación se evaluó (OSM y Google Open Buildings) pero se descartó por falta de justificación clara para el ruteo del dron — ver `codigo/RESULTADOS.md`.
 
 Detalle completo de cada prueba en [`codigo/RESULTADOS.md`](codigo/RESULTADOS.md).
 
