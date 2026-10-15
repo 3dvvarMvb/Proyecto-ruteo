@@ -1,0 +1,263 @@
+[
+  {
+    "id": 1,
+    "nombre": "RETEN PALACIO PRESIDENCIAL",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.56402099973374,
+    "lat": -33.021164999850335
+  },
+  {
+    "id": 2,
+    "nombre": "RETEN PLACILLA PENUELAS",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.57662999962345,
+    "lat": -33.114710000423344
+  },
+  {
+    "id": 3,
+    "nombre": "TENENCIA CARRETERA VALPARAISO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.56028899989924,
+    "lat": -33.14674599992908
+  },
+  {
+    "id": 4,
+    "nombre": "SUBCOM. I.A.T. VALPARAÍSO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.60131599952548,
+    "lat": -33.043240000190195
+  },
+  {
+    "id": 5,
+    "nombre": "TENENCIA CORDILLERA VALPO.",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.63802100026263,
+    "lat": -33.04334399990676
+  },
+  {
+    "id": 6,
+    "nombre": "SUBCOM. GOMEZ CARRENO",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.5189149996477,
+    "lat": -32.99941800031087
+  },
+  {
+    "id": 7,
+    "nombre": "TENENCIA EL BELLOTO",
+    "comuna": "Quilpué",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.40482099983993,
+    "lat": -33.04620199979744
+  },
+  {
+    "id": 8,
+    "nombre": "TENENCIA FORESTAL",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.54392399981386,
+    "lat": -33.029509999953184
+  },
+  {
+    "id": 9,
+    "nombre": "TENENCIA NUEVA AURORA",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.56481499976482,
+    "lat": -33.04741100016779
+  },
+  {
+    "id": 10,
+    "nombre": "TENENCIA OHIGGINS",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.58663300028607,
+    "lat": -33.061446999914665
+  },
+  {
+    "id": 11,
+    "nombre": "TENENCIA RECREO",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.57900199970818,
+    "lat": -33.030878000277795
+  },
+  {
+    "id": 12,
+    "nombre": "TENENCIA REÑACA",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.54249799971976,
+    "lat": -32.96962900005614
+  },
+  {
+    "id": 13,
+    "nombre": "TENENCIA RODELILLO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.57681699986975,
+    "lat": -33.05767999974953
+  },
+  {
+    "id": 14,
+    "nombre": "ZONA DE CARABS. VALPARAISO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.61873299980483,
+    "lat": -33.04881899988444
+  },
+  {
+    "id": 15,
+    "nombre": "SUBCOM. CONCON",
+    "comuna": "Concón",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.51293885823532,
+    "lat": -32.92239145688349
+  },
+  {
+    "id": 16,
+    "nombre": "PREFECTURA DE CARABS. VALPARAISO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.61875000006751,
+    "lat": -33.04884000006104
+  },
+  {
+    "id": 17,
+    "nombre": "8VA. COM. FLORIDA VALPO.",
+    "comuna": "Valparaíso",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.62181700020462,
+    "lat": -33.05313700041416
+  },
+  {
+    "id": 18,
+    "nombre": "6TA. COM. VILLA ALEMANA",
+    "comuna": "Villa Alemana",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.37097999952138,
+    "lat": -33.04333000019255
+  },
+  {
+    "id": 19,
+    "nombre": "5TA. COM. VINA DEL MAR",
+    "comuna": "Viña del Mar",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.51739300050457,
+    "lat": -33.02339599964761
+  },
+  {
+    "id": 20,
+    "nombre": "4TA. COM. R.P.Y TTO.VALPARAISO",
+    "comuna": "Valparaíso",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.61821499950571,
+    "lat": -33.04804299982816
+  },
+  {
+    "id": 21,
+    "nombre": "3RA. COM. NORTE VALPO.",
+    "comuna": "Valparaíso",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.60128999977438,
+    "lat": -33.04325000009612
+  },
+  {
+    "id": 22,
+    "nombre": "2DA. COM. QUILPUE",
+    "comuna": "Quilpué",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.43881800030542,
+    "lat": -33.0553280003118
+  },
+  {
+    "id": 23,
+    "nombre": "2DA. COM. CENTRAL VALPO.",
+    "comuna": "Valparaíso",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.61863000008586,
+    "lat": -33.048308999554465
+  },
+  {
+    "id": 24,
+    "nombre": "1RA. COM. VINA DEL MAR",
+    "comuna": "Viña del Mar",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.5557520001161,
+    "lat": -33.0191320001412
+  },
+  {
+    "id": 25,
+    "nombre": "1RA. COM. SUR VALPARAISO",
+    "comuna": "Valparaíso",
+    "es_comisaria": true,
+    "es_punto_carga": true,
+    "lon": -71.63768499975795,
+    "lat": -33.029423000198854
+  },
+  {
+    "id": 26,
+    "nombre": "PREFECTURA DE CARABS. VINA DEL MAR",
+    "comuna": "Viña del Mar",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.55578899981111,
+    "lat": -33.01920800005369
+  },
+  {
+    "id": 27,
+    "nombre": "RETEN CABO 1º JUAN CARLOS SILVA TORO",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.55962600032052,
+    "lat": -33.056546999907226
+  },
+  {
+    "id": 28,
+    "nombre": "RETEN LAGUNA VERDE",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.66789606051645,
+    "lat": -33.10462472585057
+  },
+  {
+    "id": 29,
+    "nombre": "RETEN LAS CANAS",
+    "comuna": "Valparaíso",
+    "es_comisaria": false,
+    "es_punto_carga": true,
+    "lon": -71.6071210002408,
+    "lat": -33.059143999721584
+  }
+]

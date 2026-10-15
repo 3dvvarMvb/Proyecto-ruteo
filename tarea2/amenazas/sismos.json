@@ -1,0 +1,956 @@
+[
+  {
+    "usgs_id": "us6000tz75",
+    "magnitud": 4.3,
+    "profundidad_km": 32.14,
+    "fecha": 1790962098887,
+    "lugar": "30 km NNW of Valparaíso, Chile",
+    "lon": -71.7075,
+    "lat": -32.773
+  },
+  {
+    "usgs_id": "us6000tg56",
+    "magnitud": 4.1,
+    "profundidad_km": 53.862,
+    "fecha": 1785172776712,
+    "lugar": "9 km N of Quilpué, Chile",
+    "lon": -71.4287,
+    "lat": -32.9625
+  },
+  {
+    "usgs_id": "us7000ssy4",
+    "magnitud": 4.1,
+    "profundidad_km": 33.17,
+    "fecha": 1781477646081,
+    "lugar": "34 km NNW of Valparaíso, Chile",
+    "lon": -71.7345,
+    "lat": -32.7349
+  },
+  {
+    "usgs_id": "us7000srwj",
+    "magnitud": 4.2,
+    "profundidad_km": 35.194,
+    "fecha": 1781039170033,
+    "lugar": "36 km NW of Valparaíso, Chile",
+    "lon": -71.9088,
+    "lat": -32.808
+  },
+  {
+    "usgs_id": "us7000spql",
+    "magnitud": 4.3,
+    "profundidad_km": 10,
+    "fecha": 1780265398129,
+    "lugar": "35 km NNW of Valparaíso, Chile",
+    "lon": -71.7918,
+    "lat": -32.7445
+  },
+  {
+    "usgs_id": "us7000spqh",
+    "magnitud": 4.8,
+    "profundidad_km": 23.714,
+    "fecha": 1780264331176,
+    "lugar": "32 km NNW of Valparaíso, Chile",
+    "lon": -71.8157,
+    "lat": -32.7929
+  },
+  {
+    "usgs_id": "us7000spqc",
+    "magnitud": 6,
+    "profundidad_km": 25,
+    "fecha": 1780263257953,
+    "lugar": "33 km NW of Valparaíso, Chile",
+    "lon": -71.8897,
+    "lat": -32.8292
+  },
+  {
+    "usgs_id": "us7000qwa0",
+    "magnitud": 4.4,
+    "profundidad_km": 31.625,
+    "fecha": 1757932483789,
+    "lugar": "33 km WNW of Cartagena, Chile",
+    "lon": -71.9363,
+    "lat": -33.4325
+  },
+  {
+    "usgs_id": "us6000qvhp",
+    "magnitud": 3.9,
+    "profundidad_km": 15.58,
+    "fecha": 1753620671252,
+    "lugar": "41 km NW of Valparaíso, Chile",
+    "lon": -71.9664,
+    "lat": -32.7859
+  },
+  {
+    "usgs_id": "us6000pw96",
+    "magnitud": 4.2,
+    "profundidad_km": 61.251,
+    "fecha": 1740820935960,
+    "lugar": "20 km SSE of Villa Alemana, Chile",
+    "lon": -71.2698,
+    "lat": -33.2049
+  },
+  {
+    "usgs_id": "us6000pfm9",
+    "magnitud": 4,
+    "profundidad_km": 24.285,
+    "fecha": 1735168472889,
+    "lugar": "23 km WNW of Valparaíso, Chile",
+    "lon": -71.8777,
+    "lat": -32.986
+  },
+  {
+    "usgs_id": "us7000n0ja",
+    "magnitud": 4.1,
+    "profundidad_km": 30.17,
+    "fecha": 1721511212642,
+    "lugar": "31 km NW of Cartagena, Chile",
+    "lon": -71.8904,
+    "lat": -33.3927
+  },
+  {
+    "usgs_id": "us7000mxjb",
+    "magnitud": 4.4,
+    "profundidad_km": 32.102,
+    "fecha": 1720326567231,
+    "lugar": "26 km NNW of Cartagena, Chile",
+    "lon": -71.7327,
+    "lat": -33.3394
+  },
+  {
+    "usgs_id": "us7000mxja",
+    "magnitud": 4.2,
+    "profundidad_km": 32.387,
+    "fecha": 1720326378501,
+    "lugar": "24 km NNW of Cartagena, Chile",
+    "lon": -71.7322,
+    "lat": -33.3594
+  },
+  {
+    "usgs_id": "us7000ltwn",
+    "magnitud": 4.6,
+    "profundidad_km": 50.351,
+    "fecha": 1706250136085,
+    "lugar": "5 km N of Viña del Mar, Chile",
+    "lon": -71.5506,
+    "lat": -32.9763
+  },
+  {
+    "usgs_id": "us7000l951",
+    "magnitud": 5.1,
+    "profundidad_km": 30.868,
+    "fecha": 1699278670755,
+    "lugar": "30 km W of Valparaíso, Chile",
+    "lon": -71.9579,
+    "lat": -33.0743
+  },
+  {
+    "usgs_id": "us7000ks19",
+    "magnitud": 4.3,
+    "profundidad_km": 46.77,
+    "fecha": 1693386436320,
+    "lugar": "36 km NNW of Valparaíso, Chile",
+    "lon": -71.8257,
+    "lat": -32.7497
+  },
+  {
+    "usgs_id": "us6000kysv",
+    "magnitud": 4.3,
+    "profundidad_km": 52.722,
+    "fecha": 1691555971965,
+    "lugar": "24 km S of Quilpué, Chile",
+    "lon": -71.4044,
+    "lat": -33.2681
+  },
+  {
+    "usgs_id": "us6000kqp1",
+    "magnitud": 4.5,
+    "profundidad_km": 24.153,
+    "fecha": 1688721443131,
+    "lugar": "41 km NW of Valparaíso, Chile",
+    "lon": -71.9403,
+    "lat": -32.7708
+  },
+  {
+    "usgs_id": "us6000jliv",
+    "magnitud": 4,
+    "profundidad_km": 31.125,
+    "fecha": 1675580926577,
+    "lugar": "Near the coast of Valparaiso, Chile",
+    "lon": -71.7525,
+    "lat": -32.7313
+  },
+  {
+    "usgs_id": "us7000j30u",
+    "magnitud": 4.3,
+    "profundidad_km": 54.46,
+    "fecha": 1673206126788,
+    "lugar": "3 km NNE of Villa Alemana, Chile",
+    "lon": -71.3559,
+    "lat": -33.0128
+  },
+  {
+    "usgs_id": "us7000j2dx",
+    "magnitud": 4.2,
+    "profundidad_km": 57.962,
+    "fecha": 1672945698930,
+    "lugar": "10 km NNW of Hacienda La Calera, Chile",
+    "lon": -71.2694,
+    "lat": -32.7048
+  },
+  {
+    "usgs_id": "us6000j6mi",
+    "magnitud": 4.4,
+    "profundidad_km": 26.686,
+    "fecha": 1670063946891,
+    "lugar": "Near the coast of Valparaiso, Chile",
+    "lon": -71.7717,
+    "lat": -32.8415
+  },
+  {
+    "usgs_id": "us7000ipry",
+    "magnitud": 4.3,
+    "profundidad_km": 27.112,
+    "fecha": 1668480203224,
+    "lugar": "40 km WSW of Valparaiso, Chile",
+    "lon": -71.9884,
+    "lat": -33.2126
+  },
+  {
+    "usgs_id": "us6000ity7",
+    "magnitud": 4.4,
+    "profundidad_km": 57.896,
+    "fecha": 1665844865793,
+    "lugar": "13 km NW of Hacienda La Calera, Chile",
+    "lon": -71.3196,
+    "lat": -32.7012
+  },
+  {
+    "usgs_id": "us7000i9ef",
+    "magnitud": 4,
+    "profundidad_km": 35,
+    "fecha": 1663631720485,
+    "lugar": "near the coast of central Chile",
+    "lon": -71.7168,
+    "lat": -33.3629
+  },
+  {
+    "usgs_id": "us6000hzmw",
+    "magnitud": 4.4,
+    "profundidad_km": 31.598,
+    "fecha": 1656900224198,
+    "lugar": "25 km WNW of Valparaíso, Chile",
+    "lon": -71.8875,
+    "lat": -32.9521
+  },
+  {
+    "usgs_id": "us7000gh0u",
+    "magnitud": 4.2,
+    "profundidad_km": 26.66,
+    "fecha": 1643737257490,
+    "lugar": "36 km NNW of Valparaíso, Chile",
+    "lon": -71.7757,
+    "lat": -32.7316
+  },
+  {
+    "usgs_id": "us7000fswl",
+    "magnitud": 4.3,
+    "profundidad_km": 61.36,
+    "fecha": 1636527106962,
+    "lugar": "5 km NNW of Quillota, Chile",
+    "lon": -71.2764,
+    "lat": -32.8423
+  },
+  {
+    "usgs_id": "us6000fwww",
+    "magnitud": 4.6,
+    "profundidad_km": 35.26,
+    "fecha": 1634955236609,
+    "lugar": "29 km SSW of Valparaíso, Chile",
+    "lon": -71.7855,
+    "lat": -33.2708
+  },
+  {
+    "usgs_id": "us6000f3gi",
+    "magnitud": 4.1,
+    "profundidad_km": 53.48,
+    "fecha": 1628465075075,
+    "lugar": "3 km S of Quillota, Chile",
+    "lon": -71.2526,
+    "lat": -32.9119
+  },
+  {
+    "usgs_id": "us6000ezay",
+    "magnitud": 4.6,
+    "profundidad_km": 34.4,
+    "fecha": 1627333085614,
+    "lugar": "28 km NW of Cartagena, Chile",
+    "lon": -71.8547,
+    "lat": -33.3964
+  },
+  {
+    "usgs_id": "us7000edmg",
+    "magnitud": 4.3,
+    "profundidad_km": 28.84,
+    "fecha": 1623874406728,
+    "lugar": "24 km NNW of Cartagena, Chile",
+    "lon": -71.6982,
+    "lat": -33.343
+  },
+  {
+    "usgs_id": "us7000e5lp",
+    "magnitud": 4.6,
+    "profundidad_km": 52.77,
+    "fecha": 1621807139396,
+    "lugar": "26 km S of Quilpué, Chile",
+    "lon": -71.3906,
+    "lat": -33.279
+  },
+  {
+    "usgs_id": "us7000divm",
+    "magnitud": 4.1,
+    "profundidad_km": 24.21,
+    "fecha": 1615564826317,
+    "lugar": "31 km SW of Valparaíso, Chile",
+    "lon": -71.8907,
+    "lat": -33.2128
+  },
+  {
+    "usgs_id": "us7000cs2h",
+    "magnitud": 3.9,
+    "profundidad_km": 57.91,
+    "fecha": 1608280864518,
+    "lugar": "1 km S of Limache, Chile",
+    "lon": -71.2631,
+    "lat": -33.0337
+  },
+  {
+    "usgs_id": "us6000c6m9",
+    "magnitud": 4.4,
+    "profundidad_km": 33.82,
+    "fecha": 1602131335482,
+    "lugar": "36 km NNW of Viña del Mar, Chile",
+    "lon": -71.6383,
+    "lat": -32.7067
+  },
+  {
+    "usgs_id": "us7000bhtg",
+    "magnitud": 3.9,
+    "profundidad_km": 46.69,
+    "fecha": 1599225801628,
+    "lugar": "33 km NE of Cartagena, Chile",
+    "lon": -71.3222,
+    "lat": -33.3681
+  },
+  {
+    "usgs_id": "us6000bbrx",
+    "magnitud": 4.3,
+    "profundidad_km": 26.45,
+    "fecha": 1597050914835,
+    "lugar": "22 km WNW of Cartagena, Chile",
+    "lon": -71.8124,
+    "lat": -33.4493
+  },
+  {
+    "usgs_id": "us6000bbji",
+    "magnitud": 4.2,
+    "profundidad_km": 10,
+    "fecha": 1596996520231,
+    "lugar": "28 km WNW of Valparaíso, Chile",
+    "lon": -71.9013,
+    "lat": -32.9157
+  },
+  {
+    "usgs_id": "us70008bxw",
+    "magnitud": 3.9,
+    "profundidad_km": 49.69,
+    "fecha": 1584579597054,
+    "lugar": "31 km NE of Cartagena, Chile",
+    "lon": -71.3341,
+    "lat": -33.3848
+  },
+  {
+    "usgs_id": "us70007qtj",
+    "magnitud": 3.4,
+    "profundidad_km": 28.78,
+    "fecha": 1581738097921,
+    "lugar": "19 km SSW of Valparaíso, Chile",
+    "lon": -71.7149,
+    "lat": -33.1941
+  },
+  {
+    "usgs_id": "us70006eqd",
+    "magnitud": 4.4,
+    "profundidad_km": 23.32,
+    "fecha": 1575099051666,
+    "lugar": "36 km NNW of Valparaíso, Chile",
+    "lon": -71.8162,
+    "lat": -32.7444
+  },
+  {
+    "usgs_id": "us70006elp",
+    "magnitud": 4.4,
+    "profundidad_km": 21.41,
+    "fecha": 1575061628688,
+    "lugar": "35 km NNW of Valparaíso, Chile",
+    "lon": -71.7857,
+    "lat": -32.741
+  },
+  {
+    "usgs_id": "us70003ul8",
+    "magnitud": 4.7,
+    "profundidad_km": 55.45,
+    "fecha": 1559535745657,
+    "lugar": "19 km WNW of Hacienda La Calera, Chile",
+    "lon": -71.402,
+    "lat": -32.7054
+  },
+  {
+    "usgs_id": "us1000jasc",
+    "magnitud": 4,
+    "profundidad_km": 62.42,
+    "fecha": 1551673094800,
+    "lugar": "27 km NNW of Melipilla, Chile",
+    "lon": -71.2751,
+    "lat": -33.4451
+  },
+  {
+    "usgs_id": "us1000j9qn",
+    "magnitud": 4.1,
+    "profundidad_km": 35,
+    "fecha": 1551491730428,
+    "lugar": "17 km SW of Valparaíso, Chile",
+    "lon": -71.771,
+    "lat": -33.1392
+  },
+  {
+    "usgs_id": "us1000g9ft",
+    "magnitud": 3.1,
+    "profundidad_km": 28.17,
+    "fecha": 1534301637080,
+    "lugar": "22 km NW of Valparaíso, Chile",
+    "lon": -71.7699,
+    "lat": -32.8674
+  },
+  {
+    "usgs_id": "us1000e6kv",
+    "magnitud": 3.7,
+    "profundidad_km": 23.48,
+    "fecha": 1526081354010,
+    "lugar": "40 km NW of Valparaíso, Chile",
+    "lon": -71.9045,
+    "lat": -32.7527
+  },
+  {
+    "usgs_id": "us1000e3a7",
+    "magnitud": 4.5,
+    "profundidad_km": 19.06,
+    "fecha": 1526075860860,
+    "lugar": "43 km NW of Valparaíso, Chile",
+    "lon": -71.9572,
+    "lat": -32.7567
+  },
+  {
+    "usgs_id": "us1000d70s",
+    "magnitud": 4.2,
+    "profundidad_km": 45.27,
+    "fecha": 1521626186790,
+    "lugar": "10 km WNW of Hacienda La Calera, Chile",
+    "lon": -71.3218,
+    "lat": -32.7484
+  },
+  {
+    "usgs_id": "us1000aqlx",
+    "magnitud": 3.7,
+    "profundidad_km": 29.66,
+    "fecha": 1507790966100,
+    "lugar": "10 km SSW of Valparaíso, Chile",
+    "lon": -71.6767,
+    "lat": -33.1244
+  },
+  {
+    "usgs_id": "us20009zn9",
+    "magnitud": 4.3,
+    "profundidad_km": 22.95,
+    "fecha": 1500709465380,
+    "lugar": "30 km W of Valparaíso, Chile",
+    "lon": -71.9531,
+    "lat": -33.0524
+  },
+  {
+    "usgs_id": "us100098i6",
+    "magnitud": 4.1,
+    "profundidad_km": 18.14,
+    "fecha": 1499674960700,
+    "lugar": "43 km NNW of Valparaíso, Chile",
+    "lon": -71.8851,
+    "lat": -32.7116
+  },
+  {
+    "usgs_id": "us20009lxk",
+    "magnitud": 4.3,
+    "profundidad_km": 26.26,
+    "fecha": 1497266825120,
+    "lugar": "21 km W of Valparaíso, Chile",
+    "lon": -71.8612,
+    "lat": -33.0714
+  },
+  {
+    "usgs_id": "us10008sc5",
+    "magnitud": 4.3,
+    "profundidad_km": 30.53,
+    "fecha": 1494761575940,
+    "lugar": "11 km S of Valparaíso, Chile",
+    "lon": -71.6411,
+    "lat": -33.1399
+  },
+  {
+    "usgs_id": "us10008lxe",
+    "magnitud": 3.8,
+    "profundidad_km": 21.5,
+    "fecha": 1493433383390,
+    "lugar": "17 km SW of Valparaíso, Chile",
+    "lon": -71.7797,
+    "lat": -33.1266
+  },
+  {
+    "usgs_id": "us10008lwz",
+    "magnitud": 5.1,
+    "profundidad_km": 18.79,
+    "fecha": 1493430362230,
+    "lugar": "36 km WSW of Valparaíso, Chile",
+    "lon": -71.9616,
+    "lat": -33.2157
+  },
+  {
+    "usgs_id": "us10008lwq",
+    "magnitud": 4.4,
+    "profundidad_km": 20.04,
+    "fecha": 1493428114830,
+    "lugar": "39 km WNW of Cartagena, Chile",
+    "lon": -71.9773,
+    "lat": -33.38
+  },
+  {
+    "usgs_id": "us10008lsn",
+    "magnitud": 4.1,
+    "profundidad_km": 22.32,
+    "fecha": 1493413281960,
+    "lugar": "38 km WSW of Valparaíso, Chile",
+    "lon": -71.9745,
+    "lat": -33.2277
+  },
+  {
+    "usgs_id": "us10008lq0",
+    "magnitud": 4.2,
+    "profundidad_km": 25.51,
+    "fecha": 1493404103190,
+    "lugar": "39 km SW of Valparaíso, Chile",
+    "lon": -71.9407,
+    "lat": -33.2766
+  },
+  {
+    "usgs_id": "us10008lnm",
+    "magnitud": 5.3,
+    "profundidad_km": 17.98,
+    "fecha": 1493401309010,
+    "lugar": "40 km SW of Valparaíso, Chile",
+    "lon": -71.9578,
+    "lat": -33.2794
+  },
+  {
+    "usgs_id": "us10008lme",
+    "magnitud": 4.6,
+    "profundidad_km": 24.03,
+    "fecha": 1493396846920,
+    "lugar": "39 km NW of Cartagena, Chile",
+    "lon": -71.9356,
+    "lat": -33.3216
+  },
+  {
+    "usgs_id": "us10008lma",
+    "magnitud": 3.6,
+    "profundidad_km": 22.51,
+    "fecha": 1493396488400,
+    "lugar": "39 km WSW of Valparaíso, Chile",
+    "lon": -71.9995,
+    "lat": -33.2169
+  },
+  {
+    "usgs_id": "us10008lm3",
+    "magnitud": 5.8,
+    "profundidad_km": 27,
+    "fecha": 1493395557030,
+    "lugar": "18 km WSW of Valparaíso, Chile",
+    "lon": -71.7998,
+    "lat": -33.1297
+  },
+  {
+    "usgs_id": "us10008lll",
+    "magnitud": 4.3,
+    "profundidad_km": 22.66,
+    "fecha": 1493394203020,
+    "lugar": "38 km SW of Valparaíso, Chile",
+    "lon": -71.943,
+    "lat": -33.2599
+  },
+  {
+    "usgs_id": "us10008lli",
+    "magnitud": 4.6,
+    "profundidad_km": 22.43,
+    "fecha": 1493394024020,
+    "lugar": "36 km SW of Valparaíso, Chile",
+    "lon": -71.9301,
+    "lat": -33.2495
+  },
+  {
+    "usgs_id": "us10008llm",
+    "magnitud": 4.7,
+    "profundidad_km": 24.28,
+    "fecha": 1493393609930,
+    "lugar": "40 km SW of Valparaíso, Chile",
+    "lon": -71.9383,
+    "lat": -33.2958
+  },
+  {
+    "usgs_id": "us10008llg",
+    "magnitud": 5.9,
+    "profundidad_km": 22,
+    "fecha": 1493393406310,
+    "lugar": "37 km WSW of Valparaíso, Chile",
+    "lon": -71.9694,
+    "lat": -33.219
+  },
+  {
+    "usgs_id": "us10008ntq",
+    "magnitud": 4.3,
+    "profundidad_km": 28.61,
+    "fecha": 1493282796540,
+    "lugar": "35 km WSW of Valparaíso, Chile",
+    "lon": -71.9581,
+    "lat": -33.2047
+  },
+  {
+    "usgs_id": "us10008l8p",
+    "magnitud": 4.7,
+    "profundidad_km": 20.35,
+    "fecha": 1493281480130,
+    "lugar": "38 km SW of Valparaíso, Chile",
+    "lon": -71.9516,
+    "lat": -33.25
+  },
+  {
+    "usgs_id": "us10008l8d",
+    "magnitud": 4.1,
+    "profundidad_km": 24.21,
+    "fecha": 1493276145600,
+    "lugar": "42 km SW of Valparaíso, Chile",
+    "lon": -71.973,
+    "lat": -33.2855
+  },
+  {
+    "usgs_id": "us10008l82",
+    "magnitud": 5.1,
+    "profundidad_km": 22.51,
+    "fecha": 1493269762920,
+    "lugar": "39 km SW of Valparaíso, Chile",
+    "lon": -71.9563,
+    "lat": -33.2652
+  },
+  {
+    "usgs_id": "us10008l75",
+    "magnitud": 3.9,
+    "profundidad_km": 29.43,
+    "fecha": 1493258105880,
+    "lugar": "15 km SW of Valparaíso, Chile",
+    "lon": -71.7636,
+    "lat": -33.1172
+  },
+  {
+    "usgs_id": "us10008l1w",
+    "magnitud": 4.3,
+    "profundidad_km": 27.02,
+    "fecha": 1493219641960,
+    "lugar": "37 km SW of Valparaíso, Chile",
+    "lon": -71.9033,
+    "lat": -33.2797
+  },
+  {
+    "usgs_id": "us10008l15",
+    "magnitud": 4.3,
+    "profundidad_km": 19.38,
+    "fecha": 1493217953890,
+    "lugar": "40 km SW of Valparaíso, Chile",
+    "lon": -71.9584,
+    "lat": -33.2736
+  },
+  {
+    "usgs_id": "us10008kw7",
+    "magnitud": 3.7,
+    "profundidad_km": 22.09,
+    "fecha": 1493167380200,
+    "lugar": "34 km WNW of Valparaíso, Chile",
+    "lon": -71.9918,
+    "lat": -32.9573
+  },
+  {
+    "usgs_id": "us10008kvy",
+    "magnitud": 4,
+    "profundidad_km": 23.04,
+    "fecha": 1493164691260,
+    "lugar": "31 km WNW of Valparaíso, Chile",
+    "lon": -71.9536,
+    "lat": -32.9563
+  },
+  {
+    "usgs_id": "us10008khf",
+    "magnitud": 3.8,
+    "profundidad_km": 23.3,
+    "fecha": 1493087585520,
+    "lugar": "27 km W of Valparaíso, Chile",
+    "lon": -71.916,
+    "lat": -33.0023
+  },
+  {
+    "usgs_id": "us10008n9s",
+    "magnitud": 4.2,
+    "profundidad_km": 25.85,
+    "fecha": 1493078968920,
+    "lugar": "15 km WSW of Valparaíso, Chile",
+    "lon": -71.7822,
+    "lat": -33.0789
+  },
+  {
+    "usgs_id": "us10008kfk",
+    "magnitud": 4.4,
+    "profundidad_km": 24.57,
+    "fecha": 1493078280400,
+    "lugar": "40 km SW of Valparaíso, Chile",
+    "lon": -71.944,
+    "lat": -33.2863
+  },
+  {
+    "usgs_id": "us10008kfg",
+    "magnitud": 4.7,
+    "profundidad_km": 19.64,
+    "fecha": 1493078084230,
+    "lugar": "43 km SW of Valparaíso, Chile",
+    "lon": -71.9967,
+    "lat": -33.2762
+  },
+  {
+    "usgs_id": "us10008n9p",
+    "magnitud": 4.1,
+    "profundidad_km": 23.52,
+    "fecha": 1493077162530,
+    "lugar": "27 km W of Valparaíso, Chile",
+    "lon": -71.9276,
+    "lat": -33.0152
+  },
+  {
+    "usgs_id": "us10008kf0",
+    "magnitud": 4.3,
+    "profundidad_km": 26.19,
+    "fecha": 1493076533630,
+    "lugar": "26 km SW of Valparaíso, Chile",
+    "lon": -71.8593,
+    "lat": -33.1759
+  },
+  {
+    "usgs_id": "us10008keu",
+    "magnitud": 4.1,
+    "profundidad_km": 19.78,
+    "fecha": 1493075043160,
+    "lugar": "32 km W of Valparaíso, Chile",
+    "lon": -71.9721,
+    "lat": -33.0243
+  },
+  {
+    "usgs_id": "us10008ke3",
+    "magnitud": 4.5,
+    "profundidad_km": 23.58,
+    "fecha": 1493073835660,
+    "lugar": "25 km WSW of Valparaíso, Chile",
+    "lon": -71.8895,
+    "lat": -33.1125
+  },
+  {
+    "usgs_id": "us10008kcv",
+    "magnitud": 4.9,
+    "profundidad_km": 27.92,
+    "fecha": 1493071423690,
+    "lugar": "18 km W of Valparaíso, Chile",
+    "lon": -71.8303,
+    "lat": -33.0634
+  },
+  {
+    "usgs_id": "us10008kcw",
+    "magnitud": 3.9,
+    "profundidad_km": 27.61,
+    "fecha": 1493070713770,
+    "lugar": "30 km WNW of Valparaíso, Chile",
+    "lon": -71.944,
+    "lat": -32.9604
+  },
+  {
+    "usgs_id": "us10008kcr",
+    "magnitud": 5.4,
+    "profundidad_km": 13.21,
+    "fecha": 1493070384100,
+    "lugar": "35 km WNW of Valparaíso, Chile",
+    "lon": -71.9844,
+    "lat": -32.9309
+  },
+  {
+    "usgs_id": "us10008k1k",
+    "magnitud": 4.1,
+    "profundidad_km": 21.27,
+    "fecha": 1492963973460,
+    "lugar": "34 km WNW of Valparaíso, Chile",
+    "lon": -71.9865,
+    "lat": -32.9634
+  },
+  {
+    "usgs_id": "us10008jwi",
+    "magnitud": 4.1,
+    "profundidad_km": 19.96,
+    "fecha": 1492917003970,
+    "lugar": "30 km W of Valparaíso, Chile",
+    "lon": -71.9574,
+    "lat": -32.9935
+  },
+  {
+    "usgs_id": "us10008jw7",
+    "magnitud": 4.8,
+    "profundidad_km": 21,
+    "fecha": 1492915398710,
+    "lugar": "30 km W of Valparaíso, Chile",
+    "lon": -71.9518,
+    "lat": -33.0181
+  },
+  {
+    "usgs_id": "us20006uma",
+    "magnitud": 4.4,
+    "profundidad_km": 27.82,
+    "fecha": 1472326568080,
+    "lugar": "30 km NNW of Valparaíso, Chile",
+    "lon": -71.7105,
+    "lat": -32.7701
+  },
+  {
+    "usgs_id": "us10005fum",
+    "magnitud": 4.4,
+    "profundidad_km": 32.7,
+    "fecha": 1462703592250,
+    "lugar": "25 km W of Hacienda La Calera, Chile",
+    "lon": -71.4873,
+    "lat": -32.7579
+  },
+  {
+    "usgs_id": "us20005b20",
+    "magnitud": 4.3,
+    "profundidad_km": 24.98,
+    "fecha": 1458413428640,
+    "lugar": "23 km SW of Valparaíso, Chile",
+    "lon": -71.811,
+    "lat": -33.1874
+  },
+  {
+    "usgs_id": "us10004rzg",
+    "magnitud": 4.4,
+    "profundidad_km": 47.97,
+    "fecha": 1456223355560,
+    "lugar": "17 km SSE of Quilpué, Chile",
+    "lon": -71.3932,
+    "lat": -33.1977
+  },
+  {
+    "usgs_id": "us100048yl",
+    "magnitud": 4.3,
+    "profundidad_km": 23.36,
+    "fecha": 1450834804700,
+    "lugar": "38 km NNW of Valparaíso, Chile",
+    "lon": -71.7522,
+    "lat": -32.7027
+  },
+  {
+    "usgs_id": "us20003zyf",
+    "magnitud": 4.4,
+    "profundidad_km": 26.58,
+    "fecha": 1445970750270,
+    "lugar": "29 km N of Valparaíso, Chile",
+    "lon": -71.6589,
+    "lat": -32.7727
+  },
+  {
+    "usgs_id": "us20003mvw",
+    "magnitud": 4.3,
+    "profundidad_km": 49.06,
+    "fecha": 1442929232680,
+    "lugar": "26 km SSE of Villa Alemana, Chile",
+    "lon": -71.3036,
+    "lat": -33.2726
+  },
+  {
+    "usgs_id": "us20003kkw",
+    "magnitud": 5.9,
+    "profundidad_km": 10,
+    "fecha": 1442492074910,
+    "lugar": "13 km NNW of Viña del Mar, Chile",
+    "lon": -71.6064,
+    "lat": -32.9149
+  },
+  {
+    "usgs_id": "us10002lcj",
+    "magnitud": 3.9,
+    "profundidad_km": 25.9,
+    "fecha": 1435149323000,
+    "lugar": "37 km NNW of Valparaíso, Chile",
+    "lon": -71.783,
+    "lat": -32.723
+  },
+  {
+    "usgs_id": "us20002q4g",
+    "magnitud": 3.7,
+    "profundidad_km": 46.7,
+    "fecha": 1434246120000,
+    "lugar": "13 km N of Villa Alemana, Chile",
+    "lon": -71.38,
+    "lat": -32.925
+  },
+  {
+    "usgs_id": "us100029qx",
+    "magnitud": 4.4,
+    "profundidad_km": 33.3,
+    "fecha": 1431766314000,
+    "lugar": "28 km W of Valparaíso, Chile",
+    "lon": -71.933,
+    "lat": -33.08
+  },
+  {
+    "usgs_id": "us200026h6",
+    "magnitud": 3.8,
+    "profundidad_km": 26.3,
+    "fecha": 1429033122000,
+    "lugar": "37 km NNW of Valparaíso, Chile",
+    "lon": -71.723,
+    "lat": -32.706
+  },
+  {
+    "usgs_id": "usc000tgw0",
+    "magnitud": 4.8,
+    "profundidad_km": 25.8,
+    "fecha": 1421553599000,
+    "lugar": "37 km N of Valparaíso, Chile",
+    "lon": -71.703,
+    "lat": -32.703
+  },
+  {
+    "usgs_id": "usc000tcd4",
+    "magnitud": 4,
+    "profundidad_km": 27.67,
+    "fecha": 1420637700490,
+    "lugar": "31 km NNW of Valparaíso, Chile",
+    "lon": -71.7697,
+    "lat": -32.7784
+  }
+]

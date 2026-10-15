@@ -1,0 +1,48 @@
+services:
+  db:
+    build:
+      context: ./db
+    container_name: ruteo_db
+    environment:
+      POSTGRES_DB: ruteo_drones
+      POSTGRES_USER: ruteo
+      POSTGRES_PASSWORD: ruteo
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ruteo -d ruteo_drones"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  etl:
+    build:
+      context: .
+      dockerfile: etl.Dockerfile
+    container_name: ruteo_etl
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ruteo_drones
+      DB_USER: ruteo
+      DB_PASSWORD: ruteo
+    volumes:
+      - ./:/app
+
+  sitio_web:
+    image: nginx:alpine
+    container_name: ruteo_sitio
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    volumes:
+      - ./sitio_web:/usr/share/nginx/html:ro
+
+volumes:
+  db_data:
