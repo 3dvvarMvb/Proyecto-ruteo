@@ -31,6 +31,7 @@ let origenesList = [];
 let sismosList = [];
 let origenActivo = "8va_florida";
 let destinoActivo = "sismo_15";
+let vientoMaxActivo = 40; // restriccion de usuario (punto 6); default operacional declarado en viento.schema.md
 
 const ALIAS_CUARTEL = {
   17: "8va_florida",
@@ -71,7 +72,8 @@ Promise.all([
   actualizarRuta(origenActivo, destinoActivo);
 });
 
-// Poblar selector con TODOS los 106 sismos USGS y cuarteles
+// Poblar selector con los cuarteles y los sismos a <=2km de la red vial
+// (unicos validos como objetivo de ruteo BVLOS; ver servidor.py)
 function poblarSelectoresDinamicos(origenes, sismos) {
   const selOrigen = document.getElementById("sel-origen");
   const selDestino = document.getElementById("sel-destino");
@@ -245,7 +247,7 @@ function actualizarRuta(origenKey, destinoKey) {
   }
 
   // 1. Invocar la API dinámica de pgRouting
-  fetch(`/api/calcular_ruta?origen=${encodeURIComponent(origenKey)}&destino=${encodeURIComponent(destinoKey)}`)
+  fetch(`/api/calcular_ruta?origen=${encodeURIComponent(origenKey)}&destino=${encodeURIComponent(destinoKey)}&viento_max=${encodeURIComponent(vientoMaxActivo)}`)
     .then((r) => {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
@@ -338,7 +340,9 @@ function renderizarRuta(rutaData) {
   const infoBox = document.getElementById("info-seleccion");
   if (infoBox) {
     const msInfo = rutaData.tiempo_calculo_ms ? ` <span style="font-size:10px; background:#e8f4f8; color:#1b4f72; padding:2px 6px; border-radius:3px; font-weight:bold;">⚡ pgRouting: ${rutaData.tiempo_calculo_ms} ms</span>` : "";
-    infoBox.innerHTML = `<b>Trayecto Activo:</b> ${orig.nombre} (${orig.comuna}) <br>➔ <b>${dest.descripcion}</b>${msInfo}`;
+    const r = rutaData.restricciones;
+    const restrInfo = r ? ` <span style="font-size:10px; background:#fff8e1; color:#8a6d00; padding:2px 6px; border-radius:3px;">💨 viento máx: ${r.viento_max_kmh} km/h${r.es_default ? " (default)" : ""}</span>` : "";
+    infoBox.innerHTML = `<b>Trayecto Activo:</b> ${orig.nombre} (${orig.comuna}) <br>➔ <b>${dest.descripcion}</b>${msInfo}${restrInfo}`;
   }
 
   // 6. Actualizar Métricas en la Tabla
@@ -355,7 +359,9 @@ function renderizarRuta(rutaData) {
 
     const diff = m.diferencial_resiliencia;
     const badge = document.getElementById("badge-diferencial");
-    badge.innerText = `Diferencial: +${diff}% de Resiliencia Ganada`;
+    badge.innerText = diff >= 0
+      ? `Diferencial: +${diff}% de Resiliencia Ganada`
+      : `Diferencial: ${diff}% (Dijkstra resultó más resiliente para este par)`;
     badge.style.background = diff >= 0 ? "#ebfbee" : "#fff5f5";
     badge.style.color = diff >= 0 ? "#2b8a3e" : "#c53030";
     badge.style.borderColor = diff >= 0 ? "#b2f2bb" : "#feb2b2";
@@ -402,25 +408,34 @@ cargarGeoJSON("data/carabineros.geojson", (geojson) => {
   }).addTo(capaCarabineros);
 });
 
-// 3. Capa Sismos (TODOS los 106 sismos con fijación directa e instantánea)
+// 3. Capa Sismos (TODOS los 106, informativa; solo los <=2km de la red
+//    vial son fijables como destino, ver destino_valido)
 cargarGeoJSON("data/sismos.geojson", (geojson) => {
   L.geoJSON(geojson, {
     pointToLayer: (feature, latlng) => {
       const p = feature.properties;
       const mag = p.magnitud || 2;
-      const enTierra = p.en_tierra;
+      const valido = p.destino_valido;
       return L.circleMarker(latlng, {
         radius: Math.max(4.5, mag * 2.3),
-        color: enTierra ? "#962d00" : "#1b4f72",
+        color: valido ? "#962d00" : "#1b4f72",
         weight: 1.4,
-        fillColor: enTierra ? "#e67e22" : "#3498db",
+        fillColor: valido ? "#e67e22" : "#3498db",
         fillOpacity: 0.75,
       });
     },
     onEachFeature: (f, layer) => {
       const p = f.properties;
       const sismoKey = `sismo_${p.id}`;
-      const ubicacionStr = p.en_tierra ? "🏔️ Continente / Tierra firme" : "🌊 Océano Pacífico / Costa";
+      const distStr = p.dist_red_m < 1000 ? `${Math.round(p.dist_red_m)}m` : `${(p.dist_red_m / 1000).toFixed(1)}km`;
+      const ubicacionStr = p.destino_valido
+        ? `🏔️ A ${distStr} de la red vial`
+        : `🌊 A ${distStr} de la red vial — demasiado lejos para inspección BVLOS`;
+      const botonDestino = p.destino_valido
+        ? `<button class="btn-popup btn-destino" onclick="window.fijarDestino('${sismoKey}')" style="margin-top:6px; width:100%;">
+             🚨 Fijar como Objetivo de Emergencia
+           </button>`
+        : `<div class="tip-box" style="margin-top:6px;">No seleccionable: el epicentro está a más de 2km de cualquier calle, por lo que no representa un punto de inspección real para el dron.</div>`;
       layer.on("click", () => {
         layer.bindPopup(`
           <div style="font-size:12.5px; line-height:1.4;">
@@ -428,9 +443,7 @@ cargarGeoJSON("data/sismos.geojson", (geojson) => {
             <b>Lugar:</b> ${p.lugar}<br>
             <b>Profundidad:</b> ${p.profundidad_km != null ? p.profundidad_km + ' km' : 'No registrada'}<br>
             <b>Zona:</b> ${ubicacionStr}<br>
-            <button class="btn-popup btn-destino" onclick="window.fijarDestino('${sismoKey}')" style="margin-top:6px; width:100%;">
-              🚨 Fijar como Objetivo de Emergencia
-            </button>
+            ${botonDestino}
           </div>
         `).openPopup();
       });
@@ -525,10 +538,17 @@ toggleCapa("chk-capa-conaf", capaCONAF);
 toggleCapa("chk-capa-firms", capaFIRMS);
 toggleCapa("chk-capa-viento", capaViento);
 
-// Control de Slider de Viento
+// Control de Slider de Viento (restricción de usuario, punto 6 de la rúbrica)
 const rngViento = document.getElementById("rng-viento");
 if (rngViento) {
   rngViento.addEventListener("input", (e) => {
     document.getElementById("lbl-viento").innerText = `${e.target.value} km/h (operacional)`;
+  });
+  rngViento.addEventListener("change", (e) => {
+    // Se dispara al soltar el slider (no en cada pixel), recalcula la ruta
+    // resiliente con el nuevo umbral: aristas en zonas cuya racha pronosticada
+    // supera este valor quedan fuertemente penalizadas (x1000) en esa ruta.
+    vientoMaxActivo = Number(e.target.value);
+    actualizarRuta(origenActivo, destinoActivo);
   });
 }

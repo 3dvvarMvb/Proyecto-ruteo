@@ -54,8 +54,76 @@ WHERE id IN (
     SELECT a.id FROM infraestructura_aristas a
     JOIN amenaza_firms f ON f.dentro_chile AND a.geom && ST_Expand(f.geom, 0.005) AND ST_DWithin(a.geom, f.geom, 0.005)
 );
+
+-- factor_antiguedad_zona: proxy de antiguedad de la edificacion por zona
+-- (metadata_poblacion.indice_antiguedad, calculado a partir de permisos de
+-- edificacion 2010-2018). NO se aplica de forma fija a cost_resiliente como
+-- tendido/CONAF/FIRMS: es un riesgo condicional, solo relevante cuando la
+-- mision es evaluar danos tras UN SISMO (riesgo de escombros/obstruccion de
+-- calles por edificacion antigua), no para incendios ni en general. Se
+-- aplica mas abajo, en el calculo de rutas, solo si dest["tipo"] == "sismo".
+ALTER TABLE infraestructura_aristas ADD COLUMN IF NOT EXISTS factor_antiguedad_zona double precision DEFAULT 0;
+UPDATE infraestructura_aristas SET factor_antiguedad_zona = 0;
+
+CREATE INDEX IF NOT EXISTS idx_poblacion_geom ON metadata_poblacion USING gist(geom);
+
+UPDATE infraestructura_aristas a
+SET factor_antiguedad_zona = sub.max_indice
+FROM (
+    SELECT a2.id, max(m.indice_antiguedad) AS max_indice
+    FROM infraestructura_aristas a2
+    JOIN metadata_poblacion m ON a2.geom && m.geom AND ST_Intersects(a2.geom, m.geom)
+    WHERE m.indice_antiguedad IS NOT NULL
+    GROUP BY a2.id
+) sub
+WHERE a.id = sub.id;
+
+-- viento_racha_max_kmh: racha maxima pronosticada de la estacion Open-Meteo
+-- mas cercana (de las 6 del area). Es la base de la RESTRICCION de usuario
+-- (punto 6 de la rubrica, distinta de una ponderacion fija): el operador
+-- define un umbral maximo de viento operacional (simulando su preferencia
+-- de seguridad); cualquier arista cuya zona supere ese umbral se penaliza
+-- fuertemente (x1000, igual convencion que CONAF/areas protegidas) en la
+-- ruta resiliente. Se aplica en tiempo de consulta, no aqui, porque el
+-- umbral es un parametro variable (ver costo_resiliente_sql).
+ALTER TABLE infraestructura_aristas ADD COLUMN IF NOT EXISTS viento_racha_max_kmh double precision;
+CREATE INDEX IF NOT EXISTS idx_viento_geom ON metadata_viento USING gist(geom);
+
+UPDATE infraestructura_aristas a
+SET viento_racha_max_kmh = (
+    SELECT v.racha_max_kmh FROM metadata_viento v ORDER BY v.geom <-> a.geom LIMIT 1
+);
 """)
 conn.commit()
+
+PESO_ANTIGUEDAD = 0.3  # penalizacion leve y condicional (ver justificacion en RESULTADOS.md);
+# nunca domina sobre tendido electrico (x1.5) ni CONAF (x1000), que son riesgos fisicos directos.
+
+VIENTO_MAX_DEFAULT_KMH = 40.0  # restriccion por defecto (punto 6.2): umbral operacional
+# declarado en metadata/viento.schema.md ("rachas sobre 40 km/h comprometen la
+# estabilidad aerodinamica del dron"). Se usa cuando el operador no ingresa un
+# valor propio. El catalogo precalculado siempre usa este valor por defecto;
+# el sitio dinamico (servidor.py) permite al operador cambiarlo.
+
+
+def cost_resiliente_sql(dest, viento_max_kmh=VIENTO_MAX_DEFAULT_KMH):
+    """Expresion SQL de costo para la ruta 'resiliente':
+    - agrega el riesgo de escombros por edificacion antigua SOLO si el
+      destino es un sismo (ponderacion condicional, punto 5).
+    - aplica la restriccion de viento operacional del usuario (o el default
+      de 40 km/h): si la racha de la zona supera el umbral, la arista se
+      penaliza x1000 (punto 6). Nunca excluye literalmente la arista (costo
+      finito), por lo que siempre existe una ruta aunque toda la zona este
+      ventosa; en ese caso la restriccion de viento no afecta la eleccion de
+      ruta porque penaliza por igual, lo cual es el comportamiento correcto.
+    """
+    base = "cost_resiliente"
+    if dest.get("tipo") == "sismo":
+        base = f"({base} * (1 + {PESO_ANTIGUEDAD} * factor_antiguedad_zona))"
+    return (
+        f"(CASE WHEN viento_racha_max_kmh > {float(viento_max_kmh)} "
+        f"THEN ({base}) * 1000.0 ELSE {base} END)"
+    )
 
 # 2. Obtener lista de Origenes Clave (Cuarteles / Comisarías de todas las comunas)
 cur.execute("""
@@ -96,16 +164,22 @@ for r in filas_cuarteles:
         "nodo_vial": nodo_vial,
     })
 
-# 3. Obtener lista de Destinos Clave (Sismos USGS en Tierra + Focos NASA FIRMS)
+# 3. Obtener lista de Destinos Clave (Sismos USGS + Focos NASA FIRMS)
+# UMBRAL_DISTANCIA_RED_M = 2000: un dron BVLOS evalua danos siguiendo calles,
+# no sobrevolando el oceano. Si el epicentro esta a mas de 2km del nodo vial
+# mas cercano, "llegar" ahi es solo un punto arbitrario de la costa, no el
+# area real de impacto. 2km es insignificante frente a la profundidad tipica
+# de sismos corticales en la zona (10-25km), asi que el nodo vial sigue
+# representando razonablemente el area a evaluar. Reemplaza el filtro previo
+# de longitud >= -71.68 (bbox fijo) por uno basado en distancia real a la red,
+# que es el criterio que de verdad le importa al dron.
 cur.execute("""
 SELECT s.id, s.usgs_id, s.magnitud, s.lugar, ST_X(s.geom) AS lon, ST_Y(s.geom) AS lat
 FROM amenaza_sismos s
 CROSS JOIN LATERAL (
     SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
 ) n
-WHERE ST_X(s.geom) >= -71.68
-  AND ST_Y(s.geom) BETWEEN -33.30 AND -32.90
-  AND ST_Distance(s.geom::geography, n.geom::geography) < 1500
+WHERE ST_Distance(s.geom::geography, n.geom::geography) <= 2000
 ORDER BY s.magnitud DESC, ST_Distance(s.geom::geography, n.geom::geography) ASC
 LIMIT 10;
 """)
@@ -227,19 +301,20 @@ for orig in ORIGENES:
         )
         e_d2 = [r[0] for r in cur.fetchall()]
 
-        # 3. Resiliente 1
+        # 3. Resiliente 1 (agrega riesgo de edificacion antigua si el destino es un sismo)
+        costo_base = cost_resiliente_sql(dest)
         cur.execute(
-            "SELECT edge FROM pgr_dijkstra('SELECT id, source, target, cost_resiliente AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
+            f"SELECT edge FROM pgr_dijkstra('SELECT id, source, target, {costo_base} AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
             (o_nodo, d_nodo),
         )
         e_r1 = [r[0] for r in cur.fetchall()]
 
         # 4. Resiliente 2 (Bypass disjunto)
         cur.execute(
-            """
+            f"""
             SELECT edge FROM pgr_dijkstra(
                 'SELECT id, source, target,
-                        CASE WHEN id = ANY(%s) THEN cost_resiliente * 1000.0 ELSE cost_resiliente END AS cost
+                        CASE WHEN id = ANY(%s) THEN ({costo_base}) * 1000.0 ELSE {costo_base} END AS cost
                  FROM infraestructura_aristas',
                 %s, %s
             ) WHERE edge != -1

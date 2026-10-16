@@ -9,9 +9,9 @@ import matplotlib.patches as patches
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SALIDA = os.path.join(AQUI, "diagrama_bd.png")
 
-fig, ax = plt.subplots(figsize=(16, 11), dpi=200)
+fig, ax = plt.subplots(figsize=(16, 13), dpi=200)
 ax.set_xlim(0, 16)
-ax.set_ylim(0, 11)
+ax.set_ylim(-3.2, 11)
 ax.axis("off")
 
 # Colores temáticos
@@ -128,7 +128,18 @@ draw_table(ax, 4.6, 2.3, 3.8, "metadata_poblacion (INE Censo)", [
     ("manzent", "TEXT", "ID Manzana"),
     ("total_pers", "INTEGER", "Población"),
     ("total_vivi", "INTEGER", "Viviendas"),
+    ("permisos_count", "INTEGER", "Permisos 2010-18"),
+    ("indice_antiguedad", "DOUBLE", "0-1, proxy sismo"),
     ("geom", "MultiPolygon", "GIST (Buffer 50m)")
+], COLOR_HEADER_META)
+
+draw_table(ax, 4.6, -0.75, 3.8, "metadata_permisos_edificacion", [
+    ("id", "SERIAL", "PK"),
+    ("comuna", "TEXT", ""),
+    ("anio", "INTEGER", "2010-2018"),
+    ("num_pisos", "INTEGER", ""),
+    ("superficie_m2", "DOUBLE", ""),
+    ("geom", "Point(4326)", "GIST")
 ], COLOR_HEADER_META)
 
 # 3. Amenazas
@@ -168,7 +179,7 @@ draw_table(ax, 9.2, 2.9, 3.6, "amenaza_sismos (USGS FDSN)", [
 
 # 4. Panel de Relaciones y Notas
 ax.text(13.2, 10.2, "ARQUITECTURA RELACIONAL", fontsize=11, weight="bold", color="#1f4e79")
-ax.text(13.2, 9.7, "• Motor: PostgreSQL 18 + PostGIS 3.6\n• Algoritmos: pgRouting (Dijkstra, Yen KSP)\n• CRS Geométrico: EPSG:4326 (WGS84)\n• Índices: GIST espaciales en cada geom",
+ax.text(13.2, 9.7, "• Motor: PostgreSQL 18 + PostGIS 3.6\n• Algoritmo base: pgr_dijkstra\n• k=2 rutas: penalización iterativa\n  de aristas (insp. en Suurballe 1974)\n• CRS Geométrico: EPSG:4326 (WGS84)\n• Índices: GIST espaciales en cada geom",
         fontsize=8, color="#333333", va="top")
 
 ax.text(13.2, 8.2, "INTERACCIONES DE RUTEO", fontsize=10, weight="bold", color="#385723")
@@ -183,7 +194,15 @@ ax.text(13.2, 7.8,
         "5. Cortes / Exclusiones:\n"
         "   - ST_DWithin(foco_firms, 500m)\n"
         "   - ST_Intersects(areas_protegidas)\n"
-        "   - ST_Intersects(conaf_ignicion > umbral)",
+        "   - ST_Intersects(conaf_ignicion > umbral)\n\n"
+        "6. Riesgo condicional (solo si el\n"
+        "   destino es un sismo):\n"
+        "   costo *= (1 + 0.3 * indice_\n"
+        "   antiguedad_zona), por riesgo de\n"
+        "   escombros en edificación antigua.\n"
+        "   No aplica a incendios ni en\n"
+        "   general (ver metadata_permisos_\n"
+        "   edificacion).",
         fontsize=7.8, color="#222222", va="top")
 
 # Flechas conectivas clave
@@ -198,6 +217,8 @@ draw_arrow(ax, (3.9, 2.5), (3.9, 9.2), "KNN (<->)")
 draw_arrow(ax, (2.2, 7.8), (2.2, 8.8), "source/target")
 # Conexión Relieve -> Aristas
 draw_arrow(ax, (4.6, 3.8), (3.9, 6.0), "arista_id")
+# Conexión Permisos Edificación -> Población (join espacial, no FK)
+draw_arrow(ax, (6.5, -0.75), (6.5, 0.3), "ST_Contains")
 
 # Título general superior
 fig.suptitle("Modelo de Base de Datos Geoespacial — Ruteo Resiliente de Drones BVLOS (Gran Valparaíso)\nPostgreSQL + PostGIS + pgRouting",

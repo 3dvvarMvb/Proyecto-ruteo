@@ -19,7 +19,13 @@ CONN = dict(
 )
 
 ORIGEN_NOMBRE = "8VA. COM. FLORIDA VALPO."  # comisaria de Valparaiso
-SISMO_ID = "us20003kkw"  # M5.9, 13km NNW de Viña del Mar (dentro del area del grafo)
+# M4.6, 5km N de Viña del Mar, a 479m de la red vial mas cercana. Se eligio
+# este sismo (y no uno mas lejano) porque esta a menos de 2000m del nodo vial
+# mas cercano: un dron BVLOS evalua danos siguiendo calles, no sobrevolando
+# el oceano, asi que si el epicentro esta muy lejos de la red, "llegar" ahi
+# es solo un punto arbitrario de la costa, no el area real de impacto. Ver
+# UMBRAL_DISTANCIA_RED_M en sitio_web/servidor.py y generar_rutas_comparativas.py.
+SISMO_ID = "us7000ltwn"
 
 conn = psycopg2.connect(**CONN)
 cur = conn.cursor()

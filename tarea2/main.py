@@ -4,8 +4,11 @@
   1. Levanta la base de datos (Docker: PostGIS + pgRouting) y el sitio web.
   2. Corre cada extractor de infraestructura/metadata/amenazas -> *.json.
   3. Carga cada *.json a su tabla correspondiente en la BD.
-  4. Calcula la ruta con pgr_dijkstra y la ruta resiliente con pgr_KSP, y
-     exporta las capas para el sitio web (Leaflet).
+  4. Calcula, para cada par origen/destino, un par de rutas por distancia
+     pura (pgr_dijkstra) y un par de rutas resilientes (pgr_dijkstra con
+     costo ponderado + penalizacion iterativa de aristas, ver sitio_web/
+     generar_rutas_comparativas.py y README.md seccion "Algoritmo de ruteo"),
+     y exporta las capas para el sitio web (Leaflet).
 
 Uso:  python3 main.py            (requiere Docker y docker compose)
       python3 main.py --sin-docker   (ejecución directa dentro del contenedor o con BD accesible)
@@ -24,6 +27,7 @@ PASOS_EXTRACCION = [
     ("metadata/extraer_tendido_electrico.py", "metadata"),
     ("metadata/extraer_relieve.py", "metadata"),
     ("metadata/extraer_poblacion.py", "metadata"),
+    ("metadata/extraer_permisos_edificacion.py", "metadata"),
     ("amenazas/extraer_firms.py", "amenazas"),
     ("amenazas/extraer_conaf.py", "amenazas"),
     ("amenazas/extraer_sismos.py", "amenazas"),
@@ -36,6 +40,7 @@ PASOS_CARGA = [
     ("metadata/cargar_tendido_electrico.py", "metadata"),
     ("metadata/cargar_relieve.py", "metadata"),
     ("metadata/cargar_poblacion.py", "metadata"),
+    ("metadata/cargar_permisos_edificacion.py", "metadata"),  # requiere metadata_poblacion ya cargada
     ("amenazas/cargar_firms.py", "amenazas"),
     ("amenazas/cargar_conaf.py", "amenazas"),
     ("amenazas/cargar_sismos.py", "amenazas"),

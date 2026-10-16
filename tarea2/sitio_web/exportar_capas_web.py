@@ -57,18 +57,29 @@ exportar("carabineros", """
 """)
 
 # 2. Sismos (amenaza/destino)
+# UMBRAL_DISTANCIA_RED_M = 2000: mismo criterio que servidor.py y
+# generar_rutas_comparativas.py. "destino_valido" marca si el sismo es
+# aceptable como objetivo de ruteo (nodo vial mas cercano a <=2km del
+# epicentro); el dron evalua danos siguiendo calles, no sobrevolando el
+# oceano, asi que un sismo mar adentro no tiene un punto de inspeccion real.
+# Se exportan igual TODOS los sismos para la capa informativa del mapa (punto 7).
 exportar("sismos", """
     SELECT json_build_object(
         'type', 'FeatureCollection',
         'features', COALESCE(json_agg(json_build_object(
             'type', 'Feature',
-            'geometry', ST_AsGeoJSON(geom)::json,
+            'geometry', ST_AsGeoJSON(s.geom)::json,
             'properties', json_build_object(
-                'id', id, 'magnitud', magnitud, 'profundidad_km', profundidad_km,
-                'fecha', fecha, 'lugar', lugar, 'en_tierra', (ST_X(geom) >= -71.68)
+                'id', s.id, 'magnitud', s.magnitud, 'profundidad_km', s.profundidad_km,
+                'fecha', s.fecha, 'lugar', s.lugar,
+                'dist_red_m', round(ST_Distance(s.geom::geography, n.geom::geography)::numeric, 1),
+                'destino_valido', (ST_Distance(s.geom::geography, n.geom::geography) <= 2000)
             )
         )), '[]'::json)
-    ) FROM amenaza_sismos;
+    ) FROM amenaza_sismos s
+    CROSS JOIN LATERAL (
+        SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
+    ) n;
 """)
 
 # 3. Tendido Eléctrico (metadata)

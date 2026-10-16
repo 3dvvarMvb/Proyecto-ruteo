@@ -79,14 +79,26 @@ CREATE TABLE metadata_relieve (
 );
 
 CREATE TABLE metadata_poblacion (
-    id          SERIAL PRIMARY KEY,
-    comuna      TEXT NOT NULL,
-    manzent     TEXT,                   -- id de manzana censal (MANZENT_I)
-    total_pers  INTEGER,
-    total_vivi  INTEGER,
-    geom        GEOMETRY(MultiPolygon, 4326) NOT NULL
+    id                  SERIAL PRIMARY KEY,
+    comuna              TEXT NOT NULL,
+    manzent             TEXT,                   -- id de manzana censal (MANZENT_I)
+    total_pers          INTEGER,
+    total_vivi          INTEGER,
+    permisos_count      INTEGER,            -- permisos de edificacion 2010-2018 dentro de la manzana
+    indice_antiguedad   DOUBLE PRECISION,   -- 0 (edificacion renovada) a 1 (sin permisos recientes); proxy, no probabilidad de colapso
+    geom                GEOMETRY(MultiPolygon, 4326) NOT NULL
 );
 CREATE INDEX idx_metadata_poblacion_geom ON metadata_poblacion USING GIST (geom);
+
+CREATE TABLE metadata_permisos_edificacion (
+    id              SERIAL PRIMARY KEY,
+    comuna          TEXT NOT NULL,
+    anio            INTEGER,
+    num_pisos       INTEGER,
+    superficie_m2   DOUBLE PRECISION,
+    geom            GEOMETRY(Point, 4326) NOT NULL
+);
+CREATE INDEX idx_metadata_permisos_geom ON metadata_permisos_edificacion USING GIST (geom);
 
 -- ============================================================
 -- AMENAZAS (una tabla por fuente)

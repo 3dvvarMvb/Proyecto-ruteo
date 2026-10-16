@@ -23,6 +23,30 @@ DB_USER = os.getenv("DB_USER", "ruteo")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "ruteo")
 PORT = int(os.getenv("PORT", 8080))
 
+# Penalizacion leve y condicional por edificacion antigua (riesgo de escombros
+# post-sismo). Solo se aplica cuando el destino es un sismo, nunca para
+# incendios ni en general - ver generar_rutas_comparativas.py y RESULTADOS.md.
+PESO_ANTIGUEDAD = 0.3
+
+# Restriccion de usuario (punto 6 de la rubrica): umbral de racha de viento
+# operacional. Si no se especifica, se usa el valor por defecto declarado en
+# metadata/viento.schema.md (rachas sobre 40 km/h comprometen la estabilidad
+# aerodinamica del dron). Rango valido para evitar parametros absurdos desde
+# la URL.
+VIENTO_MAX_DEFAULT_KMH = 40.0
+VIENTO_MAX_RANGO = (10.0, 150.0)
+
+
+def cost_resiliente_sql(dest, viento_max_kmh=VIENTO_MAX_DEFAULT_KMH):
+    """Ver docstring equivalente en generar_rutas_comparativas.py."""
+    base = "cost_resiliente"
+    if dest.get("tipo") == "sismo":
+        base = f"({base} * (1 + {PESO_ANTIGUEDAD} * factor_antiguedad_zona))"
+    return (
+        f"(CASE WHEN viento_racha_max_kmh > {float(viento_max_kmh)} "
+        f"THEN ({base}) * 1000.0 ELSE {base} END)"
+    )
+
 # Pool de conexiones a PostgreSQL
 db_pool = None
 try:
@@ -84,6 +108,13 @@ def obtener_todos_los_sismos():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
+        # UMBRAL_DISTANCIA_RED_M = 2000: un dron BVLOS evalua danos siguiendo
+        # calles, no sobrevolando el oceano. Si el epicentro esta a mas de 2km
+        # del nodo vial mas cercano, "llegar" ahi es solo un punto arbitrario
+        # de la costa, no el area real de impacto. 2km es insignificante frente
+        # a la profundidad tipica de sismos corticales en la zona (10-25km), asi
+        # que el nodo vial sigue representando razonablemente el area a evaluar.
+        # Deja 20 de los 106 sismos como destinos validos (ver RESULTADOS.md).
         cur.execute("""
             SELECT s.id, s.usgs_id, s.magnitud, s.lugar, s.profundidad_km,
                    ST_X(s.geom) AS lon, ST_Y(s.geom) AS lat,
@@ -93,6 +124,7 @@ def obtener_todos_los_sismos():
             CROSS JOIN LATERAL (
                 SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
             ) n
+            WHERE ST_Distance(s.geom::geography, n.geom::geography) <= 2000
             ORDER BY s.magnitud DESC, dist_red_m ASC;
         """)
         filas = cur.fetchall()
@@ -192,6 +224,11 @@ def resolver_destino_nodo(cur, destino_str, lat_param=None, lon_param=None):
                 LIMIT 1;
             """, (s_lon, s_lat, s_lon, s_lat))
             d_nodo, dn_lon, dn_lat, dist_aerea = cur.fetchone()
+            if dist_aerea > 2000:
+                # Sismo demasiado lejos de la red vial (mar adentro / sin calles
+                # cercanas): el nodo vial mas cercano no representa un area de
+                # inspeccion real. Ver UMBRAL_DISTANCIA_RED_M en obtener_todos_los_sismos.
+                return None
             return {
                 "key": f"sismo_{s_id}",
                 "id": s_id,
@@ -321,8 +358,17 @@ def extraer_geometria_y_distancia(cur, edge_ids, dest_info=None):
     return geom_json, dist_total
 
 
-def calcular_rutas_par(origen_key, destino_key, lat=None, lon=None):
-    cache_key = f"{origen_key}_{destino_key}_{lat}_{lon}"
+def calcular_rutas_par(origen_key, destino_key, lat=None, lon=None, viento_max_kmh=None):
+    if viento_max_kmh is None:
+        viento_max_kmh = VIENTO_MAX_DEFAULT_KMH
+    else:
+        try:
+            viento_max_kmh = float(viento_max_kmh)
+        except (TypeError, ValueError):
+            viento_max_kmh = VIENTO_MAX_DEFAULT_KMH
+        viento_max_kmh = max(VIENTO_MAX_RANGO[0], min(VIENTO_MAX_RANGO[1], viento_max_kmh))
+
+    cache_key = f"{origen_key}_{destino_key}_{lat}_{lon}_{viento_max_kmh}"
     if cache_key in CACHE_RUTAS:
         return CACHE_RUTAS[cache_key]
 
@@ -359,19 +405,22 @@ def calcular_rutas_par(origen_key, destino_key, lat=None, lon=None):
         )
         e_d2 = [r[0] for r in cur.fetchall()]
 
-        # 3. Resiliente 1 (Ponderación multi-amenaza y seguridad)
+        # 3. Resiliente 1 (Ponderación multi-amenaza y seguridad; agrega riesgo
+        #    de edificación antigua solo si el destino es un sismo, y aplica
+        #    la restricción de viento operacional del usuario o su default)
+        costo_base = cost_resiliente_sql(dest, viento_max_kmh)
         cur.execute(
-            "SELECT edge FROM pgr_dijkstra('SELECT id, source, target, cost_resiliente AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
+            f"SELECT edge FROM pgr_dijkstra('SELECT id, source, target, {costo_base} AS cost FROM infraestructura_aristas', %s, %s) WHERE edge != -1",
             (o_nodo, d_nodo),
         )
         e_r1 = [r[0] for r in cur.fetchall()]
 
         # 4. Resiliente 2 (Bypass resiliente disjunto)
         cur.execute(
-            """
+            f"""
             SELECT edge FROM pgr_dijkstra(
                 'SELECT id, source, target,
-                        CASE WHEN id = ANY(%s) THEN cost_resiliente * 1000.0 ELSE cost_resiliente END AS cost
+                        CASE WHEN id = ANY(%s) THEN ({costo_base}) * 1000.0 ELSE {costo_base} END AS cost
                  FROM infraestructura_aristas',
                 %s, %s
             ) WHERE edge != -1
@@ -392,6 +441,10 @@ def calcular_rutas_par(origen_key, destino_key, lat=None, lon=None):
         resultado = {
             "origen": orig,
             "destino": dest,
+            "restricciones": {
+                "viento_max_kmh": viento_max_kmh,
+                "es_default": viento_max_kmh == VIENTO_MAX_DEFAULT_KMH,
+            },
             "dijkstra_1": {"distancia_m": round(dist_d1, 1), "tramos": len(e_d1), "geom": geom_d1},
             "dijkstra_2": {"distancia_m": round(dist_d2, 1), "tramos": len(e_d2), "geom": geom_d2},
             "resiliente_1": {"distancia_m": round(dist_r1, 1), "tramos": len(e_r1), "geom": geom_r1},
@@ -444,9 +497,10 @@ class RuteoRequestHandler(SimpleHTTPRequestHandler):
                 dest = query.get("destino", ["sismo_15"])[0]
                 lat = query.get("lat", [None])[0]
                 lon = query.get("lon", [None])[0]
+                viento_max = query.get("viento_max", [None])[0]
 
                 t0 = time.time()
-                ruta_data = calcular_rutas_par(orig, dest, lat, lon)
+                ruta_data = calcular_rutas_par(orig, dest, lat, lon, viento_max)
                 t_ms = round((time.time() - t0) * 1000, 1)
 
                 if "error" in ruta_data:
