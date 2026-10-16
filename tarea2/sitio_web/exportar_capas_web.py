@@ -57,11 +57,16 @@ exportar("carabineros", """
 """)
 
 # 2. Sismos (amenaza/destino)
-# UMBRAL_DISTANCIA_RED_M = 2000: mismo criterio que servidor.py y
-# generar_rutas_comparativas.py. "destino_valido" marca si el sismo es
-# aceptable como objetivo de ruteo (nodo vial mas cercano a <=2km del
-# epicentro); el dron evalua danos siguiendo calles, no sobrevolando el
-# oceano, asi que un sismo mar adentro no tiene un punto de inspeccion real.
+# Umbral combinado (mismo criterio que servidor.py y generar_rutas_
+# comparativas.py): "destino_valido" exige que el nodo vial mas cercano este
+# dentro del MINIMO de (a) el radio de relevancia segun la magnitud del
+# sismo (Wells & Coppersmith 1994) y (b) el radio operacional segun el
+# viento real de la zona (restriccion fisica de alcance del dron). Funciones
+# SQL en db/schema.sql: distancia_max_valida_sismo_km y sus componentes.
+# "en_tierra" es un hecho geografico INDEPENDIENTE (no un sinonimo de
+# destino_valido): un sismo puede estar en el mar y aun asi ser destino
+# valido (si es grande y el viento de la zona es favorable), o estar en
+# tierra y no serlo. No confundir ambos campos en el frontend.
 # Se exportan igual TODOS los sismos para la capa informativa del mapa (punto 7).
 exportar("sismos", """
     SELECT json_build_object(
@@ -72,14 +77,21 @@ exportar("sismos", """
             'properties', json_build_object(
                 'id', s.id, 'magnitud', s.magnitud, 'profundidad_km', s.profundidad_km,
                 'fecha', s.fecha, 'lugar', s.lugar,
-                'dist_red_m', round(ST_Distance(s.geom::geography, n.geom::geography)::numeric, 1),
-                'destino_valido', (ST_Distance(s.geom::geography, n.geom::geography) <= 2000)
+                'dist_red_m', round(dist_red.d::numeric, 1),
+                'racha_zona_kmh', round(v.racha_max_kmh::numeric, 1),
+                'umbral_valido_km', round(distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)::numeric, 1),
+                'destino_valido', ((dist_red.d / 1000.0) <= distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)),
+                'en_tierra', (ST_X(s.geom) >= -71.68)
             )
         )), '[]'::json)
     ) FROM amenaza_sismos s
     CROSS JOIN LATERAL (
-        SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
-    ) n;
+        SELECT ST_Distance(s.geom::geography, n.geom::geography) AS d
+        FROM infraestructura_nodos n ORDER BY n.geom <-> s.geom LIMIT 1
+    ) dist_red
+    CROSS JOIN LATERAL (
+        SELECT racha_max_kmh FROM metadata_viento ORDER BY geom <-> s.geom LIMIT 1
+    ) v;
 """)
 
 # 3. Tendido Eléctrico (metadata)

@@ -94,14 +94,10 @@
   <div class="info-trayecto" id="info-seleccion">
     <b>Ruta Activa:</b> Cargando trayectoria...
   </div>
-  <div class="tip-box">
-    💡 <i>Tip: También puedes hacer clic en cualquier Cuartel o Sismo en el mapa para fijarlo como Origen o Destino.</i>
-  </div>
-
   <div class="section-title">2. Preferencias / Restricciones (Punto 6)</div>
   <div class="form-group">
-    <label>Viento máx permitido: <span id="lbl-viento">40 km/h (operacional)</span></label>
-    <input type="range" id="rng-viento" min="20" max="80" value="40" class="form-control" style="padding:0;">
+    <label>Viento máx permitido: <span id="lbl-viento">43 km/h (DJI M300 RTK, despegue/aterrizaje)</span></label>
+    <input type="range" id="rng-viento" min="15" max="54" value="43" class="form-control" style="padding:0;">
   </div>
   <div style="display:flex; gap:12px; font-size:11.5px; margin-bottom:4px;">
     <label><input type="checkbox" id="chk-opt-tendido" checked disabled> Evitar tendido eléctrico</label>
@@ -147,11 +143,11 @@
 
   <div class="section-title">4. Capas en el Mapa (Punto 7)</div>
   <div class="layer-item">
-    <span><span class="line-swatch" style="background:#2980b9;"></span> Rutas Resilientes (k=2: azul + verde)</span>
+    <span><span class="line-swatch" style="background:#2980b9;"></span><span class="line-swatch" style="background:#27ae60;"></span> Rutas Resilientes (k=2: Ruta 1 azul + Ruta 2 verde)</span>
     <input type="checkbox" id="chk-capa-resil" checked>
   </div>
   <div class="layer-item">
-    <span><span class="line-swatch" style="background:#e74c3c;"></span> Rutas Dijkstra (k=2: rojo + naranja)</span>
+    <span><span class="line-swatch" style="background:#e74c3c;"></span><span class="line-swatch" style="background:#e67e22;"></span> Rutas Dijkstra (k=2: Ruta 1 roja + Ruta 2 naranja)</span>
     <input type="checkbox" id="chk-capa-dijkstra" checked>
   </div>
   <div class="layer-item">

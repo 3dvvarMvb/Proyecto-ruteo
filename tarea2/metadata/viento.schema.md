@@ -2,7 +2,7 @@
 
 Metadata operacional de meteorología para los puntos clave del Gran Valparaíso (viento, rachas y dirección).
 
-**Rol operacional:** Encarece el costo de las aristas del grafo vial según la velocidad y dirección del viento. Ráfagas sobre el umbral de 40 km/h comprometen la estabilidad aerodinámica y la autonomía del dron BVLOS.
+**Rol operacional:** Encarece el costo de las aristas del grafo vial según la velocidad y dirección del viento, y limita qué sismos son alcanzables como destino (ver `amenazas/sismos.schema.md`). El umbral por defecto es **43.2 km/h (12 m/s)**, la resistencia al viento para despegue/aterrizaje del **DJI Matrice 300 RTK** (dron de referencia del proyecto, plataforma enterprise/BVLOS para inspección y respuesta a desastres — ficha técnica oficial en `enterprise.dji.com/matrice-300`); el límite físico absoluto en vuelo del mismo dron es 54 km/h (15 m/s), y el operador no puede fijar una restricción menos estricta que ese límite.
 
 **Fuente:** Open-Meteo API (`api.open-meteo.com/v1/forecast`), REST/JSON público sin API key.
 

@@ -29,12 +29,19 @@ PORT = int(os.getenv("PORT", 8080))
 PESO_ANTIGUEDAD = 0.3
 
 # Restriccion de usuario (punto 6 de la rubrica): umbral de racha de viento
-# operacional. Si no se especifica, se usa el valor por defecto declarado en
-# metadata/viento.schema.md (rachas sobre 40 km/h comprometen la estabilidad
-# aerodinamica del dron). Rango valido para evitar parametros absurdos desde
-# la URL.
-VIENTO_MAX_DEFAULT_KMH = 40.0
-VIENTO_MAX_RANGO = (10.0, 150.0)
+# operacional. Valores anclados a la ficha tecnica oficial del DJI Matrice
+# 300 RTK (enterprise.dji.com/matrice-300), el dron de referencia del
+# proyecto (plataforma BVLOS usada en inspeccion/respuesta a desastres):
+#   - 12 m/s (43.2 km/h): resistencia al viento para despegue/aterrizaje
+#     segun DJI. Es el default: mas restrictivo que el limite en vuelo
+#     porque si no puede despegar/aterrizar seguro, la mision no es viable.
+#   - 15 m/s (54.0 km/h): resistencia al viento EN VUELO segun DJI. Es el
+#     techo absoluto del rango valido: no tiene sentido que el operador
+#     pida una restriccion mas permisiva que lo que el dron fisicamente
+#     resiste.
+VIENTO_MAX_DEFAULT_KMH = 43.2
+VIENTO_MAX_ABSOLUTO_KMH = 54.0  # limite fisico en vuelo del DJI M300 RTK (15 m/s)
+VIENTO_MAX_RANGO = (10.0, VIENTO_MAX_ABSOLUTO_KMH)
 
 
 def cost_resiliente_sql(dest, viento_max_kmh=VIENTO_MAX_DEFAULT_KMH):
@@ -108,29 +115,42 @@ def obtener_todos_los_sismos():
     conn = get_db_connection()
     try:
         cur = conn.cursor()
-        # UMBRAL_DISTANCIA_RED_M = 2000: un dron BVLOS evalua danos siguiendo
-        # calles, no sobrevolando el oceano. Si el epicentro esta a mas de 2km
-        # del nodo vial mas cercano, "llegar" ahi es solo un punto arbitrario
-        # de la costa, no el area real de impacto. 2km es insignificante frente
-        # a la profundidad tipica de sismos corticales en la zona (10-25km), asi
-        # que el nodo vial sigue representando razonablemente el area a evaluar.
-        # Deja 20 de los 106 sismos como destinos validos (ver RESULTADOS.md).
+        # Umbral de validez combinado (reemplaza el umbral fijo de 2000m):
+        # un sismo es destino valido si el nodo vial mas cercano esta dentro
+        # del MINIMO de (a) el radio de relevancia segun su magnitud (Wells &
+        # Coppersmith 1994) y (b) el radio operacional segun el viento de la
+        # zona (restriccion fisica real de alcance del dron). Funciones SQL
+        # en db/schema.sql: radio_relevancia_sismo_km, radio_operacional_
+        # viento_km, distancia_max_valida_sismo_km.
+        # "en_tierra" (geografico, ST_X >= -71.68) y "destino_valido" (umbral
+        # dinamico de ruteo) son conceptos INDEPENDIENTES y no deben
+        # confundirse: un sismo puede estar en el mar y aun asi ser destino
+        # valido (si es grande y el viento de la zona es favorable), o estar
+        # en tierra y no serlo (si esta lejos de cualquier calle). El primero
+        # es un hecho geografico fijo; el segundo depende de magnitud+viento.
         cur.execute("""
             SELECT s.id, s.usgs_id, s.magnitud, s.lugar, s.profundidad_km,
                    ST_X(s.geom) AS lon, ST_Y(s.geom) AS lat,
-                   round(ST_Distance(s.geom::geography, n.geom::geography)::numeric, 1) AS dist_red_m,
+                   round(dist_red.d::numeric, 1) AS dist_red_m,
+                   round(v.racha_max_kmh::numeric, 1) AS racha_zona_kmh,
+                   round(distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)::numeric, 1) AS umbral_km,
+                   ((dist_red.d / 1000.0) <= distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)) AS destino_valido,
                    (ST_X(s.geom) >= -71.68) AS en_tierra
             FROM amenaza_sismos s
             CROSS JOIN LATERAL (
-                SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
-            ) n
-            WHERE ST_Distance(s.geom::geography, n.geom::geography) <= 2000
+                SELECT ST_Distance(s.geom::geography, n.geom::geography) AS d
+                FROM infraestructura_nodos n ORDER BY n.geom <-> s.geom LIMIT 1
+            ) dist_red
+            CROSS JOIN LATERAL (
+                SELECT racha_max_kmh FROM metadata_viento ORDER BY geom <-> s.geom LIMIT 1
+            ) v
+            WHERE (dist_red.d / 1000.0) <= distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)
             ORDER BY s.magnitud DESC, dist_red_m ASC;
         """)
         filas = cur.fetchall()
         sismos = []
         for r in filas:
-            s_id, usgs_id, mag, lugar, prof, lon, lat, dist_red, en_tierra = r
+            s_id, usgs_id, mag, lugar, prof, lon, lat, dist_red, racha_zona, umbral_km, destino_valido, en_tierra = r
             sismos.append({
                 "key": f"sismo_{s_id}",
                 "id": s_id,
@@ -141,6 +161,9 @@ def obtener_todos_los_sismos():
                 "lon": round(float(lon), 5),
                 "lat": round(float(lat), 5),
                 "dist_red_m": float(dist_red) if dist_red is not None else 0.0,
+                "racha_zona_kmh": float(racha_zona) if racha_zona is not None else None,
+                "umbral_valido_km": float(umbral_km) if umbral_km is not None else None,
+                "destino_valido": bool(destino_valido),
                 "en_tierra": bool(en_tierra),
                 "descripcion": f"Sismo M{mag} ({lugar})",
             })
@@ -224,10 +247,16 @@ def resolver_destino_nodo(cur, destino_str, lat_param=None, lon_param=None):
                 LIMIT 1;
             """, (s_lon, s_lat, s_lon, s_lat))
             d_nodo, dn_lon, dn_lat, dist_aerea = cur.fetchone()
-            if dist_aerea > 2000:
-                # Sismo demasiado lejos de la red vial (mar adentro / sin calles
-                # cercanas): el nodo vial mas cercano no representa un area de
-                # inspeccion real. Ver UMBRAL_DISTANCIA_RED_M en obtener_todos_los_sismos.
+            cur.execute(
+                "SELECT distancia_max_valida_sismo_km(%s, (SELECT racha_max_kmh FROM metadata_viento ORDER BY geom <-> ST_SetSRID(ST_MakePoint(%s, %s), 4326) LIMIT 1))",
+                (mag, s_lon, s_lat),
+            )
+            umbral_km = cur.fetchone()[0]
+            if (dist_aerea / 1000.0) > umbral_km:
+                # Sismo fuera del umbral combinado (radio por magnitud x radio
+                # operacional por viento - ver distancia_max_valida_sismo_km en
+                # db/schema.sql): el nodo vial mas cercano no representa un
+                # area de inspeccion alcanzable para el dron.
                 return None
             return {
                 "key": f"sismo_{s_id}",

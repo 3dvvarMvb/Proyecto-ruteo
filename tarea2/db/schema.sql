@@ -141,3 +141,68 @@ CREATE TABLE amenaza_sismos (
     geom            GEOMETRY(Point, 4326) NOT NULL
 );
 CREATE INDEX idx_amenaza_sismos_geom ON amenaza_sismos USING GIST (geom);
+
+-- ============================================================
+-- UMBRAL DE VALIDEZ DE UN SISMO COMO DESTINO DE RUTEO
+-- ============================================================
+-- Reemplaza un umbral fijo de distancia (version anterior) por uno que
+-- combina dos criterios reales, no arbitrarios:
+
+CREATE OR REPLACE FUNCTION radio_relevancia_sismo_km(magnitud double precision)
+RETURNS double precision AS $$
+    -- Wells & Coppersmith (1994), "New Empirical Relationships among
+    -- Magnitude, Rupture Length, Rupture Width, Rupture Area, and Surface
+    -- Displacement", Bulletin of the Seismological Society of America,
+    -- 84(4):974-1002. Longitud de ruptura subsuperficial (todos los tipos
+    -- de falla, regresion "All"): log10(RLD) = -2.44 + 0.59*M.
+    -- Se usa 3x RLD como radio de relevancia del area de impacto esperada
+    -- (el area afectada/sentida suele ser varias veces la ruptura misma;
+    -- el multiplicador 3 es una eleccion propia, no del paper), con un
+    -- piso de 2km para sismos pequenos (consistente con el umbral
+    -- original de Tarea 2, documentado en RESULTADOS.md).
+    SELECT GREATEST(2.0, 3.0 * POWER(10, -2.44 + 0.59 * magnitud));
+$$ LANGUAGE SQL IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION radio_operacional_viento_km(
+    racha_zona_kmh double precision,
+    umbral_usuario_kmh double precision DEFAULT 43.2,
+    radio_base_km double precision DEFAULT 15.0
+) RETURNS double precision AS $$
+    -- Restriccion fisica real del dron de referencia (DJI Matrice 300 RTK,
+    -- plataforma enterprise/BVLOS usada en inspeccion y respuesta a
+    -- desastres), no una regla inventada:
+    --   - umbral_usuario_kmh DEFAULT 43.2 = 12 m/s, el limite de resistencia
+    --     al viento para despegue/aterrizaje segun la ficha tecnica oficial
+    --     DJI (el limite EN VUELO es 15 m/s = 54 km/h; se usa el mas
+    --     restrictivo como default porque si no puede despegar/aterrizar
+    --     con seguridad, la mision no es viable aunque pudiera volar).
+    --   - radio_base_km DEFAULT 15.0 = alcance maximo de transmision
+    --     OcuSync Enterprise del M300 RTK en condiciones FCC/NCC (ideal,
+    --     sin obstrucciones/interferencia), segun la pagina oficial DJI
+    --     Enterprise (enterprise.dji.com/matrice-300).
+    -- A mayor viento real de la zona (racha_zona_kmh) por sobre el umbral,
+    -- menor el radio operacional seguro (ver p.ej. Thibbotuwawa, A. et al.
+    -- (2020), "UAV Mission Planning Resistant to Weather Uncertainty",
+    -- Sensors, 20(3):598, sobre como el viento reduce el alcance/autonomia
+    -- planificable de un UAV). El factor de derateo (razon umbral/racha,
+    -- acotada entre 0.15x y 1.5x) es una heuristica propia; los 3 valores
+    -- que escala (umbral, radio base, y el limite absoluto de 54km/h que
+    -- acota la entrada de usuario en servidor.py) vienen de la ficha del
+    -- fabricante, no son arbitrarios.
+    SELECT radio_base_km * LEAST(1.5, GREATEST(0.15, umbral_usuario_kmh / GREATEST(racha_zona_kmh, 1.0)));
+$$ LANGUAGE SQL IMMUTABLE;
+
+CREATE OR REPLACE FUNCTION distancia_max_valida_sismo_km(
+    magnitud double precision,
+    racha_zona_kmh double precision,
+    umbral_usuario_kmh double precision DEFAULT 43.2
+) RETURNS double precision AS $$
+    -- El umbral final es el MINIMO de ambos criterios: un sismo grande en
+    -- una zona muy ventosa sigue sin ser alcanzable - el viento es una
+    -- restriccion fisica que no desaparece solo porque el sismo sea
+    -- importante.
+    SELECT LEAST(
+        radio_relevancia_sismo_km(magnitud),
+        radio_operacional_viento_km(racha_zona_kmh, umbral_usuario_kmh)
+    );
+$$ LANGUAGE SQL IMMUTABLE;

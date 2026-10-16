@@ -43,6 +43,8 @@ Este documento está organizado según los puntos de la rúbrica de la Tarea 2, 
 
 Además de las columnas fijas del esquema, `sitio_web/generar_rutas_comparativas.py` agrega en tiempo de ejecución 3 columnas derivadas a `infraestructura_aristas` (no están en `schema.sql` porque dependen de joins espaciales con las demás tablas, que deben estar ya cargadas): `cost_resiliente`, `factor_antiguedad_zona` y `viento_racha_max_kmh`. Se explican en las secciones 5 y 6.
 
+`schema.sql` también define 3 funciones SQL reutilizables que determinan qué sismos son destinos válidos de ruteo, combinando magnitud del sismo y viento real de la zona: `radio_relevancia_sismo_km`, `radio_operacional_viento_km` y `distancia_max_valida_sismo_km` (ver sección "Qué sismos son destinos válidos" más abajo).
+
 ---
 
 ## 1. Infraestructura (grafo vial)
@@ -105,13 +107,18 @@ Todo el modelamiento vive en [`sitio_web/generar_rutas_comparativas.py`](sitio_w
 | CONAF áreas protegidas | `ST_Intersects(arista, polígono)` | **Exclusión efectiva** ×1000 — vuelo prohibido/no deseable en SNASPE |
 | FIRMS (incendio activo) | `ST_DWithin(arista, foco, 0.005°)` (~500m) | **Exclusión efectiva** ×1000 — peligro físico inmediato, se evita por completo |
 | Permisos de edificación (antigüedad) | `ST_Intersects(arista, manzana)` | **Penalización condicional** ×(1 + 0.3·índice), **solo si el destino es un sismo** (ver más abajo) |
-| Sismos (USGS) | nodo vial más cercano al epicentro, con umbral de 2.000m | Define el **destino** de la ruta, no penaliza aristas directamente |
+| Sismos (USGS) | nodo vial más cercano al epicentro, con umbral combinado magnitud + viento (ver abajo) | Define el **destino** de la ruta, no penaliza aristas directamente |
 
 Esta distinción (excluir vs. penalizar vs. priorizar) sigue la taxonomía de `codigo/RESULTADOS.md`: un incendio activo o una zona protegida son peligros de los que hay que alejarse (exclusión), mientras que el tendido eléctrico o una ignición pronosticada son riesgos que se pueden asumir con precaución (penalización leve). La sismicidad es distinta de ambas: define el **objetivo** de la misión (ir a evaluar daños), así que nunca se "evita" — en cambio, condiciona un riesgo secundario (ver abajo).
 
 **Caso especial — por qué los sismos no penalizan, sino que condicionan**: la edificación antigua (proxy via permisos de edificación 2010-2018, `metadata_poblacion.indice_antiguedad`) representa riesgo de escombros/obstrucción de calle, que solo es relevante si la misión es justamente evaluar daños post-sismo. Por eso el costo `cost_resiliente * (1 + 0.3 * factor_antiguedad_zona)` solo se activa cuando `destino.tipo == "sismo"` — para un destino de tipo incendio, no se aplica en absoluto. El peso `0.3` se eligió deliberadamente bajo para que nunca domine sobre tendido eléctrico (×1.5) o CONAF (×1000), que son riesgos físicos directos e inmediatos, mientras que la edificación antigua es un riesgo indirecto y secundario.
 
-También se excluyen de antemano, como destino de ruteo, los sismos cuyo epicentro está a más de 2.000m del nodo vial más cercano (de los 106 sismos reales, solo 20 cumplen el umbral): un dron BVLOS evalúa daños siguiendo calles, no sobrevolando el océano, así que un epicentro mar adentro no representa un punto de inspección real. Ver `UMBRAL_DISTANCIA_RED_M` en `sitio_web/servidor.py` y `sitio_web/generar_rutas_comparativas.py`.
+**Qué sismos son destinos válidos**: se excluyen de antemano los sismos cuyo epicentro está demasiado lejos del nodo vial más cercano — un dron BVLOS evalúa daños siguiendo calles, no sobrevolando el océano. En vez de un número fijo, el umbral combina dos criterios reales (funciones SQL en `db/schema.sql`):
+
+1. **`radio_relevancia_sismo_km(magnitud)`** — Wells & Coppersmith (1994), *"New Empirical Relationships among Magnitude, Rupture Length, Rupture Width, Rupture Area, and Surface Displacement"*, BSSA 84(4):974-1002. Longitud de ruptura subsuperficial `RLD(M) = 10^(-2.44 + 0.59·M)` km; se usa `3×RLD` como radio de la zona de impacto esperada (multiplicador propio), con piso de 2km para sismos pequeños.
+2. **`radio_operacional_viento_km(racha_zona, umbral_usuario)`** — restricción física real, no arbitraria: el dron de referencia del proyecto es el **DJI Matrice 300 RTK** (plataforma enterprise/BVLOS usada en inspección y respuesta a desastres; ficha técnica en `enterprise.dji.com/matrice-300`). El radio base (15km) es su alcance máximo de transmisión OcuSync Enterprise (FCC/NCC); el umbral de viento por defecto (43.2 km/h = 12 m/s) es su resistencia al viento para despegue/aterrizaje, y el límite absoluto que acota cualquier valor que el operador ingrese (54 km/h = 15 m/s) es su resistencia al viento en vuelo. El radio operacional se reduce proporcionalmente cuando la racha de viento real de la zona del epicentro supera el umbral — mecanismo de derateo conceptualmente respaldado por Thibbotuwawa et al. 2020, *"UAV Mission Planning Resistant to Weather Uncertainty"*, Sensors 20(3):598.
+
+**`distancia_max_valida_sismo_km`** = el **mínimo** de ambos: un sismo grande en una zona muy ventosa sigue sin ser alcanzable — el viento no desaparece porque el sismo sea importante. Ejemplo real: el M6.0 "33 km NW of Valparaíso" queda excluido (está a 32.8km de la red y el viento de esa zona limita el radio operacional a 8.3km, aunque su magnitud por sí sola permitiría hasta 37.8km), mientras que el M5.9 "13 km NNW de Viña del Mar" (a solo 5.5km de la red) sí es válido. De los 106 sismos reales, 26 cumplen el umbral combinado.
 
 ### 5.2 Asignación de pesos
 
@@ -148,7 +155,7 @@ El umbral se recibe como parámetro `viento_max` en `GET /api/calcular_ruta` (ve
 
 ### 6.2 Restricción por defecto
 
-Si el usuario no especifica un umbral (parámetro `viento_max` ausente), se usa **40 km/h**, el umbral operacional declarado en `metadata/viento.schema.md` ("ráfagas sobre 40 km/h comprometen la estabilidad aerodinámica del dron"). Constante `VIENTO_MAX_DEFAULT_KMH` en `sitio_web/servidor.py` y `sitio_web/generar_rutas_comparativas.py` (el catálogo precalculado siempre usa este valor).
+Si el usuario no especifica un umbral (parámetro `viento_max` ausente), se usa **43.2 km/h (12 m/s)** — la resistencia al viento para despegue/aterrizaje del **DJI Matrice 300 RTK** según su ficha técnica oficial (`enterprise.dji.com/matrice-300`), el dron de referencia del proyecto. Se eligió ese límite (y no el de 15 m/s / 54 km/h en vuelo) como default porque es el más restrictivo: si el dron no puede despegar/aterrizar con seguridad, la misión no es viable aunque pudiera volar. Ese mismo límite en vuelo (54 km/h) acota el máximo valor que el operador puede pedir — no tiene sentido una restricción menos estricta que lo que el dron físicamente resiste. Constante `VIENTO_MAX_DEFAULT_KMH` en `sitio_web/servidor.py` y `sitio_web/generar_rutas_comparativas.py` (el catálogo precalculado siempre usa este valor).
 
 ---
 
@@ -233,7 +240,7 @@ resiliencia  = disyuncion × seguridad × 100
 
 ### 11.1
 
-El sitio (`sitio_web/index.html` + `app.js` + `servidor.py`) permite elegir cualquier cuartel de Carabineros como origen y cualquier sismo válido (≤2km de la red vial) como destino — por selector desplegable o haciendo clic directo en el mapa — además de ajustar la restricción de viento (sección 6). Si no se ajusta el viento, se usa el default de 40 km/h. El resultado se calcula en vivo contra PostgreSQL/pgRouting (`GET /api/calcular_ruta`) y se dibuja sobre el mapa: 2 rutas Dijkstra (rojo/naranjo) y 2 rutas resilientes (azul/verde).
+El sitio (`sitio_web/index.html` + `app.js` + `servidor.py`) permite elegir cualquier cuartel de Carabineros como origen y cualquier sismo válido (según el umbral combinado magnitud+viento, sección 5) como destino — por selector desplegable o haciendo clic directo en el mapa — además de ajustar la restricción de viento (sección 6), acotada entre 15 y 54 km/h (el límite físico en vuelo del DJI Matrice 300 RTK). Si no se ajusta, se usa el default de 43.2 km/h. El resultado se calcula en vivo contra PostgreSQL/pgRouting (`GET /api/calcular_ruta`) y se dibuja sobre el mapa: 2 rutas Dijkstra (rojo/naranjo) y 2 rutas resilientes (azul/verde).
 
 ### 11.2
 

@@ -31,7 +31,7 @@ let origenesList = [];
 let sismosList = [];
 let origenActivo = "8va_florida";
 let destinoActivo = "sismo_15";
-let vientoMaxActivo = 40; // restriccion de usuario (punto 6); default operacional declarado en viento.schema.md
+let vientoMaxActivo = 43.2; // restriccion de usuario (punto 6); 12 m/s, limite despegue/aterrizaje del DJI Matrice 300 RTK
 
 const ALIAS_CUARTEL = {
   17: "8va_florida",
@@ -408,8 +408,11 @@ cargarGeoJSON("data/carabineros.geojson", (geojson) => {
   }).addTo(capaCarabineros);
 });
 
-// 3. Capa Sismos (TODOS los 106, informativa; solo los <=2km de la red
-//    vial son fijables como destino, ver destino_valido)
+// 3. Capa Sismos (TODOS los 106, informativa; solo los que cumplen el
+//    umbral dinamico magnitud+viento son fijables como destino, ver
+//    destino_valido. "en_tierra" es un hecho geografico INDEPENDIENTE:
+//    un sismo en el mar puede igual ser destino_valido si es grande y el
+//    viento de su zona es favorable - no confundir ambos campos.)
 cargarGeoJSON("data/sismos.geojson", (geojson) => {
   L.geoJSON(geojson, {
     pointToLayer: (feature, latlng) => {
@@ -428,14 +431,14 @@ cargarGeoJSON("data/sismos.geojson", (geojson) => {
       const p = f.properties;
       const sismoKey = `sismo_${p.id}`;
       const distStr = p.dist_red_m < 1000 ? `${Math.round(p.dist_red_m)}m` : `${(p.dist_red_m / 1000).toFixed(1)}km`;
-      const ubicacionStr = p.destino_valido
-        ? `🏔️ A ${distStr} de la red vial`
-        : `🌊 A ${distStr} de la red vial — demasiado lejos para inspección BVLOS`;
+      const umbralStr = p.umbral_valido_km != null ? `${p.umbral_valido_km}km` : "—";
+      const zonaStr = p.en_tierra ? "🏔️ Epicentro en tierra" : "🌊 Epicentro en el mar";
+      const ubicacionStr = `${zonaStr}, a ${distStr} de la red vial — alcance máximo aquí: ${umbralStr} (según magnitud del sismo y viento actual)`;
       const botonDestino = p.destino_valido
         ? `<button class="btn-popup btn-destino" onclick="window.fijarDestino('${sismoKey}')" style="margin-top:6px; width:100%;">
              🚨 Fijar como Objetivo de Emergencia
            </button>`
-        : `<div class="tip-box" style="margin-top:6px;">No seleccionable: el epicentro está a más de 2km de cualquier calle, por lo que no representa un punto de inspección real para el dron.</div>`;
+        : `<div class="tip-box" style="margin-top:6px;">No seleccionable: está a ${distStr} de la calle más cercana, pero con este sismo (M${p.magnitud}) y el viento actual en esa zona (${p.racha_zona_kmh ?? "—"} km/h) el dron solo puede alejarse hasta ${umbralStr} de la red vial. Al estar más lejos que eso, no es alcanzable.</div>`;
       layer.on("click", () => {
         layer.bindPopup(`
           <div style="font-size:12.5px; line-height:1.4;">
@@ -542,7 +545,9 @@ toggleCapa("chk-capa-viento", capaViento);
 const rngViento = document.getElementById("rng-viento");
 if (rngViento) {
   rngViento.addEventListener("input", (e) => {
-    document.getElementById("lbl-viento").innerText = `${e.target.value} km/h (operacional)`;
+    const v = Number(e.target.value);
+    const nota = v >= 54 ? "límite físico DJI M300 RTK en vuelo" : v >= 43 ? "DJI M300 RTK, despegue/aterrizaje" : "más conservador que el límite del fabricante";
+    document.getElementById("lbl-viento").innerText = `${v} km/h (${nota})`;
   });
   rngViento.addEventListener("change", (e) => {
     // Se dispara al soltar el slider (no en cada pixel), recalcula la ruta

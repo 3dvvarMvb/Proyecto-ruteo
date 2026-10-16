@@ -99,11 +99,12 @@ conn.commit()
 PESO_ANTIGUEDAD = 0.3  # penalizacion leve y condicional (ver justificacion en RESULTADOS.md);
 # nunca domina sobre tendido electrico (x1.5) ni CONAF (x1000), que son riesgos fisicos directos.
 
-VIENTO_MAX_DEFAULT_KMH = 40.0  # restriccion por defecto (punto 6.2): umbral operacional
-# declarado en metadata/viento.schema.md ("rachas sobre 40 km/h comprometen la
-# estabilidad aerodinamica del dron"). Se usa cuando el operador no ingresa un
-# valor propio. El catalogo precalculado siempre usa este valor por defecto;
-# el sitio dinamico (servidor.py) permite al operador cambiarlo.
+VIENTO_MAX_DEFAULT_KMH = 43.2  # restriccion por defecto (punto 6.2): 12 m/s, el
+# limite de resistencia al viento para despegue/aterrizaje del DJI Matrice 300
+# RTK (dron de referencia del proyecto; enterprise.dji.com/matrice-300). Se usa
+# cuando el operador no ingresa un valor propio. El catalogo precalculado
+# siempre usa este valor; el sitio dinamico (servidor.py) permite cambiarlo,
+# acotado al limite fisico en vuelo del mismo dron (15 m/s = 54 km/h).
 
 
 def cost_resiliente_sql(dest, viento_max_kmh=VIENTO_MAX_DEFAULT_KMH):
@@ -165,22 +166,23 @@ for r in filas_cuarteles:
     })
 
 # 3. Obtener lista de Destinos Clave (Sismos USGS + Focos NASA FIRMS)
-# UMBRAL_DISTANCIA_RED_M = 2000: un dron BVLOS evalua danos siguiendo calles,
-# no sobrevolando el oceano. Si el epicentro esta a mas de 2km del nodo vial
-# mas cercano, "llegar" ahi es solo un punto arbitrario de la costa, no el
-# area real de impacto. 2km es insignificante frente a la profundidad tipica
-# de sismos corticales en la zona (10-25km), asi que el nodo vial sigue
-# representando razonablemente el area a evaluar. Reemplaza el filtro previo
-# de longitud >= -71.68 (bbox fijo) por uno basado en distancia real a la red,
-# que es el criterio que de verdad le importa al dron.
+# Umbral combinado (reemplaza el umbral fijo de 2000m): un sismo es destino
+# valido si el nodo vial mas cercano esta dentro del MINIMO de (a) el radio
+# de relevancia segun su magnitud (Wells & Coppersmith 1994) y (b) el radio
+# operacional segun el viento real de la zona (restriccion fisica de alcance
+# del dron). Funciones SQL en db/schema.sql.
 cur.execute("""
 SELECT s.id, s.usgs_id, s.magnitud, s.lugar, ST_X(s.geom) AS lon, ST_Y(s.geom) AS lat
 FROM amenaza_sismos s
 CROSS JOIN LATERAL (
-    SELECT geom FROM infraestructura_nodos ORDER BY infraestructura_nodos.geom <-> s.geom LIMIT 1
-) n
-WHERE ST_Distance(s.geom::geography, n.geom::geography) <= 2000
-ORDER BY s.magnitud DESC, ST_Distance(s.geom::geography, n.geom::geography) ASC
+    SELECT ST_Distance(s.geom::geography, n.geom::geography) AS d
+    FROM infraestructura_nodos n ORDER BY n.geom <-> s.geom LIMIT 1
+) dist_red
+CROSS JOIN LATERAL (
+    SELECT racha_max_kmh FROM metadata_viento ORDER BY geom <-> s.geom LIMIT 1
+) v
+WHERE (dist_red.d / 1000.0) <= distancia_max_valida_sismo_km(s.magnitud, v.racha_max_kmh)
+ORDER BY s.magnitud DESC, dist_red.d ASC
 LIMIT 10;
 """)
 filas_sismos = cur.fetchall()
